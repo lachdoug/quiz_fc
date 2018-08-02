@@ -1,0 +1,38 @@
+<%= form_with(model: question, local: true) do |form| %>
+
+  <%= render "/errors", object: question %>
+
+  <div class="form-group">
+    <%= form.label :ask %>
+    <div class="markdown-editor">
+      <%= form.text_area :ask %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :answer %>
+    <%= form.text_field :answer, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :points %>
+    <%= form.number_field :points, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :form_type %>
+    <%= form.select :form_type, Question.form_types.map { |k,v| [ k.humanize, k ] }, {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :form_config_yaml, "Form config" %>
+    <div class="yaml-editor">
+      <%= form.text_area :form_config_yaml %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= link_to :Cancel, question_path( @question ), class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

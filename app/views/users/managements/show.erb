@@ -1,0 +1,6 @@
+<h1><%= current_user.email %></h1>
+<%= link_to fa("edit") + " Edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
+<%= link_to fa("dollar-sign") + " Quizbucks", "#", class: "btn btn-outline-secondary disabled", disabled: :disabled %>
+<%= link_to fa("history") + " History", history_path, class: "btn btn-outline-secondary disabled", disabled: :disabled %>
+<hr>
+<p>Unhappy? Want to leave QuizFC? <%= link_to "Terminate my account", user_termination_path %></p>

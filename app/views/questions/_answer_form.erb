@@ -1,0 +1,17 @@
+<% form_config = @question.form_config || {} %>
+<% if @question.form_type == "input_field" %>
+  <% tag_attributes = form_config["input_tag"] || {} %>
+  <%= form_with( url: question_test_path( @question ), local: true, class: "question_answer_form_input_test" ) do |form| %>
+    <%= content_tag :input, nil, ( tag_attributes ).merge( { name: "question[answer]"} ) %>
+    <%= form.submit :OK %>
+  <% end %>
+<% elsif @question.form_type == "select" %>
+  <% tag_attributes = form_config["select_tag"] || {} %>
+  <%= form_with( url: question_test_path( @question ), local: true ) do |form| %>
+    <%= content_tag :select, options_for_select( @question.form_config[:options] ), ( tag_attributes ).merge( { name: "question[answer]"} ) %>
+    <%= form.submit :OK %>
+  <% end %>
+<% elsif @question.form_type == "multiple_choice" %>
+
+
+<% end %>

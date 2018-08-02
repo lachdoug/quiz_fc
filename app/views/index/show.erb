@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-xl-6 landing_primary_section text-center">
+      <p><%= image_tag "/logo-large.png", class: "img-fluid" %></p>
+      <!-- <div class="landing_primary_title"><%= fa "futbol" %> QuizFC</div> -->
+      <% if current_user %>
+        <%= link_to( fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-light btn-lg" )  %>
+      <% elsif current_admin && ( current_admin.developer? || current_admin.quizmaster? ) %>
+        <%= link_to( fa( "chess-queen" ) + ' Quizmaster', quizmaster_path, class: "btn btn-outline-light btn-lg" )  %>
+      <% else %>
+        <%= link_to( fa( "pen" ) + ' Sign up', new_user_registration_path, class: "btn btn-outline-light btn-lg" )  %>
+        <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "btn btn-outline-light btn-lg" )  %>
+      <% end %>
+    </div>
+    <div class="col landing_primary_section text-center">
+      <h3>Test your football knowledge</h3>
+      <br>
+      <h3>Win prizes</h3>
+      <br>
+      <h1>$10</h1>
+      <h4>for 10 plays</h4>
+      <br>
+      <h4>Weekly quizzes<br>12pm on Saturdays</h4>
+      <h4>Good luck!
+</div>

@@ -1,0 +1,23 @@
+<h1>Edit answer form multiple_choice</h1>
+<p>
+  <strong>Quiz</strong> <%= @answer_form_multiple_choice.question.quiz %>
+  <strong>Question</strong> <%= @answer_form_multiple_choice.question %>
+</p>
+
+<%= form_with model: @answer_form_multiple_choice, local: true do |form| %>
+
+  <%= render "/errors", object: @answer_form_multiple_choice %>
+
+  <div class="form-group">
+    <%= form.label :tag_attributes_json, "Tag attributes" %>
+    <%= form.text_area :tag_attributes_json %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :options_json, "Options" %>
+    <%= form.text_area :options_json %>
+  </div>
+
+  <br>
+  <%= form.submit :Save, class: "btn btn-primary" %>
+<% end %>

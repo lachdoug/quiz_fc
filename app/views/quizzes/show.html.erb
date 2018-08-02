@@ -1,0 +1,25 @@
+<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<h1><%= @quiz.to_s :short %></h1>
+
+<p>
+  <strong>Start</strong> <%= @quiz.start %>
+</p>
+
+<div class="clearfix">
+  <% if @quiz.queued? %>
+    <%= link_to fa("clock") + ' Dequeue', quiz_dequeue_path(@quiz), method: :POST, class: "btn btn-danger float-right",
+    data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
+  <% else %>
+    <%= link_to fa("calendar-alt") + ' Schedule', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
+    <% if @quiz.start && @quiz.start.future? %>
+      <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning float-right",
+      data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
+    <% end %>
+  <% end %>
+</div>
+
+<hr>
+
+<%= link_to fa("plus") + ' New', questions_path( quiz_id: @quiz.id ), method: :POST, class: "btn btn-outline-primary float-right" %>
+<h2>Questions</h2>
+<%= render collection: @quiz.questions, partial: 'quizzes/question' %>

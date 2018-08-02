@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>QuizFC</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style>
+    .container {
+      /*text-align: center;*/
+    }
+    form .form-control {
+      max-width: 300px;
+      /*display: inline-block;*/
+    }
+    .page {
+      margin-top: 20px;
+    }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/"><%= fa "futbol" %> QuizFC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+
+    </div>
+
+    <div class="container">
+
+      <div class="flash-messages">
+        <div class="flash-notice"><%= notice %></div>
+        <div class="flash-alert"><%= alert %></div>
+      </div>
+
+    </div>
+    <div class="container page">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>

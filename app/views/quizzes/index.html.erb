@@ -1,0 +1,24 @@
+<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<h1>Quizzes</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Start</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quizzes.each do |quiz| %>
+      <tr>
+        <td><%= quiz.id %></td>
+        <td><%= quiz.status %></td>
+        <td><%= quiz.start %></td>
+        <td width="1"><%= link_to fa("arrow-right"), quiz %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
