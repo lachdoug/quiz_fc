@@ -8,14 +8,14 @@
 <div class="row">
   <div class="col">
     <h3>Drafts</h3>
-    <%= render( collection: Quiz.drafts, partial: 'quizmasters/quiz' ) || content_tag( :p, "None" ) %>
+    <%= render( collection: Quiz.drafts, partial: 'quizmasters/quiz' ) || content_tag( :p, content_tag( :i, "None" ) ) %>
   </div>
   <div class="col">
     <h3>Pending</h3>
-    <%= render( collection: Quiz.pending, partial: 'quizmasters/quiz' ) || content_tag( :p, "None" ) %>
+    <%= render( collection: Quiz.pending, partial: 'quizmasters/quiz' ) || content_tag( :p, content_tag( :i, "None" ) ) %>
     <h3>Playing</h3>
-    <%= render( collection: Quiz.playing, partial: 'quizmasters/quiz' ) || content_tag( :p, "None" ) %>
+    <%= render( collection: Quiz.playing, partial: 'quizmasters/quiz' ) || content_tag( :p, content_tag( :i, "None" ) ) %>
     <h3>Queued</h3>
-    <%= render( collection: Quiz.queued, partial: 'quizmasters/quiz' ) || content_tag( :p, "None" ) %>
+    <%= render( collection: Quiz.queued, partial: 'quizmasters/quiz' ) || content_tag( :p, content_tag( :i, "None" ) ) %>
   </div>
 </div>
