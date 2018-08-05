@@ -1,6 +1,6 @@
 class Quiz < ApplicationRecord
   enum status: [ :draft, :queued, :playing, :pending, :complete, :archived ]
-  has_many :questions, dependent: :destroy
+  has_many :questions, -> { order( :number ) }, dependent: :destroy
   has_many :plays, dependent: :destroy
 
   def to_s( type=nil )
