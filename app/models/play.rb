@@ -7,15 +7,6 @@ class Play < ApplicationRecord
 
   serialize :answers, Array
 
-  # def find_question( question_number )
-  #   quiz.find_question question_number
-  # end
-  #
-
-  # def score
-  #   super || calculate_score
-  # end
-
   def calculate_score
     question_scores.sum.tap do |score|
       update score: score

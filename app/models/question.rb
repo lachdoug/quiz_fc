@@ -28,7 +28,7 @@ class Question < ApplicationRecord
   end
 
   def ask_html
-    Markdown.new( ask.to_s ).to_html
+    MarkdownRenderer.new( ask.to_s ).to_html
   end
 
   def next_question

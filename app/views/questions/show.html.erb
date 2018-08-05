@@ -1,4 +1,10 @@
-<%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary float-right" %>
+<% previous_question = @question.previous_question %>
+<% next_question = @question.next_question %>
+<div class="float-right">
+  <%= link_to fa("arrow-left") + " Previous", previous_question, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary" %>
+  <%= link_to fa("arrow-right") + " Next", next_question, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
+</div>
 <h2><%= @question %></h2>
 
 <p>

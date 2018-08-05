@@ -14,17 +14,19 @@
 
     <div class="col">
 
-      <h4>Played quizzes</h4>
-      <% @profile.played_quizzes.each do |quiz| %>
+      <h4>Unplayed quizzes</h4>
+      <% @profile.unplayed_quizzes.each do |quiz| %>
         <%= link_to "Quiz #{quiz.id}", plays_path( quiz_id: quiz.id ), class: "btn btn-link" %><br>
+        <% #= button_to "Quiz #{quiz.id}", plays_path, params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-link" %>
       <% end %>
 
     </div>
+
     <div class="col">
 
-      <h4>Unplayed quizzes</h4>
-      <% @profile.unplayed_quizzes.each do |quiz| %>
-        <%= button_to "Quiz #{quiz.id}", plays_path, params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-link" %>
+      <h4>Played quizzes</h4>
+      <% @profile.played_quizzes.each do |quiz| %>
+        <%= link_to "Quiz #{quiz.id}", plays_path( quiz_id: quiz.id ), class: "btn btn-link" %><br>
       <% end %>
 
     </div>

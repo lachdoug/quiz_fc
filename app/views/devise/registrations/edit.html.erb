@@ -31,7 +31,7 @@
     <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
   </div>
 
-  <div class="actions">
+  <div class="form-group">
     <%= link_to "Cancel", current_admin ? quizmaster_path : user_management_path, class: "btn btn-secondary" %>
     <%= f.submit "Update", class: "btn btn-primary" %>
   </div>

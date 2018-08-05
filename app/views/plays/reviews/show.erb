@@ -1,16 +1,11 @@
 <% previous_question = @question.previous_question %>
 <% next_question = @question.next_question %>
-
 <div class="float-right">
-  <% if previous_question %>
-    <%= link_to fa("arrow-left") + " Previous", play_question_review_path( @play, previous_question ), class: "btn btn-outline-primary" %>
-  <% end %>
+  <%= link_to fa("arrow-left") + " Previous", previous_question ? play_question_review_path( @play, previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
   <%= link_to fa("arrow-up"), play_result_path( @play ), class: "btn btn-outline-primary" %>
-
-  <% if next_question %>
-    <%= link_to fa("arrow-right") + " Next", play_question_review_path( @play, next_question ), class: "btn btn-outline-primary" %>
-  <% end %>
+  <%= link_to fa("arrow-right") + " Next", next_question ? play_question_review_path( @play, next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
 </div>
+
 
 <h2>Question <%= "#{@question.number} of #{@play.questions.count}" %></h2>
 <% if false && @question.points > 1 %>

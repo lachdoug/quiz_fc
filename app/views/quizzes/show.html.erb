@@ -5,6 +5,10 @@
   <strong>Start</strong> <%= @quiz.start %>
 </p>
 
+<p>
+  <strong>Duration</strong> <%= @quiz.duration_value %> <%= @quiz.duration_units %>
+</p>
+
 <div class="clearfix">
   <% if @quiz.queued? %>
     <%= link_to fa("clock") + ' Dequeue', quiz_dequeue_path(@quiz), method: :POST, class: "btn btn-danger float-right",

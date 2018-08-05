@@ -4,16 +4,29 @@
 
   <div class="form-group">
     <%= form.label :start_date %>
-    <%= date_field_tag 'quiz[start_date]', ( quiz.start || Time.new ).strftime('%Y-%m-%d'), class: "form-control" %>
+    <%= date_field_tag 'quiz[start_date]', ( quiz.start || Time.now ).strftime('%Y-%m-%d'), class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= form.label :start_time, "Start time (UTC)" %>
-    <%= time_field_tag 'quiz[start_time]', ( quiz.start || Time.new ).strftime('%H:%M'), class: "form-control" %>
+    <%= time_field_tag 'quiz[start_time]', ( quiz.start || Time.now ).strftime('%H:%M'), class: "form-control" %>
   </div>
 
-  <div class="actions">
+  <div class="form-group">
+    <%= form.label :duration_value, "Duration" %>
+    <div class="row">
+      <div class="col">
+        <%= form.text_field :duration_value, class: "form-control" %>
+      </div>
+      <div class="col">
+        <%= form.select :duration_units, Quiz.duration_units.keys, {}, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= link_to "Cancel", quiz_path(quiz), class: "btn btn-secondary" %>
     <%= form.submit "Set start time", class: "btn btn-primary" %>
   </div>
+
 <% end %>
