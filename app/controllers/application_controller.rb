@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   #   ) unless current_user.try(:admin?)
   # end
 
-  layout :layout_by_resource
+  # layout :layout_by_resource
 
   # def current_developer
   #   current_admin if !current_admin.developer?
@@ -20,15 +20,18 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def layout_by_resource
-    if devise_controller?
-      "devise"
-    elsif self.class == IndexController
-      "landing"
-    else
-      "application"
-    end
-  end
+  # def layout_by_resource
+  #   if devise_controller?
+  #     "devise"
+  #   elsif self.class == IndexController
+  #     #  || self.class == HomesController
+  #     "landing"
+  #   # elsif self.class == PlaysController
+  #   #   "play"
+  #   else
+  #     "application"
+  #   end
+  # end
 
 
 end

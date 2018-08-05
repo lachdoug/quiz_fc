@@ -6,6 +6,8 @@ gem 'devise'
 # gem 'activeadmin'
 gem 'rails_admin'
 gem 'omniauth'
+gem 'redcarpet'
+gem 'seed_dump'
 group :production do
   gem 'mysql2'
 end

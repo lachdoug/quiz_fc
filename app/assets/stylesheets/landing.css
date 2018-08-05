@@ -1,0 +1,34 @@
+body.landing {
+  background: url(/landingsplash.jpeg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: black;
+  color: #eee;
+  margin-bottom: 50px;
+}
+.landing .flash-messages {
+  text-align: center;
+  padding: 20px;
+}
+.landing .landing_primary_title {
+  font-size: 3rem;
+  white-space: nowrap;
+  margin-bottom: 50px;
+}
+.landing .primary_section {
+  padding: 50px 10px;
+  background-color: rgba(255,0,0,0.85);
+}
+.landing .primary_section .btn {
+  margin: 5px;
+}
+
+@media (min-width: 576px) {
+  .landing .landing_primary_title { font-size: 6rem; }
+  .landing .primary_section .btn { font-size: 1.5rem; }
+}
+@media (min-width: 992px) {
+  .landing .landing_primary_title { font-size: 6rem; }
+}

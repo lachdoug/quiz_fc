@@ -5,7 +5,7 @@ $( document ).on('turbolinks:load', function() {
 
   $(".yaml-editor").each( function ( i, wrapper ) {
     codemirrorEditors[i] = CodeMirror.fromTextArea( wrapper.querySelector("textarea"), { lineNumbers: true } );
-    // codemirrorEditors[i].setSize("100%", 200)
+    // codemirrorEditors[i].setSize("100%", "100%")
   } );
 
   $(".markdown-editor").each( function ( i, wrapper ) {
@@ -13,8 +13,9 @@ $( document ).on('turbolinks:load', function() {
       element: wrapper.querySelector("textarea"),
       toolbar: simpleMdeToolbarIcons,
       autoDownloadFontAwesome: false,
+      status: false,
     } );
-    codemirrorEditors[i].setSize("100%", 200)
+    // codemirrorEditors[i].setSize("100%", 200)
   } );
 
 } );

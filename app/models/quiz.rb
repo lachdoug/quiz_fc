@@ -1,18 +1,27 @@
 class Quiz < ApplicationRecord
   enum status: [ :draft, :queued, :playing, :pending, :complete, :archived ]
-  has_many :questions
+  has_many :questions, dependent: :destroy
+  has_many :plays, dependent: :destroy
 
   def to_s( type=nil )
-    return "#{id} " + status.capitalize if type.to_s == "short"
-    "#{id} " + status.capitalize + ( start.present? ? " " + start.strftime("%A %d %B %Y at %H:%M %Z") : "" )
+    return "Quiz #{id} #{status.capitalize}" if type.to_s == "short"
+    "#{id} #{status.capitalize} #{formatted_start}"
+  end
+
+  def formatted_start
+    start.present? ? start.strftime("%A %d %B %Y at %H:%M %Z") : "Unsheduled"
   end
 
   # def self.recent
   #   where.not( status: 0 ).order( "start ASC" ).first(10)
   # end
 
-  # def self.next
-  #   pending.first || new
+  def self.next
+    queued.first
+  end
+
+  # def find_question( question_number )
+  #   questions.find_by( number: question_number )
   # end
 
   # def start_date

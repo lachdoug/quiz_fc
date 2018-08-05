@@ -1,4 +1,4 @@
-<h1>Terminate <%= current_user.email %></h1>
+<h2>Terminate <%= current_user.email %></h2>
 <div class="alert alert-danger">
   <h3><%= fa( "exclamation-triangle" ) %> Warning</h3>
   <p>You are about to delete your QuizFC user account.</p>
@@ -24,7 +24,7 @@
     <%= form.text_field :code_confirmation, placeholder: "Confirm code", class: "form-control" %>
   </div>
 
-  <%= link_to fa("times") + " Cancel", user_management_path, class: "btn btn-secondary" %>
+  <%= link_to fa("times") + "Cancel", user_management_path, class: "btn btn-secondary" %>
   <%= button_tag type: :submit, class: "btn btn-danger" do %><%= fa("skull") %> Terminate<% end %>
 
 <% end %>

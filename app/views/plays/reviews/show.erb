@@ -1,0 +1,39 @@
+<% previous_question = @question.previous_question %>
+<% next_question = @question.next_question %>
+
+<div class="float-right">
+  <% if previous_question %>
+    <%= link_to fa("arrow-left") + " Previous", play_question_review_path( @play, previous_question ), class: "btn btn-outline-primary" %>
+  <% end %>
+  <%= link_to fa("arrow-up"), play_result_path( @play ), class: "btn btn-outline-primary" %>
+
+  <% if next_question %>
+    <%= link_to fa("arrow-right") + " Next", play_question_review_path( @play, next_question ), class: "btn btn-outline-primary" %>
+  <% end %>
+</div>
+
+<h2>Question <%= "#{@question.number} of #{@play.questions.count}" %></h2>
+<% if false && @question.points > 1 %>
+  <h5><%= @question.points %> points</h5>
+<% end %>
+<hr>
+<div class="rendered_question_ask">
+  <%= @question.ask_html.html_safe %>
+</div>
+<% your_answer = @play.answer_for @question %>
+<% points_scored = @question.score_for( your_answer ) %>
+<% if points_scored > 0 %>
+  <div class="alert alert-success">
+    <h5>
+      Your answer <strong><%= your_answer %></strong> <%= fa "check" %>
+      <small><%= pluralize( points_scored, "point" ) %></small>
+    </h5>
+  </div>
+<% else %>
+  <div class="alert alert-warning">
+    <h5>
+      Your answer <strong><%= your_answer %></strong> <%= fa "times" %>
+    </h5>
+    <h5>Correct answer <strong><%= @question.answer %></strong> <small><%= pluralize @question.points, "point" %></small></h5>
+  </div>
+<% end %>

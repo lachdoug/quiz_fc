@@ -8,6 +8,8 @@ Needs a MySQL database
 
 Public at '/public'
 
+ENV['RAILS_MASTER_KEY'] for secret key
+
 NOT THIS > Cron job every 5 minutes `rails runner "ScheduleQuizzesJob.perform_now"`
 
 

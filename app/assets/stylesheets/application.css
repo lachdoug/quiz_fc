@@ -1,39 +1,49 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
 
- .page {
-   border: 1px solid grey;
-   border-radius: .25rem;
-   padding: 20px;
-   margin-bottom: 20px;
- }
+.page {
+  border: 1px solid grey;
+  border-radius: .25rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  overflow-x: hidden;
+}
 
- form .form-control {
-   max-width: 300px;
- }
+form .form-control {
+  max-width: 300px;
+}
 
- form .form-group.form-group-inline {
-   display: inline-block;
- }
+form .form-group.form-group-inline {
+  display: inline-block;
+}
 
- .flash-messages {
-   text-align: center;
-   padding: 10px;
- }
+.flash-messages {
+  text-align: center;
+  padding: 10px;
+}
 
- form.question_answer_form_input_test button, form.question_answer_form_input_test input {
-   vertical-align: middle;
- }
+form.question_answer_form_input_test button, form.question_answer_form_input_test input {
+  vertical-align: middle;
+}
+
+.rendered_question_ask blockquote {
+  margin-left: 10px;
+  font-style: italic;
+}
+
+.rendered_question_ask img {
+  max-width: 100%
+}

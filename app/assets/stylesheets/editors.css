@@ -3,11 +3,15 @@
 }
 
 .markdown-editor .CodeMirror-scroll {
-  min-height: 160px;
+  min-height: 60px;
 }
 
 .yaml-editor .CodeMirror {
-  min-height: 200px;
+  min-height: 0px;
   padding: 0px;
-  font: monospace;
+  font-family: monospace;
+}
+
+.yaml-editor .CodeMirror-scroll {
+  min-height: 0px;
 }

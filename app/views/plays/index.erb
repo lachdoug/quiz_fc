@@ -1,0 +1,42 @@
+<%= link_to fa("arrow-up"), user_root_path(), class: "btn btn-outline-primary float-right" %>
+
+<h2>Quiz <%= @quiz.id %></h2>
+<hr>
+
+<% if false %>
+<p>
+  <strong>Start</strong>
+  <%= @quiz.formatted_start %>
+</p>
+<% end %>
+
+<p>
+  <%= button_to plays_path, params: { quiz_id: params[:quiz_id] }, method: :POST, class: "btn btn-outline-dark" do %>
+    <%= fa("futbol") %> Play again
+  <% end %>
+</p>
+
+<% if @plays.any? %>
+  <table class="table">
+    <tr>
+      <th>Started</th>
+      <th>Score</th>
+      <th></th>
+    </tr>
+    <% @plays.each do |play| %>
+      <tr>
+        <td><%= time_ago_in_words play.created_at %> ago</td>
+        <td><%= play.score %></td>
+        <td>
+          <% if play.score %>
+            <%= link_to fa("arrow-right"), play_result_path( play ), class: "float-right" %>
+          <% else %>
+            <%= link_to "Resume play ".html_safe + fa("play"), new_play_question_path( play ), class: "float-right" %>
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>

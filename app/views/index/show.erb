@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-12 col-xl-6 landing_primary_section text-center">
+    <div class="col-lg-12 col-xl-6 primary_section text-center">
       <p><%= image_tag "/logo-large.png", class: "img-fluid" %></p>
       <!-- <div class="landing_primary_title"><%= fa "futbol" %> QuizFC</div> -->
       <% if current_user %>
@@ -12,7 +12,7 @@
         <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "btn btn-outline-light btn-lg" )  %>
       <% end %>
     </div>
-    <div class="col landing_primary_section text-center">
+    <div class="col primary_section text-center">
       <h3>Test your football knowledge</h3>
       <br>
       <h3>Win prizes</h3>

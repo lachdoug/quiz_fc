@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"><%= fa "futbol" %> QuizFC</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="navbar-nav mr-auto">
+      <% if current_user %>
+      <li class="nav-item">
+        <%= link_to fa("home") + " Home", user_root_path, class: "nav-link" %>
+      </li>
+      <% end %>
+      <% if current_admin && ( current_admin.quizmaster? || current_admin.developer? ) %>
+      <li class="nav-item">
+        <%= link_to fa("chess-queen") + " Quizmaster", quizmaster_path, class: "nav-link" %>
+      </li>
+      <% end %>
+      <% if current_admin && current_admin.developer? %>
+      <li class="nav-item">
+        <%= link_to fa("database") + " Database", rails_admin_path, class: "nav-link" %>
+      </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <% if current_user %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= fa "user" %> <%= current_user.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+            <%= link_to fa("cog") + " Manage", user_management_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_user_session_path, class: "dropdown-item", method: :delete) %>
+          </div>
+        </li>
+      <% elsif current_admin %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= fa "user" %> <%= current_admin.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
+            <%= content_tag :div, content_tag( :strong, "Admin ( #{ current_admin.role } )" ), class: "dropdown-item"  %>
+            <div class="dropdown-divider"></div>
+            <%= link_to fa("edit") + " Edit", edit_admin_registration_path, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_admin_session_path, class: "dropdown-item", method: :delete) %>
+          </div>
+        </li>
+      <% elsif !devise_controller? %>
+        <li class="nav-item">
+          <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "nav-link" )  %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

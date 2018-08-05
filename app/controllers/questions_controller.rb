@@ -14,13 +14,14 @@ class QuestionsController < ApplicationController
   def show
     # byebug
     # @new_answer = @question.new_answer unless @question
+    # @test_score = @question, notice: "You scored #{@question.answer == params[:test_answer] ? @question.points : 0 }"
   end
 
   # # GET /questions/new
   # def new
   #   @quiz = Quiz.find( params[:quiz_id] )
   #   @questions = @quiz.questions
-  #   @question = @questions.create( order: @questions.count )
+  #   @question = @questions.create( number: @questions.count )
   #   redirect_to @question, notice: "Successfully created question."
   # end
 
@@ -33,7 +34,7 @@ class QuestionsController < ApplicationController
   def create
     @quiz = Quiz.find( params[:quiz_id] )
     @questions = @quiz.questions
-    @question = @questions.build( sort_order: @questions.count + 1 )
+    @question = @questions.build( number: @questions.count + 1 )
 
     respond_to do |format|
       if @question.save
@@ -79,6 +80,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:ask, :answer, :points, :form_type, :form_config_yaml)
+      params.require(:question).permit(:ask, :answer, :form_type, :config_yaml)
     end
 end

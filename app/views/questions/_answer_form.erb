@@ -1,17 +1,40 @@
-<% form_config = @question.form_config || {} %>
-<% if @question.form_type == "input_field" %>
-  <% tag_attributes = form_config["input_tag"] || {} %>
-  <%= form_with( url: question_test_path( @question ), local: true, class: "question_answer_form_input_test" ) do |form| %>
-    <%= content_tag :input, nil, ( tag_attributes ).merge( { name: "question[answer]"} ) %>
-    <%= form.submit :OK %>
+<% begin %>
+  <% question_config = question.config || {} %>
+  <% if question.form_type == "input_field" %>
+    <% tag_config = question_config["input"] || {} %>
+    <% button_config = question_config["button"] || {} %>
+    <%= form_with url: url, class: "question_answer_form_input_test", method: http_method, local: local do |form| %>
+      <%= content_tag :input, nil, ( tag_config ).merge( { name: :answer } ) %>
+      <%= content_tag :button, ( { class: "btn" }).merge( button_config ).merge( { type: :submit } ) do %><%= fa("arrow-right") %><% end %>
+    <% end %>
+  <% elsif question.form_type == "select_menu" %>
+    <% tag_config = question_config["select"] || {} %>
+    <% options = question_config["options"] || [] %>
+    <% button_config = question_config["button"] || {} %>
+    <%= form_with url: url, method: http_method, local: local do |form| %>
+      <%= content_tag :select, options_for_select( options ), ( tag_config ).merge( { name: :answer } ) %>
+      <%= content_tag :button, ( { class: "btn" } ).merge( button_config ).merge( { type: :submit } ) do %><%= fa("arrow-right") %><% end %>
+    <% end %>
+  <% elsif question.form_type == "multiple_choice" %>
+    <% options = question_config["options"] || [] %>
+    <% buttons_config = question_config["buttons"] || [] %>
+    <% button_config = question_config["button"] || {} %>
+    <%= form_with url: url, method: http_method, local: local do |form| %>
+      <% options.each.with_index do |option, i| %>
+        <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
+        <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
+        <%= content_tag :button, option_label, (
+          { class: "btn" } ).merge( button_config ).merge( buttons_config[i] || {} ).
+          merge( { name: :answer, value: option_value, type: :submit }
+        ) %>
+      <% end %>
+    <% end %>
   <% end %>
-<% elsif @question.form_type == "select" %>
-  <% tag_attributes = form_config["select_tag"] || {} %>
-  <%= form_with( url: question_test_path( @question ), local: true ) do |form| %>
-    <%= content_tag :select, options_for_select( @question.form_config[:options] ), ( tag_attributes ).merge( { name: "question[answer]"} ) %>
-    <%= form.submit :OK %>
-  <% end %>
-<% elsif @question.form_type == "multiple_choice" %>
-
+<% rescue => e %>
+  <div class="alert alert-danger">
+    <p>Failed to render form. There is a problem with the form config.</p>
+    <p><small><%= e %></small></p>
+    <p><small><%= e.backtrace %></small></p>
+  </div>
 
 <% end %>

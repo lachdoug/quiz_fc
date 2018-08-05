@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_230206) do
+ActiveRecord::Schema.define(version: 2018_07_28_220315) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,7 +24,15 @@ ActiveRecord::Schema.define(version: 2018_07_27_230206) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index [nil], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "plays", force: :cascade do |t|
+    t.integer "quiz_id"
+    t.integer "profile_id"
+    t.text "answers"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -35,12 +43,11 @@ ActiveRecord::Schema.define(version: 2018_07_27_230206) do
 
   create_table "questions", force: :cascade do |t|
     t.integer "quiz_id", null: false
-    t.integer "sort_order"
+    t.integer "number"
     t.text "ask"
     t.text "answer"
-    t.text "points"
     t.integer "form_type", default: 0
-    t.text "form_config"
+    t.text "config"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"

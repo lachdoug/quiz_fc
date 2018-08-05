@@ -58,7 +58,7 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy
     respond_to do |format|
-      format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
+      format.html { redirect_to quizmaster_path, notice: 'Quiz was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

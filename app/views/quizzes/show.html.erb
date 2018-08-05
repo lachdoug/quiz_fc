@@ -1,5 +1,5 @@
 <%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
-<h1><%= @quiz.to_s :short %></h1>
+<h2><%= @quiz.to_s :short %></h2>
 
 <p>
   <strong>Start</strong> <%= @quiz.start %>
@@ -11,10 +11,14 @@
     data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
   <% else %>
     <%= link_to fa("calendar-alt") + ' Schedule', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
-    <% if @quiz.start && @quiz.start.future? %>
-      <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning float-right",
-      data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
-    <% end %>
+    <div class="float-right">
+      <% if @quiz.start && @quiz.start.future? %>
+        <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning",
+        data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
+      <% end %>
+      <%= link_to fa("trash") + ' Delete', quiz_path(@quiz), method: :DELETE,
+      data: { confirm: "Are you sure that you want to delete this quiz?" }, class: "btn btn-outline-danger #{'disabled' if @quiz.questions.any?}" %>
+    </div>
   <% end %>
 </div>
 
@@ -22,4 +26,8 @@
 
 <%= link_to fa("plus") + ' New', questions_path( quiz_id: @quiz.id ), method: :POST, class: "btn btn-outline-primary float-right" %>
 <h2>Questions</h2>
-<%= render collection: @quiz.questions, partial: 'quizzes/question' %>
+<ol>
+  <% @quiz.questions.each do |question| %>
+    <%= link_to content_tag( :li, strip_tags(question.ask_html) ), question %>
+  <% end %>
+</ol>
