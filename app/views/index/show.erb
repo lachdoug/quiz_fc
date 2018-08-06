@@ -23,4 +23,10 @@
       <br>
       <h4>Weekly quizzes<br>12pm on Saturdays</h4>
       <h4>Good luck!
+
+        <% Admin.all.each do |admin| %>
+          <%= admin.email %>
+        <% end %>
+    </div>
+  </div>
 </div>
