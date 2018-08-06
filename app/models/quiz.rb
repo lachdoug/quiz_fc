@@ -17,6 +17,10 @@ class Quiz < ApplicationRecord
   #   where.not( status: 0 ).order( "start ASC" ).first(10)
   # end
 
+  def recalculate!
+    plays.each &:calculate_score
+  end
+
   def self.next
     queued.first
   end

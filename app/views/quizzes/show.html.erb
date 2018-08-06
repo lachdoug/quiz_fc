@@ -11,8 +11,12 @@
 
 <div class="clearfix">
   <% if @quiz.queued? %>
-    <%= link_to fa("clock") + ' Dequeue', quiz_dequeue_path(@quiz), method: :POST, class: "btn btn-danger float-right",
-    data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
+    <div class="float-right">
+      <%= link_to fa("clock") + ' Dequeue', quiz_dequeue_path(@quiz), method: :POST, class: "btn btn-danger",
+      data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
+      <%= link_to fa("calculator") + ' Recalculate', quiz_recalculate_path(@quiz), method: :POST, class: "btn btn-danger",
+      data: { confirm: "Are you sure that you want to recalculate the scores on all plays of this quiz?" } %>
+    </div>
   <% else %>
     <%= link_to fa("edit") + ' Edit', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
     <div class="float-right">

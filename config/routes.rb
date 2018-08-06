@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ]
       resources :quizzes do
+        resource :recalculate, only: [ :create ], module: :quizzes
         resource :enqueue, only: [ :create ], module: :quizzes
         resource :dequeue, only: [ :create ], module: :quizzes
       end

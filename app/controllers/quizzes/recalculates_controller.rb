@@ -1,9 +1,9 @@
 module Quizzes
-  class EnqueuesController < ApplicationController
+  class RecalculatesController < ApplicationController
 
     def create
       @quiz = Quiz.find( params[:quiz_id] )
-      @quiz.draft? && @quiz.queued!
+      @quiz.recalculate!
       redirect_to @quiz
     end
 
