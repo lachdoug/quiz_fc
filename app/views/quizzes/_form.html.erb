@@ -2,17 +2,17 @@
 
   <%= render "/errors", object: quiz %>
 
-  <div class="form-group">
+  <div class="form-group form-group-narrow">
     <%= form.label :start_date %>
     <%= date_field_tag 'quiz[start_date]', ( quiz.start || Time.now ).strftime('%Y-%m-%d'), class: "form-control" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group form-group-narrow">
     <%= form.label :start_time, "Start time (UTC)" %>
     <%= time_field_tag 'quiz[start_time]', ( quiz.start || Time.now ).strftime('%H:%M'), class: "form-control" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group form-group-narrow">
     <%= form.label :duration_value, "Duration" %>
     <div class="row">
       <div class="col">

@@ -3,6 +3,8 @@
 <h2>Quiz <%= @play.quiz_id %> results</h2>
 <hr>
 
+<%= link_to fa("arrow-right") + " Review", play_question_review_path( @play, @play.questions.first ), class: "btn btn-outline-primary float-right" %>
+
 <p>
   <% if false %>
   <strong>Quiz</strong> <%= @play.quiz.formatted_start %><br>
@@ -12,13 +14,16 @@
 
 <h3>Your score: <%= @play.score %></h3>
 
+
 <ol>
   <% @play.questions.each do |question| %>
     <li>
       <%= strip_tags question.ask_html %><br>
-      <% answer = @play.answer_for question %>
-      <%= answer.present? ? answer : content_tag( :i, "Not answered!") %>
-      <% score = @play.score_for question %>
+      <strong>
+        <% answer = @play.answer_for question %>
+        <%= answer.present? ? answer : content_tag( :i, "Not answered!") %>
+        <% score = @play.score_for question %>
+      </strong>
       <%= score > 0 ? fa("check") : ( fa("times") + " (#{question.answer})" ) %>
       <%= link_to fa("arrow-right"), play_question_review_path( @play, question ) %>
     </li>
