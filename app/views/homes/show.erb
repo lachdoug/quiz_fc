@@ -2,6 +2,13 @@
 
   <h2>Home</h2>
 
+  <%= Rails.application.secret_key_base %><br>
+  <% begin %>
+  <%= Devise.secret_key %>
+  <% rescue %>
+  No key
+  <% end %><br>
+
   <% if false %>
     <p>
       <strong>Next quiz</strong>

@@ -11,7 +11,7 @@
 <% end %>
 
 <p>
-  <%= button_to plays_path, params: { quiz_id: params[:quiz_id] }, method: :POST, class: "btn btn-outline-dark" do %>
+  <%= button_to plays_path, params: { quiz_id: params[:quiz_id] }, method: :POST, class: "btn btn-outline-primary" do %>
     <%= fa("futbol") %> Play <%= @plays.any? ? "again" : "" %>
   <% end %>
 </p>

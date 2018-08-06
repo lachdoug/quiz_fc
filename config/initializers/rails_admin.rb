@@ -13,20 +13,20 @@ RailsAdmin.config do |config|
   #   end
   # end
 
-  config.authorize_with do |controller|
-    unless current_admin.developer?
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
-
-
-  ### Popular gems integration
-
-  # == Devise ==
-  config.authenticate_with do
-    warden.authenticate! scope: :admin
-  end
-  config.current_user_method(&:current_admin)
+  # config.authorize_with do |controller|
+  #   unless current_admin.developer?
+  #     raise ActionController::RoutingError.new('Not Found')
+  #   end
+  # end
+  #
+  #
+  # ### Popular gems integration
+  #
+  # # == Devise ==
+  # config.authenticate_with do
+  #   warden.authenticate! scope: :admin
+  # end
+  # config.current_user_method(&:current_admin)
 
   ## == Cancan ==
   # config.authorize_with :cancan
