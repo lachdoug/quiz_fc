@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   end
 
   authenticate :admin do
+    authorize_admin( :developer ) do
+      resource :datadump, only: [ :show ]
+    end
     authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ]
       resources :quizzes do

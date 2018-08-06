@@ -39,11 +39,11 @@ form.question_answer_form_input_test button, form.question_answer_form_input_tes
   vertical-align: middle;
 }
 
-.rendered_question_ask blockquote {
+.rendered_markdown blockquote {
   margin-left: 10px;
   font-style: italic;
 }
 
-.rendered_question_ask img {
+.rendered_markdown img {
   max-width: 100%
 }

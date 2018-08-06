@@ -4,29 +4,17 @@ RailsAdmin.config do |config|
 
   config.parent_controller = "::ApplicationController"
 
-  # config.authorize_with do |controller|
-  #   unless admin_user && current_user.admin?
-  #     redirect_to(
-  #       main_app.root_path,
-  #       alert: "Not permitted."
-  #     )
-  #   end
-  # end
+  config.authorize_with do |controller|
+      render plain: "Not authorized" unless current_admin.developer?
+  end
 
-  # config.authorize_with do |controller|
-  #   unless current_admin.developer?
-  #     raise ActionController::RoutingError.new('Not Found')
-  #   end
-  # end
-  #
-  #
-  # ### Popular gems integration
-  #
-  # # == Devise ==
-  # config.authenticate_with do
-  #   warden.authenticate! scope: :admin
-  # end
-  # config.current_user_method(&:current_admin)
+  ### Popular gems integration
+
+  # == Devise ==
+  config.authenticate_with do
+    warden.authenticate! scope: :admin
+  end
+  config.current_user_method(&:current_admin)
 
   ## == Cancan ==
   # config.authorize_with :cancan

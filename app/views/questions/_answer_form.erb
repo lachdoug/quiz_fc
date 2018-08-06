@@ -1,45 +1,46 @@
 <% begin %>
-  <% question_config = question.config || {} %>
-  <% if question.form_type == "input_field" %>
-    <% tag_config = question_config["input"] || {} %>
-    <% button_config = question_config["button"] || {} %>
-    <%= form_with url: url, class: "question_answer_form_input_test", method: http_method, local: local do |form| %>
-      <%= content_tag :input, nil, ( tag_config ).merge( { "name" => :answer, "autocomplete" => "off" } ) %>
-      <%= content_tag :button, (
-        { "class" => :btn }).merge( button_config ).merge( { "type" => :submit }
+  <%= content_tag :div, config["answer"] do %>
+    <% if form_type == "input_field" %>
+      <% tag_config = config["input"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= form_with url: url, class: "question_answer_form_input_test", method: http_method, local: local do |form| %>
+        <%= content_tag :input, nil, ( tag_config ).merge( { "name" => :answer, "autocomplete" => "off" } ) %>
+        <%= content_tag :button, (
+          { "class" => :btn }).merge( button_config ).merge( { "type" => :submit }
+          ) do %>
+          <%= fa("arrow-right") %>
+        <% end %>
+      <% end %>
+    <% elsif form_type == "select_menu" %>
+      <% tag_config = config["select"] || {} %>
+      <% options = config["options"] || [] %>
+      <% button_config = config["button"] || {} %>
+      <%= form_with url: url, method: http_method, local: local do |form| %>
+        <%= content_tag :select, options_for_select( options ), ( tag_config ).merge( { "name" => :answer } ) %>
+        <%= content_tag :button, (
+        { "class" => :btn } ).merge( button_config ).merge( { "type" => :submit }
         ) do %>
-        <%= fa("arrow-right") %>
+          <%= fa("arrow-right") %>
+        <% end %>
       <% end %>
-    <% end %>
-  <% elsif question.form_type == "select_menu" %>
-    <% tag_config = question_config["select"] || {} %>
-    <% options = question_config["options"] || [] %>
-    <% button_config = question_config["button"] || {} %>
-    <%= form_with url: url, method: http_method, local: local do |form| %>
-      <%= content_tag :select, options_for_select( options ), ( tag_config ).merge( { "name" => :answer } ) %>
-      <%= content_tag :button, (
-      { "class" => :btn } ).merge( button_config ).merge( { "type" => :submit }
-      ) do %>
-        <%= fa("arrow-right") %>
-      <% end %>
-    <% end %>
-  <% elsif question.form_type == "multiple_choice" %>
-    <% options = question_config["options"] || [] %>
-    <% buttons_config = question_config["buttons"] || [] %>
-    <% button_config = question_config["button"] || {} %>
-    <%= form_with url: url, method: http_method, local: local do |form| %>
-      <% options.each.with_index do |option, i| %>
-        <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
-        <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
-        <%= content_tag :button, option_label, (
-          { "class" => :btn } ).merge( buttons_config[i] || {} ).merge( button_config ).
-          merge( { "name" => :answer, "value" => option_value, "type" => :submit }
-        ) %>
+    <% elsif form_type == "multiple_choice" %>
+      <% options = config["options"] || [] %>
+      <% buttons_config = config["buttons"] || [] %>
+      <% button_config = config["button"] || {} %>
+      <%= form_with url: url, method: http_method, local: local do |form| %>
+        <% options.each.with_index do |option, i| %>
+          <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
+          <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
+          <%= content_tag :button, option_label, (
+            { "class" => :btn } ).merge( buttons_config[i] || {} ).merge( button_config ).
+            merge( { "name" => :answer, "value" => option_value, "type" => :submit }
+          ) %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
 <% rescue => e %>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger text-left">
     <p>Failed to render form. There is a problem with the form config.</p>
     <p><small><%= e %></small></p>
     <% if Rails.env.development? %>
