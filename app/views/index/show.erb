@@ -5,11 +5,12 @@
       <!-- <div class="landing_primary_title"><%= fa "futbol" %> QuizFC</div> -->
       <% if current_user %>
         <%= link_to( fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-light btn-lg" )  %>
-      <% elsif current_admin && ( current_admin.developer? || current_admin.quizmaster? ) %>
-        <%= link_to( fa( "chess-queen" ) + ' Quizmaster', quizmaster_path, class: "btn btn-outline-light btn-lg" )  %>
       <% else %>
         <%= link_to( fa( "pen" ) + ' Sign up', new_user_registration_path, class: "btn btn-outline-light btn-lg" )  %>
         <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "btn btn-outline-light btn-lg" )  %>
+      <% end %>
+      <% if current_admin && ( current_admin.developer? || current_admin.quizmaster? ) %>
+        <%= link_to( fa( "chess-queen" ) + ' Quizmaster', quizmaster_path, class: "btn btn-outline-light btn-lg" )  %>
       <% end %>
     </div>
     <div class="col primary_section text-center">

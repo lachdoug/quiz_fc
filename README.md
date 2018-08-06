@@ -6,34 +6,21 @@ Needs a MySQL database
 `rails db:migrate`
 `rails db:seed`
 
-Public at '/public'
+ENV['SECRET_KEY_BASE'] for secret key (in config/secret.yaml)
 
-ENV['RAILS_MASTER_KEY'] for secret key
+in config/initializers/production.rb
+1. Static '/public'
+Default behaviour is to disable serving static files from the `/public` folder.
+Apache or NGINX already handles this.
+Is configured as:
+`config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?`
+Set ENV['RAILS_SERVE_STATIC_FILES'] to override default behaviour.
 
-NOT THIS > Cron job every 5 minutes `rails runner "ScheduleQuizzesJob.perform_now"`
-
-
-
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2. Logging
+Is configured as:
+`if ENV["RAILS_LOG_TO_STDOUT"].present?
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
+end`
+Set ENV['RAILS_LOG_TO_STDOUT'] to enable logging to STDOUT.

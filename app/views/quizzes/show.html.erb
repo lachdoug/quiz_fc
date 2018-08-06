@@ -14,7 +14,7 @@
     <%= link_to fa("clock") + ' Dequeue', quiz_dequeue_path(@quiz), method: :POST, class: "btn btn-danger float-right",
     data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
   <% else %>
-    <%= link_to fa("calendar-alt") + ' Schedule', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
+    <%= link_to fa("edit") + ' Edit', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
     <div class="float-right">
       <% if @quiz.start && @quiz.start.future? %>
         <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning",
