@@ -50,14 +50,14 @@
 
 <hr>
 <% config = @question.config || {} %>
-<%= content_tag :div, config["wrapper"] do %>
-  <%= content_tag :div, config["question"] do %>
-    <div class="rendered_markdown">
+<div class="rendered_markdown">
+  <%= content_tag :div, config["wrapper"] do %>
+    <%= content_tag :div, config["question"] do %>
       <%= @question.ask_html.html_safe %>
-    </div>
+    <% end %>
+    <%= render 'questions/answer_form', form_type: @question.form_type, config: config, url: question_test_path( @question ), http_method: :POST, local: false %>
   <% end %>
-  <%= render 'questions/answer_form', form_type: @question.form_type, config: config, url: question_test_path( @question ), http_method: :POST, local: false %>
-<% end %>
+</div>
 
 <hr>
 <div id="question_test_result">

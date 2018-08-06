@@ -13,37 +13,3 @@
 *= require_tree .
 *= require_self
 */
-
-.page {
-  border: 1px solid grey;
-  border-radius: .25rem;
-  padding: 20px;
-  margin-bottom: 20px;
-  overflow-x: hidden;
-}
-
-form .form-group-narrow {
-  max-width: 300px;
-}
-
-form .form-group.form-group-inline {
-  display: inline-block;
-}
-
-.flash-messages {
-  text-align: center;
-  padding: 10px;
-}
-
-form.question_answer_form_input_test button, form.question_answer_form_input_test input {
-  vertical-align: middle;
-}
-
-.rendered_markdown blockquote {
-  margin-left: 10px;
-  font-style: italic;
-}
-
-.rendered_markdown img {
-  max-width: 100%
-}

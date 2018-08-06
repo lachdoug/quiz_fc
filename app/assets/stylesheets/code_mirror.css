@@ -1,5 +1,6 @@
 .markdown-editor .CodeMirror {
   min-height: 0px;
+  font-family: monospace;
 }
 
 .markdown-editor .CodeMirror-scroll {

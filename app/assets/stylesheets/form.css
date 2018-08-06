@@ -1,0 +1,11 @@
+form .form-group-narrow {
+  max-width: 300px;
+}
+
+form .form-group.form-group-inline {
+  display: inline-block;
+}
+
+form.question_answer_form_input_test button, form.question_answer_form_input_test input {
+  vertical-align: middle;
+}

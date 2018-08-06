@@ -15,7 +15,7 @@ class MarkdownRenderer
   private
 
   def renderer
-    Redcarpet::Markdown.new( RedcarpetCustomRenderer, filter_html: false )
+    Redcarpet::Markdown.new( RedcarpetCustomRenderer, filter_html: false, tables: true )
   end
 
 end
