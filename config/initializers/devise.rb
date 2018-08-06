@@ -5,6 +5,7 @@
 Devise.setup do |config|
 
   config.secret_key = Rails.application.secret_key_base
+  config.sign_out_all_scopes = false
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
