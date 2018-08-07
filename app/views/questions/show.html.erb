@@ -49,15 +49,7 @@
 <%= link_to fa("caret-up") + ' Move up', question_moveup_path(@question), class: "btn btn-outline-primary #{ @question.number == 1 ? 'disabled' : '' }" %>
 
 <hr>
-<% config = @question.config || {} %>
-<div class="rendered_markdown">
-  <%= content_tag :div, config["wrapper"] do %>
-    <%= content_tag :div, config["question"] do %>
-      <%= @question.ask_html.html_safe %>
-    <% end %>
-    <%= render 'questions/answer_form', form_type: @question.form_type, config: config, url: question_test_path( @question ), http_method: :POST, local: false %>
-  <% end %>
-</div>
+<%= render 'questions/rendered', question: @question, url: question_test_path( @question ), http_method: :POST, local: false %>
 
 <hr>
 <div id="question_test_result">

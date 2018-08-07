@@ -1,0 +1,9 @@
+<% config = question.config || {} %>
+<div class="rendered_markdown">
+  <%= content_tag :div, config["wrapper"] do %>
+    <%= content_tag :div, config["question"] do %>
+      <%= question.ask_html.html_safe %>
+    <% end %>
+    <%= render 'questions/rendered/answer_form', form_type: question.form_type, config: config, url: url, http_method: http_method, local: local %>
+  <% end %>
+</div>

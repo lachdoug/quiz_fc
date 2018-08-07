@@ -2,7 +2,4 @@
 
 <h2><%= @question %></h2>
 <hr>
-<div class="rendered_markdown">
-  <%= @question.ask_html.html_safe %>
-</div>
-<%= render '/questions/answer_form', form_type: @question.form_type, config: @question.config.to_h, url: play_question_path( @play, @question ), http_method: :patch, local: true %>
+<%= render 'questions/rendered', question: @question, url: question_test_path( @question ), http_method: :PATCH, local: true %>
