@@ -20,3 +20,7 @@
 .rendered_markdown img {
   max-width: 100%
 }
+
+.rendered_markdown .btn {
+  margin: 3px;
+}

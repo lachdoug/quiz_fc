@@ -44,9 +44,9 @@
 <% end %>
 
 
-<%= link_to fa("trash") + ' Delete', question_path(@question), method: :DELETE, data: { confirm: "Are you sure that you want to delete this question?" }, class: "btn btn-outline-danger float-right" %>
-<%= link_to fa("edit") + ' Edit', edit_question_path(@question), class: "btn btn-outline-primary" %>
-<%= link_to fa("caret-up") + ' Move up', question_moveup_path(@question), class: "btn btn-outline-primary #{ @question.number == 1 ? 'disabled' : '' }" %>
+<%= link_to fa("trash") + ' Delete', question_path(@question), method: :DELETE, data: { confirm: "Are you sure that you want to delete this question?" }, class: "btn btn-outline-danger float-right #{ @question.quiz.queued? ? 'disabled' : '' }" %>
+<%= link_to fa("edit") + ' Edit', edit_question_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? ? 'disabled' : '' }" %>
+<%= link_to fa("caret-up") + ' Move up', question_moveup_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? || @question.number == 1 ? 'disabled' : '' }" %>
 
 <hr>
 <%= render 'questions/rendered', question: @question, url: question_test_path( @question ), http_method: :POST, local: false %>

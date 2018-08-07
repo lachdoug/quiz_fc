@@ -6,7 +6,7 @@
       <%= form_with url: url, class: "question_answer_form_input_test", method: http_method, local: local do |form| %>
         <%= content_tag :input, nil, ( tag_config ).merge( { "name" => :answer, "autocomplete" => "off" } ) %>
         <%= content_tag :button, (
-          { "class" => :btn }).merge( button_config ).merge( { "type" => :submit }
+          { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
           ) do %>
           <%= fa("arrow-right") %>
         <% end %>
@@ -18,7 +18,7 @@
       <%= form_with url: url, method: http_method, local: local do |form| %>
         <%= content_tag :select, options_for_select( options ), ( tag_config ).merge( { "name" => :answer } ) %>
         <%= content_tag :button, (
-        { "class" => :btn } ).merge( button_config ).merge( { "type" => :submit }
+        { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( { "type" => :submit }
         ) do %>
           <%= fa("arrow-right") %>
         <% end %>
@@ -32,7 +32,7 @@
           <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
           <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
           <%= content_tag :button, option_label, (
-            { "class" => :btn } ).merge( buttons_config[i] || {} ).merge( button_config ).
+            { "class" => "btn btn-outline-primary" } ).merge( buttons_config[i] || {} ).merge( button_config ).
             merge( { "name" => :answer, "value" => option_value, "type" => :submit }
           ) %>
         <% end %>

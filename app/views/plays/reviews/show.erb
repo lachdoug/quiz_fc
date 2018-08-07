@@ -12,8 +12,13 @@
   <h5><%= @question.points %> points</h5>
 <% end %>
 <hr>
+<% config = @question.config || {} %>
 <div class="rendered_markdown">
-  <%= @question.ask_html.html_safe %>
+  <%= content_tag :div, config["wrapper"] do %>
+    <%= content_tag :div, config["question"] do %>
+      <%= @question.ask_html.html_safe %>
+    <% end %>
+  <% end %>
 </div>
 <% your_answer = @play.answer_for @question %>
 <% points_scored = @question.score_for( your_answer ) %>
