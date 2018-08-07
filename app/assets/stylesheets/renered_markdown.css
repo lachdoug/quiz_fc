@@ -1,3 +1,7 @@
+.rendered_markdown {
+  overflow: auto;
+}
+
 .rendered_markdown blockquote {
   margin-left: 10px;
   font-style: italic;

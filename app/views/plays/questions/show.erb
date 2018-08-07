@@ -5,4 +5,4 @@
 <div class="rendered_markdown">
   <%= @question.ask_html.html_safe %>
 </div>
-<%= render '/questions/answer_form', question: @question, url: play_question_path( @play, @question ), http_method: :patch, local: true %>
+<%= render '/questions/answer_form', form_type: @question.form_type, config: @question.config.to_h, url: play_question_path( @play, @question ), http_method: :patch, local: true %>
