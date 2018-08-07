@@ -2,4 +2,4 @@
 
 <h2><%= @question %></h2>
 <hr>
-<%= render 'questions/rendered', question: @question, url: question_test_path( @question ), http_method: :PATCH, local: true %>
+<%= render 'questions/rendered', question: @question, url: play_question_path( @play, @question ), http_method: :PATCH, local: true %>
