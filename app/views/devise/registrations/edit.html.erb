@@ -32,7 +32,7 @@
   </div>
 
   <div class="form-group form-group-narrow">
-    <%= link_to "Cancel", current_admin ? quizmaster_path : user_management_path, class: "btn btn-secondary" %>
+    <%= link_to "Cancel", resource_name.to_s == "user" ? user_management_path : quizmaster_path, class: "btn btn-secondary" %>
     <%= f.submit "Update", class: "btn btn-primary" %>
   </div>
 <% end %>
