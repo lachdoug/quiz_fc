@@ -1,5 +1,6 @@
 .rendered_markdown {
   overflow: auto;
+  padding: 5px;
 }
 
 .rendered_markdown blockquote {
@@ -23,4 +24,8 @@
 
 .rendered_markdown .btn {
   margin: 3px;
+}
+
+.rendered_markdown video, audio {
+  vertical-align: middle;
 }

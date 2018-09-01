@@ -1,0 +1,132 @@
+<% begin %>
+  <%= content_tag :div, config["answer"] do %>
+    <% if form_type == "input_field" %>
+      <% input_config = config["input"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= content_tag :input, nil, input_config.merge( { "name" => 'answer[]', "autocomplete" => "off" } ) %>
+      <%= content_tag :button, (
+        { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
+        ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "select_menu" %>
+      <% options = config["options"] || [] %>
+      <% select_config = config["select"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= content_tag :select, options_for_select( options ), ( select_config ).merge( { "name" => 'answer[]' } ) %>
+      <%= content_tag :button, (
+      { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( { "type" => :submit }
+      ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "buttons" %>
+      <% options = config["options"] || [] %>
+      <% buttons_config = config["buttons"] || [] %>
+      <% button_config = config["button"] || {} %>
+      <% options.each.with_index do |option, i| %>
+        <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
+        <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
+        <%= content_tag :button, option_label, (
+          { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( buttons_config[i] || {} ).
+          merge( { "name" => 'answer[]', "value" => option_value, "type" => :submit }
+        ) %>
+      <% end %>
+    <% elsif form_type == "checkboxes" %>
+      <% options = config["options"] || [] %>
+      <% inputs_config = config["inputs"] || [] %>
+      <% input_config = config["input"] || {} %>
+      <% labels_config = config["labels"] || [] %>
+      <% label_config = config["label"] || {} %>
+      <% checks_config = config["checks"] || [] %>
+      <% check_config = config["check"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <% options.each.with_index do |option, i| %>
+        <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
+        <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
+        <%= content_tag :div, { "class" => "form-check" }.merge( check_config ).merge( checks_config[i] || {} ) do %>
+          <%= content_tag :label, { "class" => "form-check-label" }.merge( label_config ).merge( labels_config[i] || {} ) do %>
+            <%= content_tag :input, nil, { "class" => "form-check-input" }.merge( input_config ).merge( inputs_config[i] || {} ).merge( { "type" => "checkbox", "value" => option_value, "name" => 'answer[]' } ) %>
+            <%= option_label %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= content_tag :button, (
+      { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( { "type" => :submit }
+      ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "radios" %>
+      <% options = config["options"] || [] %>
+      <% inputs_config = config["inputs"] || [] %>
+      <% input_config = config["input"] || {} %>
+      <% radio_labels_config = config["labels"] || [] %>
+      <% radio_label_config = config["label"] || {} %>
+      <% radio_wrappers_config = config["checks"] || [] %>
+      <% radio_wrapper_config = config["check"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <% options.each.with_index do |option, i| %>
+        <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
+        <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
+        <%= content_tag :div, { "class" => "form-check" }.merge( radio_wrapper_config ).merge( radio_wrappers_config[i] || {} ) do %>
+          <%= content_tag :label, { "class" => "form-check-label" }.merge( radio_label_config ).merge( radio_labels_config[i] || {} ) do %>
+            <%= content_tag :input, nil, { "class" => "form-check-input" }.merge( input_config ).merge( inputs_config[i] || {} ).merge( { "type" => "radio", "value" => option_value, "name" => 'answer[]' } ) %>
+            <%= option_label %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= content_tag :button, (
+      { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( { "type" => :submit }
+      ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "two_inputs" %>
+      <% options = config["options"] || [] %>
+      <% inputs_config = config["inputs"] || {} %>
+      <% input_config = config["input"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= content_tag :input, nil, input_config.merge( inputs_config[0] || {} ).merge( { "name" => 'answer[]', "autocomplete" => "off" } ) %>
+      <%= content_tag :input, nil, input_config.merge( inputs_config[1] || {} ).merge( { "name" => 'answer[]', "autocomplete" => "off" } ) %>
+      <%= content_tag :button, (
+        { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
+        ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "two_selects" %>
+      <% options = config["options"] || [] %>
+      <% selects_config = config["selects"] || {} %>
+      <% select_config = config["select"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= content_tag :select, options_for_select( options[0] || [] ), select_config.merge( selects_config[0] || {} ).merge( { "name" => 'answer[]' } ) %>
+      <%= content_tag :select, options_for_select( options[1] || [] ), select_config.merge( selects_config[1] || {} ).merge( { "name" => 'answer[]' } ) %>
+      <%= content_tag :button, (
+        { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
+        ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "select_and_input" %>
+      <% options = config["options"] || [] %>
+      <% select_config = config["select"] || {} %>
+      <% input_config = config["input"] || {} %>
+      <% button_config = config["button"] || {} %>
+      <%= content_tag :select, options_for_select( options ), ( select_config ).merge( { "name" => 'answer[]' } ) %>
+      <%= content_tag :input, nil, input_config.merge( { "name" => 'answer[]', "autocomplete" => "off" } ) %>
+      <%= content_tag :button, (
+        { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
+        ) do %>
+        <%= fa("arrow-right") %>
+      <% end %>
+    <% elsif form_type == "custom" %>
+      <% # Empty - the answer form should be defined using HTML in ask %>
+    <% else %>
+      <% raise "No form for type '#{form_type}'." %>
+    <% end %>
+  <% end %>
+<% rescue => e %>
+  <div class="alert alert-danger text-left">
+    <p>Failed to render form. There is a problem with the form config.</p>
+    <p><small><%= e %></small></p>
+    <% if Rails.env.development? %>
+      <p><small><%= e.backtrace %></small></p>
+    <% end %>
+  </div>
+<% end %>

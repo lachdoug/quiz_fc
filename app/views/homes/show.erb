@@ -17,7 +17,6 @@
       <%= content_tag(:i, :None) unless @profile.unplayed_quizzes.any? %>
       <% @profile.unplayed_quizzes.each do |quiz| %>
         <%= link_to "Quiz #{quiz.id}", plays_path( quiz_id: quiz.id ), class: "btn btn-link" %><br>
-        <% #= button_to "Quiz #{quiz.id}", plays_path, params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-link" %>
       <% end %>
     </div>
 

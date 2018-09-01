@@ -15,7 +15,7 @@ module Plays
     def update
       @play = Play.find params[:play_id]
       @question = @play.questions.find params[:id]
-      @play.give_answer @question.number, params[:answer]
+      @play.give_answer @question.number, ( params[:answer] || [] )
       @next_question = @question.next_question
       if @next_question
         redirect_to play_question_path( @play, @next_question )

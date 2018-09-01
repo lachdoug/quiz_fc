@@ -1,9 +1,8 @@
 class MarkdownRenderer
 
-  require_relative 'markdown_renderer/custom_renderer'
-
-  def initialize( raw )
+  def initialize( raw, options )
     @raw = raw
+    @options = options
   end
 
   attr_reader :raw
@@ -15,7 +14,7 @@ class MarkdownRenderer
   private
 
   def renderer
-    Redcarpet::Markdown.new( RedcarpetCustomRenderer, filter_html: false, tables: true )
+    Redcarpet::Markdown.new( RedcarpetCustomRenderer, @options.merge( { filter_html: false, tables: true } ) )
   end
 
 end

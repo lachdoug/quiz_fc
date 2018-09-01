@@ -37,6 +37,12 @@ method: :POST, class: "btn btn-outline-primary float-right #{ @quiz.queued? ? 'd
 <h2>Questions</h2>
 <ol>
   <% @quiz.questions.each do |question| %>
-    <%= link_to content_tag( :li, strip_tags(question.ask_html) ), question %>
-  <% end %>
+    <%= content_tag :li do %>
+      <%= link_to question, class: "" do %>
+        <%= content_tag :span, strip_tags( markdown question.ask ) %>
+        <%= content_tag :strong, question.answer %>
+        <%= content_tag :i, pluralize( question.points, 'point' ) %>
+      <% end %>
+    <% end %>
+<% end %>
 </ol>

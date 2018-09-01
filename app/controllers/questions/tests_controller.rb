@@ -3,6 +3,7 @@ module Questions
 
     def create
       @question = Question.find( params[:question_id] )
+      @answer_attempt = ( params[:answer] || [] )
     end
 
   end

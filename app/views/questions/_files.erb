@@ -1,0 +1,13 @@
+<%= link_to fa("paperclip") + " Attach", new_question_file_path( question ), class: "btn btn-outline-primary float-right" %>
+<h6><strong>Files</strong></h6>
+<% if @question.files.any? %>
+  <ol>
+    <% @question.files.each do |file| %>
+      <li>
+        <%= link_to file.blob.filename, question_file_path( @question, file ) %>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <%= content_tag :i, "None" %>
+<% end %>

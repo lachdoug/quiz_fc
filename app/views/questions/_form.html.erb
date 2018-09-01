@@ -9,11 +9,28 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= form.label :answer %>
+    <%= form.text_field :answer, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :explanation %>
+    <button class="btn btn-light btn-sm" type="button" data-toggle="collapse" data-target="#questionExplanationFieldCollapse">
+      <%= fa "pencil-alt" %>
+    </button>
+    <div class="collapse <%= :show if question.explanation.present? %>" id="questionExplanationFieldCollapse">
+      <div class="markdown-editor">
+        <%= form.text_area :explanation %>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
 
     <div class="col form-group">
-      <%= form.label :answer %>
-      <%= form.text_field :answer, class: "form-control" %>
+      <%= form.label :points %>
+      <%= form.number_field :points, class: "form-control" %>
     </div>
 
     <div class="col form-group">
@@ -24,6 +41,7 @@
   </div>
 
   <div class="form-group">
+    <%= render 'help' %>
     <%= form.label :config_yaml, "Config" %>
     <div class="yaml-editor">
       <%= form.text_area :config_yaml %>

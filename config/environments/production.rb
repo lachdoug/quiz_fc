@@ -9,6 +9,20 @@ Rails.application.configure do
     enable_starttls_auto:  false
   };
 
+  # config.ldap = {
+  #   host: ENV['DEVISE_LDAP_HOST'] || 'ldap',
+  #   port: ENV['DEVISE_LDAP_PORT'] || 636,
+  #   admin_username: ENV['DEVISE_LDAP_ADMIN_USERNAME'] || 'admin',
+  #   admin_password: ENV['DEVISE_LDAP_ADMIN_PASSWORD']
+  # }
+
+  # Devise.setup do |config|
+  #   config.ldap_host =
+  #   config.ldap_port =
+  #   config.ldap_admin_username =
+  #   config.ldap_admin_password =
+  # end
+
 
   # Settings specified here will take precedence over those in config/application.rb.
 

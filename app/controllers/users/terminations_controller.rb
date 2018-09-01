@@ -1,7 +1,6 @@
 module Users
   class TerminationsController < ApplicationController
 
-
     def show
       session[:user_termination_code] = rand( 10 ** 4 ).to_s.rjust( 4,"0" )
       @user_termination = User::Termination.new(
@@ -23,17 +22,6 @@ module Users
         end
       end
     end
-
-
-    # # DELETE /quizzes/1
-    # # DELETE /quizzes/1.json
-    # def destroy
-    #   @quiz.destroy
-    #   respond_to do |format|
-    #     format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
-    #     format.json { head :no_content }
-    #   end
-    # end
 
     private
 

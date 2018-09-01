@@ -2,38 +2,19 @@
 <% next_question = @question.next_question %>
 <div class="float-right">
   <%= link_to fa("arrow-left") + " Previous", previous_question ? play_question_review_path( @play, previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-up"), play_result_path( @play ), class: "btn btn-outline-primary" %>
   <%= link_to fa("arrow-right") + " Next", next_question ? play_question_review_path( @play, next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-up"), play_result_path( @play ), class: "btn btn-outline-primary" %>
 </div>
 
 
 <h2>Question <%= "#{@question.number} of #{@play.questions.count}" %></h2>
-<% if false && @question.points > 1 %>
-  <h5><%= @question.points %> points</h5>
-<% end %>
 <hr>
-<% config = @question.config || {} %>
-<div class="rendered_markdown">
-  <%= content_tag :div, config["wrapper"] do %>
-    <%= content_tag :div, config["question"] do %>
-      <%= @question.ask_html.html_safe %>
-    <% end %>
-  <% end %>
-</div>
-<% your_answer = @play.answer_for @question %>
-<% points_scored = @question.score_for( your_answer ) %>
-<% if points_scored > 0 %>
-  <div class="alert alert-success">
-    <h5>
-      Your answer <strong><%= your_answer %></strong> <%= fa "check" %>
-      <small><%= pluralize( points_scored, "point" ) %></small>
-    </h5>
-  </div>
-<% else %>
-  <div class="alert alert-warning">
-    <h5>
-      Your answer <strong><%= your_answer %></strong> <%= fa "times" %>
-    </h5>
-    <h5>Correct answer <strong><%= @question.answer %></strong> <small><%= pluralize @question.points, "point" %></small></h5>
-  </div>
-<% end %>
+<%= @question.ask_html %>
+
+<% answer_attempt = @play.answer_for( @question ).join(", ") %>
+<% points_scored = @play.points_for @question %>
+
+<%= render '/questions/rendered/result',
+      answer_attempt: answer_attempt,
+      points_scored: points_scored,
+      question: @question %>

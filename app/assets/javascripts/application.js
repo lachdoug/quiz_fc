@@ -10,6 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery-3.3.1.slim.min
+//= require codemirror-5.28.0/codemirror
+//= require codemirror-5.28.0/mode/yaml
+//= require simplemde-1.11.2/simplemde.min
+//= require popperjs-1.14.3.min
+//= require bootstrap-4.1.3.min
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks

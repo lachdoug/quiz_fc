@@ -13,7 +13,6 @@ class Profile < ApplicationRecord
 
   def unplayed_quizzes
     ( Quiz.queued - played_quizzes ).sort
-    # Quiz.queued
   end
 
   def next_quiz

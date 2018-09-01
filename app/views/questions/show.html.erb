@@ -2,8 +2,8 @@
 <% next_question = @question.next_question %>
 <div class="float-right">
   <%= link_to fa("arrow-left") + " Previous", previous_question, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary" %>
   <%= link_to fa("arrow-right") + " Next", next_question, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary" %>
 </div>
 <h2><%= @question %></h2>
 
@@ -14,12 +14,22 @@
 
 <p>
   <strong>Ask</strong>
-  <%= strip_tags @question.ask_html %>
+  <%= strip_tags( markdown @question.ask ) %>
 </p>
 
 <p>
   <strong>Answer</strong>
   <%= @question.answer %>
+</p>
+
+<p>
+  <strong>Explanation</strong>
+  <%= strip_tags( markdown @question.explanation ) %>
+</p>
+
+<p>
+  <strong>Points</strong>
+  <%= @question.points %>
 </p>
 
 <p>
@@ -30,27 +40,22 @@
 <strong>Config</strong>
 <pre><%= @question.config_yaml %></pre>
 
-<% if false %>
-  <%= form_with( url: answer_forms_path( question_id: @question.id ), local: true ) do |form| %>
-    <div class="clearfix">
-      <div class="form-group form-group-inline">
-        <%= select_tag :'answer_form[type]', options_for_select( AnswerForm.type_options ), class: "form-control" %>
-      </div>
-      <div class="form-group form-group-inline">
+<strong>Scoring</strong>
+<pre><%= @question.scoring %></pre>
 
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-
-<%= link_to fa("trash") + ' Delete', question_path(@question), method: :DELETE, data: { confirm: "Are you sure that you want to delete this question?" }, class: "btn btn-outline-danger float-right #{ @question.quiz.queued? ? 'disabled' : '' }" %>
+<div class="float-right">
+  <%= link_to fa("caret-up") + ' Move up', question_moveup_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? || @question.number == 1 ? 'disabled' : '' }" %>
+  <%= link_to fa("trash") + ' Delete', question_path(@question), method: :DELETE, data: { confirm: "Are you sure that you want to delete this question?" }, class: "btn btn-outline-danger #{ @question.quiz.queued? ? 'disabled' : '' }" %>
+</div>
 <%= link_to fa("edit") + ' Edit', edit_question_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? ? 'disabled' : '' }" %>
-<%= link_to fa("caret-up") + ' Move up', question_moveup_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? || @question.number == 1 ? 'disabled' : '' }" %>
 
 <hr>
-<%= render 'questions/rendered', question: @question, url: question_test_path( @question ), http_method: :POST, local: false %>
+<%= render 'questions/files', question: @question %>
 
+<hr>
+<%= form_with url: question_test_path( @question ), method: :POST, local: false do |form| %>
+  <%= render 'questions/rendered/ask', question: @question %>
+<% end %>
 <hr>
 <div id="question_test_result">
 </div>

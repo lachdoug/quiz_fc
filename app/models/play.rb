@@ -6,15 +6,18 @@ class Play < ApplicationRecord
   has_many :questions, -> { order( :number ) }, through: :quiz
 
   serialize :answers, Array
+  serialize :points, Array
 
   def calculate_score
-    question_scores.sum.tap do |score|
-      update score: score
+    question_points.tap do |points|
+      points.sum.tap do |score|
+        update points: points, score: score
+      end
     end
   end
 
-  def question_scores
-    questions.each.map { |question| score_for question }
+  def question_points
+    questions.each.map { |question| calculate_score_for question }
   end
 
   def give_answer( number, answer )
@@ -27,7 +30,11 @@ class Play < ApplicationRecord
     answers[ question.number - 1 ]
   end
 
-  def score_for( question )
+  def points_for( question )
+    points[ question.number - 1 ]
+  end
+
+  def calculate_score_for( question )
     question.score_for answers[ question.number - 1 ]
   end
 

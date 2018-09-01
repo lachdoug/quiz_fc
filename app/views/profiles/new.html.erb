@@ -1,3 +1,14 @@
+<h1>Welcome to QuizFC!</h1>
+
+<h4>Please setup your profile.</h4>
+
+<%= form_with model: @profiles, local: true do |form| %>
+  <%= form.text_field :handle %>
+<% end %>
+
+
+
+
 <h1>New Profile</h1>
 
 <%= render 'form', profile: @profile %>

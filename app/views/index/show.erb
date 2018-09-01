@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-lg-12 col-xl-6 primary_section text-center">
       <p><%= image_tag "/logo-large.png", class: "img-fluid" %></p>
-      <!-- <div class="landing_primary_title"><%= fa "futbol" %> QuizFC</div> -->
       <% if current_user %>
         <%= link_to( fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-light btn-lg" )  %>
       <% else %>

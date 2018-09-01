@@ -1,10 +1,27 @@
 class Question < ApplicationRecord
+
   belongs_to :quiz
+  has_many_attached :files
 
+  validate :config_updated_from_yaml
   validate :config_is_a_hash_or_nil
+  validate :scoring_updated_from_config
 
-  enum form_type: [ :input_field, :select_menu, :multiple_choice ]
+  enum form_type: [
+    :input_field,
+    :buttons,
+    :select_menu,
+    :checkboxes,
+    :radios,
+    :two_inputs,
+    :two_selects,
+    :select_and_input,
+    :custom ]
+
   serialize :config
+  serialize :scoring
+
+  attr_writer :config_yaml
 
   def to_s
     "Question #{ number } of #{ quiz.questions.count }"
@@ -14,21 +31,8 @@ class Question < ApplicationRecord
     @config_yaml ||= config.to_yaml.sub(/^---/,"").sub(/\.\.\.\n$/,"").strip
   end
 
-  def update( params )
-    @config_yaml = params[:config_yaml]
-    super params.except( :config_yaml )
-  end
-
   def score_for( answer_attempt )
-    answer == answer_attempt ? points : 0
-  end
-
-  def points
-    ( config || {} )["points"] || 1
-  end
-
-  def ask_html
-    MarkdownRenderer.new( ask.to_s ).to_html
+    Scorer.new( self, answer_attempt ).process
   end
 
   def next_question
@@ -43,10 +47,26 @@ class Question < ApplicationRecord
     previous_question.update( number: number ) && update( number: number - 1 )
   end
 
+  def destroy
+    files.each &:purge
+    super
+  end
+
   private
 
+  def config_updated_from_yaml
+    self.config = YAML.load( "---\n" + self.config_yaml.strip + "\n..." )
+  rescue Psych::SyntaxError => e
+    errors.add(:config, "invalid - there is a syntax error (line #{ e.line - 1 })")
+  end
+
+  def scoring_updated_from_config
+    self.scoring = Scoring.new( self ).process
+  rescue RegexpError
+    errors.add(:config, "invalid - failed to interpret scoring")
+  end
+
   def config_is_a_hash_or_nil
-    self.config = YAML.load( "---\n" + config_yaml.strip + "\n..." )
     unless config.is_a?(Hash) || config.nil?
       errors.add(:config, "invalid - must be a hash")
     end

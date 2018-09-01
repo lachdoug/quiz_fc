@@ -2,4 +2,7 @@
 
 <h2><%= @question %></h2>
 <hr>
-<%= render 'questions/rendered', question: @question, url: play_question_path( @play, @question ), http_method: :PATCH, local: true %>
+<%= form_with url: play_question_path( @play, @question ), method: :PATCH, local: true do |form| %>
+  <% #= @question.ask_html %>
+  <%= render 'questions/rendered/ask', question: @question %>
+<% end %>

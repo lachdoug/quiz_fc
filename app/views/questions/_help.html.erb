@@ -1,0 +1,168 @@
+<button type="button" class="btn btn-light btn-sm float-right" data-toggle="modal" data-target="#questionConfigHelpModal">
+  <%= fa "question" %>
+</button>
+
+<div class="modal fade" id="questionConfigHelpModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Question config</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<h4>Scoring</h4>
+
+<p>
+<code>scoring: Array or Hash</code>
+<br>
+Hash is a Scoring Hash. Array is an Array of Scoring Hashes.
+</p>
+
+<p>
+A Scoring Hash can have one key, either <code>reg:</code> or <code>lev:</code>.
+<code>lev: Hash or Integer</code>. When Integer, full points will be awarded up to this edit distance.
+Points are determined by returning the value for a matching key. A match is determined by using a scoring strategy, either a Regexp match for <code>reg:</code>, or Levenshtein distance for <code>lev:</code>.
+</p>
+
+<pre>#EXAMPLE
+
+scoring:
+  reg:
+    /red/i: 1
+    /blue/i: 2
+
+scoring:
+  lev: 2
+
+scoring:
+  lev:
+    0: 5
+    1: 4
+    2: 2
+</pre>
+</p>
+
+<p>
+An Array maps to elements in the <doce>answer[]</code>. Points are determined by scoring each element in order against its matching answer response and summing the result.
+</p>
+
+<pre>#EXAMPLE
+
+scoring:
+- reg:
+    /red/i: 1
+    /blue/i: 2
+- reg:
+    /green/i: 1
+    /black/i: 2
+
+scoring:
+- lev: 0
+- reg:
+    /red/i: 1
+    /blue/i: 2
+</pre>
+
+<p>
+When <code>scoring:</code> is nil, points are determined by matching the answer reposnses to the correct answer, ignoring letter case and spaces, and awarding full points for a match.
+</p>
+
+<h4>Options</h4>
+<p>
+<code>options: Array or Hash</code>
+</p>
+
+<p>
+The options available for an answer. Applies to buttons, select menus, radio buttons and checkboxes.
+</p>
+
+<p>
+When Array, each value is used as both the display value and the submit value.
+When Hash, each key is used as the display value and each value is used as the submit value.
+</p>
+
+<pre>#EXAMPLE
+
+options:
+- Red
+- Blue
+
+options:
+  Stop: 0
+  Go: 1
+</pre>
+
+<h4>Tag attributes</h4>
+<p>
+</p>
+
+<p>
+  All form types:
+  <ul>
+    <li><code>wrapper: Hash</code> outer DIV wrapper</li>
+    <li><code>question: Hash</code> question DIV wrapper</li>
+    <li><code>answer: Hash</code> answer DIV wrapper</li>
+    <li><code>button: Hash</code> all BUTTON tags</li>
+  </ul>
+</p>
+
+<p>
+  For :checkboxes and :radio_buttons only:
+  <ul>
+    <li><code>label: Hash</code> all LABEL tags</li>
+    <li><code>labels: Array</code> each LABEL tag, in order</li>
+    <li><code>check: Hash</code> all INPUT tags</li>
+    <li><code>checks: Array</code> each LABEL tag, in order</li>
+  </ul>
+</p>
+
+<p>
+  For :input_field and :select_and_input only:
+  <ul>
+    <li><code>input: Hash</code> all INPUT tags</li>
+  </ul>
+</p>
+
+<p>
+  For :two_inputs only:
+  <ul>
+    <li><code>inputs: Array</code> each INPUT tag, in order</li>
+  </ul>
+</p>
+
+<p>
+  For :select_menu and :select_and_input only:
+  <ul>
+    <li><code>select: Hash</code> all SELECT tags</li>
+  </ul>
+</p>
+
+<p>
+  For :two_selects only:
+  <ul>
+    <li><code>selects: Array</code> each SELECT tag, in order</li>
+  </ul>
+</p>
+
+
+<pre>#EXAMPLE
+
+button:
+  class: btn
+
+input:
+  type: number
+</pre>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

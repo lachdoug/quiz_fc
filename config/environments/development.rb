@@ -1,11 +1,24 @@
 Rails.application.configure do
 
-# Added
-# For Devise
-config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-Devise.setup do |config|
-  config.secret_key = '96c6c0d23fa5ac6abcbbcaf5697d3e76dd76a51b3558bf67450de3e04f906dcce83427d90e2e1ee5a12bacd123cb0eaa900eea9204393c8e83124a44638c761d'
-end
+  # Added
+  # For Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  Devise.setup do |config|
+    config.secret_key = '96c6c0d23fa5ac6abcbbcaf5697d3e76dd76a51b3558bf67450de3e04f906dcce83427d90e2e1ee5a12bacd123cb0eaa900eea9204393c8e83124a44638c761d'
+  end
+  
+  # config.ldap = {
+  #   host: 'ldap',
+  #   port: 389,
+  #   admin_username: 'admin',
+  #   admin_password: 'password'
+  # }
+  # config.ldap_host = 'ldap'
+  # config.ldap_port = 389
+  # config.ldap_admin_username = 'admin'
+  # config.ldap_admin_password = 'password'
+
+
 # Defaults
 
   # Settings specified here will take precedence over those in config/application.rb.

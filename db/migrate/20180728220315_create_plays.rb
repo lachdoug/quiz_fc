@@ -4,6 +4,7 @@ class CreatePlays < ActiveRecord::Migration[5.2]
       t.integer :quiz_id
       t.integer :profile_id
       t.text :answers
+      t.text :points
       t.integer :score
 
       t.timestamps
