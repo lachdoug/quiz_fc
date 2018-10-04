@@ -1,4 +1,4 @@
-<div class="primary_section">
+<div class="primary-section">
 
   <h2>Home</h2>
 
@@ -12,7 +12,7 @@
 
   <div class="row">
 
-    <div class="col-sm">
+    <div id="unplayed_quizzes" class="col-sm">
       <h4>Unplayed quizzes</h4>
       <%= content_tag(:i, :None) unless @profile.unplayed_quizzes.any? %>
       <% @profile.unplayed_quizzes.each do |quiz| %>
@@ -20,7 +20,7 @@
       <% end %>
     </div>
 
-    <div class="col-sm">
+    <div id="played_quizzes" class="col-sm">
       <h4>Played quizzes</h4>
       <%= content_tag(:i, :None) unless @profile.played_quizzes.any? %>
       <% @profile.played_quizzes.each do |quiz| %>

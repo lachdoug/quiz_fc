@@ -1,0 +1,6 @@
+one:
+  quiz_id: 0
+  profile_id: 0
+  score: 2
+  answers: [ "test1", "test2" ]
+  points: [ 1, 1 ]

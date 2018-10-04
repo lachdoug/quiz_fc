@@ -1,7 +1,7 @@
 class Quiz < ApplicationRecord
   enum status: [ :draft, :queued, :playing, :pending, :complete, :archived ]
   enum duration_units: [ :hours, :minutes, :seconds ]
-  has_many :questions, -> { order( :number ) }, dependent: :destroy
+  has_many :questions, -> { order( Arel.sql 'number' ) }, dependent: :destroy
   has_many :plays, dependent: :destroy
 
   def to_s( type=nil )
@@ -33,23 +33,23 @@ class Quiz < ApplicationRecord
   end
 
   def self.queued
-    where( status: 1 ).order( "start ASC" )
+    where( status: 1 ).order( Arel.sql "start ASC" )
   end
 
   def self.playing
-    where( status: 2 ).order( "start ASC" )
+    where( status: 2 ).order( Arel.sql "start ASC" )
   end
 
   def self.pending
-    where( status: 3 ).order( "start ASC" )
+    where( status: 3 ).order( Arel.sql "start ASC" )
   end
 
   def self.complete
-    where( status: 4 ).order( "start ASC" )
+    where( status: 4 ).order( Arel.sql "start ASC" )
   end
 
   def self.archived
-    where( status: 5 ).order( "start ASC" )
+    where( status: 5 ).order( Arel.sql "start ASC" )
   end
 
 end

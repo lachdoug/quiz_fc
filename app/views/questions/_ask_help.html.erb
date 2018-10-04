@@ -1,0 +1,33 @@
+<button type="button" class="btn btn-light btn-sm float-right" data-toggle="modal" data-target="#questionAskHelpModal">
+  <%= fa "question" %>
+</button>
+
+<div class="modal fade" id="questionAskHelpModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Question ask</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<h4>Markdown</h4>
+
+<p>
+  Show files with
+<code>file( #FILE_NUMBER =WIDTH(optional) )</code>
+</p>
+
+<pre>#EXAMPLE
+### Who is this?
+file( #1 =300 )
+</pre>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

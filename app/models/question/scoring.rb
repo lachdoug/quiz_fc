@@ -33,13 +33,17 @@ class Question
     end
     #
     def regex_scoring_for( regexp_config )
-      regexp_config.to_a.map do |answer|
-        [ answer[0].to_s.to_regexp( detect: true ), answer[1].to_i ]
-      end.to_h
+      if regexp_config.is_a? Hash
+        regexp_config.to_a.map do |answer|
+          [ answer[0].to_s.to_regexp( detect: true ), answer[1].to_i ]
+        end.to_h
+      else
+        { regexp_config.to_s.to_regexp( detect: true ) => @question.points }
+      end
     end
 
     def levenshtein_scoring_for( levenshtein_config )
-      map = levenshtein_map_config_for levenshtein_config
+      map = levenshtein_config_for levenshtein_config
       {}.tap do |result|
         last_match = @question.points
         (0..map.keys.max).to_a.each do |index|
@@ -49,7 +53,7 @@ class Question
       end
     end
 
-    def levenshtein_map_config_for( levenshtein_config )
+    def levenshtein_config_for( levenshtein_config )
       if levenshtein_config.is_a? Integer
         { levenshtein_config => @question.points }
       elsif levenshtein_config.is_a? Hash

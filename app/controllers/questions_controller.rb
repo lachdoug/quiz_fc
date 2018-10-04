@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 
+  layout 'admin'
 
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
@@ -53,7 +54,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:ask, :answer, :points, :explanation, :form_type, :config_yaml, files:[])
+      params.require(:question).permit(:ask, :answer, :points, :explanation, :form_type, :config_yaml)
     end
 
 end

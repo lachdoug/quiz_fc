@@ -27,13 +27,11 @@ class MarkdownRenderer
     end
 
     def preprocess_file(document)
-      regex = Regexp.compile(/\bfile\((\d+)\s*\=(\S+)\)/)
+      regex = Regexp.compile(/\bfile\s*(\[\s*.*\s*\]|)\(\s*\#(\d+)\s*(\=\s*\d*\s*|)\)/)
+      # file( #FILE_NUMBER =WIDTH(optional) )
+      # e.g. file( #1 =300 )
       document.to_enum(:scan, regex).map { Regexp.last_match }.each do |match|
-        document.gsub!( match.to_s, file_tag_for( match[1], width: match[2] ) )
-      end
-      regex = Regexp.compile(/\bfile\((\d+)\)/)
-      document.to_enum(:scan, regex).map { Regexp.last_match }.each do |match|
-        document.gsub!( match.to_s, file_tag_for( match[1] ) )
+        document.gsub!( match.to_s, file_tag_for( match[2], width: match[3], alt: match[1] ) )
       end
       document
     end
@@ -47,15 +45,15 @@ class MarkdownRenderer
 
       if file.image?
         tag_options = {}
-        tag_options = tag_options.merge( { width: "#{ options[:width] }px" } ) if options[:width]
+        tag_options = { width: "#{ options[:width] }px", alt: options[:width] }.merge tag_options
         view_context.image_tag file, tag_options
       elsif file.video?
         tag_options = { controls: true }
-        tag_options = tag_options.merge( { style: "width: #{ options[:width] }px" } ) if options[:width]
+        tag_options = { width: "#{ options[:width] }px" }.merge tag_options
         view_context.video_tag view_context.rails_blob_path( file ), tag_options
       elsif file.audio?
         tag_options = { controls: true }
-        tag_options = tag_options.merge( { style: "width: #{ options[:width] }px" } ) if options[:width]
+        tag_options = { width: "#{ options[:width] }px" }.merge tag_options
         view_context.audio_tag view_context.rails_blob_path( file ), tag_options
       else
         view_context.content_tag :p, "File of unknown type"

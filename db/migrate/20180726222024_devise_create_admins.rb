@@ -32,7 +32,10 @@ class DeviseCreateAdmins < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.integer :role
+      t.boolean :developer
+      t.boolean :quizmaster
+      t.boolean :controller
+      t.boolean :auditor
 
       t.timestamps null: false
     end

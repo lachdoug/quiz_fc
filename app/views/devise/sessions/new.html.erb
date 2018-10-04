@@ -1,26 +1,46 @@
-<h2>Sign in<%= resource_name == :admin ? " admin" : "" %></h2>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="form-wrapper">
+      <h3>
+        <% if resource_name == :admin %>
+          Sign in admin
+        <% else %>
+          Welcome Back, Please Sign In Below
+        <% end %>
+      </h3>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group form-group-narrow">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: 'required' %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "off", class: "form-control", required: 'required' %>
+            </div>
+          </div>
+        </div>
 
-  <div class="form-group form-group-narrow">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-  </div>
+        <div class="text-center">
+          <% if devise_mapping.rememberable? %>
+            <div class="form-group">
+              <div class="form-check">
+                <%= f.check_box :remember_me, class: "form-check-input" %>
+                <%= f.label :remember_me, class: "form-check-label" %>
+              </div>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <%= f.submit "Sign in", class: "btn btn-outline-primary btn-app" %>
+          </div>
+        </div>
+      <% end %>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="form-group form-group-narrow">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= render "devise/shared/links" %>
     </div>
-  <% end -%>
-
-  <div class="form-group form-group-narrow">
-    <%= f.submit "Sign in", class: "btn btn-primary" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

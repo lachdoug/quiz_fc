@@ -5,9 +5,8 @@ class AdminModeConstraint
   end
 
   def matches?(request)
-    current_admin_role = request.env['warden'].user(:admin).try(:role)
-    return true if current_admin_role == "developer"
-    @roles.include? current_admin_role
+    return true if request.env['warden'].user(:admin).developer
+    request.env['warden'].user(:admin).try( current_admin_role )
   end
 
 end

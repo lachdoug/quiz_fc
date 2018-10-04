@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <title>QuizFC</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if layout == "admin" %>
+      <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
+  </head>
+
+  <body class="<%= devise_controller? || controller_name == 'index' ? 'landing' : '' %>">
+
+    <div class="container-fluid">
+      <%= render '/layouts/navbar' %>
+    </div>
+    <div class="container">
+      <%= render '/layouts/flash_messages' %>
+    </div>
+    <div class="<%= controller_name == 'index' ? '' : 'container page' %>">
+      <%= yield %>
+    </div>
+    <% if devise_controller? || controller_name == 'index' %>
+      <section class="supported-by text-center">
+        <div class="container">
+          <p>Proudly Supported By</p>
+          <div class="row vertical-align">
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <p><strong>BT ENTERPRISES</strong></p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <%= image_tag "supporter-logos-granite.png", class: "img-fluid" %>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <%= image_tag "supporter-logos-fof.png", class: "img-fluid" %>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <%= image_tag "supporter-logos-axis.png", class: "img-fluid" %>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <p>ETW MANAGEMENT</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% end %>
+    <section class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <p><span>© 2018 Copyright QuizFC</span></p>
+          </div>
+          <div class="col-sm-6 text-right">
+            <p><a href="##"><span>Privacy Policy </span></a>| <a href="##"><span>Terms Of Use</span></a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

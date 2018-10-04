@@ -9,7 +9,8 @@
 
 <h2>Question <%= "#{@question.number} of #{@play.questions.count}" %></h2>
 <hr>
-<%= @question.ask_html %>
+<% #= @question.ask_html %>
+<%= markdown @question.ask %>
 
 <% answer_attempt = @play.answer_for( @question ).join(", ") %>
 <% points_scored = @play.points_for @question %>

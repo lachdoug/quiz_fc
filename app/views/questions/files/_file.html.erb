@@ -1,0 +1,9 @@
+<% if file.image? %>
+  <%= image_tag( file ) %>
+<% elsif file.video? %>
+  <%= video_tag( rails_blob_path( file ), controls: true ) %>
+<% elsif file.audio? %>
+  <%= audio_tag( rails_blob_path( file ), controls: true ) %>
+<% else %>
+  <%= "File of unknown type" %>
+<% end %>

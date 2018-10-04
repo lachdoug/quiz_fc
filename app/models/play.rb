@@ -3,7 +3,7 @@ class Play < ApplicationRecord
   belongs_to :quiz
   belongs_to :profile
 
-  has_many :questions, -> { order( :number ) }, through: :quiz
+  has_many :questions, -> { order( Arel.sql('number') ) }, through: :quiz
 
   serialize :answers, Array
   serialize :points, Array

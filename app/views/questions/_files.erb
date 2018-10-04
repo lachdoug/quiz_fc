@@ -4,7 +4,8 @@
   <ol>
     <% @question.files.each do |file| %>
       <li>
-        <%= link_to file.blob.filename, question_file_path( @question, file ) %>
+        <% file_type = file.image? ? "Image" : file.video? ? "Video" : file.audio? ? "Audio" : "File of unknown type" %>
+        <%= link_to file_type, question_file_path( @question, file ) %>
       </li>
     <% end %>
   </ol>

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar <%= 'navbar-expand' unless current_admin || current_admin %> navbar-expand-lg navbar-light bg-transparent">
   <a class="navbar-brand" href="/">
-    <%= image_tag "/favicon.ico", height: 20 %> QuizFC
+    <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
   </a>
   <% if !devise_controller? %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,10 +12,10 @@
     <ul class="navbar-nav mr-auto">
       <% if current_user %>
       <li class="nav-item">
-        <%= link_to fa("home") + " Home", user_root_path, class: "nav-link" %>
+        <%= link_to fa("home") + " Home", home_path, class: "nav-link" %>
       </li>
       <% end %>
-      <% if current_admin && ( current_admin.quizmaster? || current_admin.developer? ) %>
+      <% if current_admin && current_admin.quizmaster? %>
       <li class="nav-item">
         <%= link_to fa("chess-queen") + " Quizmaster", quizmaster_path, class: "nav-link" %>
       </li>
@@ -52,7 +52,10 @@
             <%= fa "user" %> <%= current_admin.email %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-            <%= content_tag :div, content_tag( :strong, "Admin ( #{ current_admin.role } )" ), class: "dropdown-item"  %>
+            <%= content_tag :div, content_tag( :strong, "Admin" ), class: "dropdown-item"  %>
+            <% current_admin.roles.each do |role| %>
+              <%= content_tag :div, content_tag( :small, role ), class: "dropdown-item"  %>
+            <% end %>
             <div class="dropdown-divider"></div>
             <%= link_to fa("edit") + " Edit", edit_admin_registration_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>

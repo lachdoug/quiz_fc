@@ -1,9 +1,11 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  quiz_id: 1
-  order: 1
+  quiz_id: 0
+  number: 1
+  ask: "Test1\n---"
+  answer: test1
 
 two:
-  quiz_id: 1
-  order: 1
+  quiz_id: 0
+  number: 2
+  ask: "Test2\n---"
+  answer: test2

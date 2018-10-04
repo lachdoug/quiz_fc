@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
 
+  layout 'admin'
 
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 

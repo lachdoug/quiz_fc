@@ -52,6 +52,12 @@ class Question < ApplicationRecord
     super
   end
 
+  def attach( uploaded_files )
+    uploaded_files.each do |file|
+      files.attach io: file, filename: 'file'
+    end
+  end
+
   private
 
   def config_updated_from_yaml

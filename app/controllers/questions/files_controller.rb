@@ -10,6 +10,19 @@ module Questions
     def new
     end
 
+    def create
+      respond_to do |format|
+        if @question.attach( uploaded_files )
+          format.html { redirect_to @question, notice: 'File was successfully attached.' }
+          format.json { render :show, status: :ok, location: @question }
+        else
+          flash.now.alert = 'Failed to attach file.'
+          format.html { render :new }
+          format.json { render json: @question.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+
     def destroy
       @file = @question.files.find params[:id]
       @file.purge
@@ -20,6 +33,10 @@ module Questions
 
     def set_question
       @question = Question.find( params[:question_id] )
+    end
+
+    def uploaded_files
+      params.require(:files).map &:tempfile
     end
 
   end

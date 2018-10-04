@@ -3,6 +3,7 @@
   <%= render "/errors", object: question %>
 
   <div class="form-group">
+    <%= render 'ask_help' %>
     <%= form.label :ask %>
     <div class="markdown-editor">
       <%= form.text_area :ask %>
@@ -41,7 +42,7 @@
   </div>
 
   <div class="form-group">
-    <%= render 'help' %>
+    <%= render 'config_help' %>
     <%= form.label :config_yaml, "Config" %>
     <div class="yaml-editor">
       <%= form.text_area :config_yaml %>

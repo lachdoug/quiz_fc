@@ -3,8 +3,12 @@ module Plays
 
     def new
       @play = Play.find params[:play_id]
-      @question = @play.next_unanswered_question
-      redirect_to play_question_path( @play, @question )
+      @next_question = @play.next_unanswered_question
+      if @next_question
+        redirect_to play_question_path( @play, @next_question )
+      else
+        redirect_to play_complete_path( @play )
+      end
     end
 
     def show

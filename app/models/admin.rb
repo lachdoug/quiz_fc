@@ -4,6 +4,13 @@ class Admin < ApplicationRecord
   # :ldap_authenticatable
   devise :database_authenticatable, :timeoutable, :trackable, :validatable
 
-  enum role: [ :developer, :quizmaster, :controller, :auditor ]
+  def roles
+    [].tap do |result|
+      result << "Developer" if developer
+      result << "Quizmaster" if quizmaster
+      result << "Controller" if controller
+      result << "Auditor" if auditor
+    end
+  end
 
 end

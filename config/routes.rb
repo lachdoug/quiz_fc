@@ -10,10 +10,17 @@ Rails.application.routes.draw do
   end
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
+
+  authenticated :admin do
+    root to: "quizmasters#show", as: :admin_root
+  end
+  authenticated :user do
+    root to: "homes#show", as: :user_root
+  end
   root to: "index#show"
 
   authenticate :user do
-    resource :home, as: :user_root, only: [ :show ]
+    resource :home, only: [ :show ]
     resources :plays, only: [ :index, :create ] do
       resources :questions, only: [ :new, :show, :update ], module: :plays do
         resource :review, only: [:show]

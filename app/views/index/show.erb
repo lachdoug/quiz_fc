@@ -1,27 +1,117 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-xl-6 primary_section text-center">
-      <p><%= image_tag "/logo-large.png", class: "img-fluid" %></p>
-      <% if current_user %>
-        <%= link_to( fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-light btn-lg" )  %>
-      <% else %>
-        <%= link_to( fa( "pen" ) + ' Sign up', new_user_registration_path, class: "btn btn-outline-light btn-lg" )  %>
-        <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "btn btn-outline-light btn-lg" )  %>
-      <% end %>
-      <% if current_admin && ( current_admin.developer? || current_admin.quizmaster? ) %>
-        <%= link_to( fa( "chess-queen" ) + ' Quizmaster', quizmaster_path, class: "btn btn-outline-light btn-lg" )  %>
-      <% end %>
-    </div>
-    <div class="col primary_section text-center">
-      <h3>Test your football knowledge</h3>
-      <br>
-      <h3>Win prizes</h3>
-      <br>
-      <h1>$10</h1>
-      <h4>for 10 plays</h4>
-      <br>
-      <h4>Weekly quizzes<br>12pm on Saturdays</h4>
-      <h4>Good luck!
+<section class="top-section">
+  <div class="container">
+    <div class="row vertical-align">
+      <div class="col">
+        <h1>
+          The World's Most Entertaining, Fun & Interesting Football Quiz
+        </h1>
+        <h3>Win Cash & Prizes Every Saturday From 9am to 5pm</h3>
+        <%= link_to( 'Join the team', new_user_registration_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+      </div>
+      <div class="col-lg-5 text-center">
+        <%= image_tag "smartphone.png", class: "d-none d-lg-block", height: 500 %>
+      </div>
     </div>
   </div>
-</div>
+</section>
+
+<section class="what-is-quizfc text-center">
+  <div class="container text-center">
+    <h2>What is QuizFC?</h2>
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "ball.png", height: 60 %>
+          <p><strong>Football Only Quiz</strong></p>
+          <p>
+            With 12 Fun & Interesting Football Questions
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "matche.png", height: 60 %>
+          <p><strong>Matches Every Saturday</strong></p>
+          <p>
+            Matches Are Open 9am - 5pm Every Saturday
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "results.png", height: 60 %>
+          <p><strong>Results Provided Mondays</strong></p>
+          <p>
+            We Announce All Results At 12pm Mondays
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "prize.png", height: 60 %>
+          <p><strong>Shared Prize Pool</strong></p>
+          <p>
+            Entrants With The Most Points Share Cash & Prizes
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-to-play text-center">
+  <div class="container">
+    <h2>How To Play QuizFC</h2>
+    <div class="row box-holder">
+      <div class="col-md-3 text-center">
+        <div class="box">
+          <%= image_tag "team.png", height: 60 %>
+          <p>1. 'Join The Team' To Play</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="box">
+          <%= image_tag "free.png", height: 60 %>
+          <p>2. Receive Your First 3 Quizzes Free</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="box">
+          <%= image_tag "quizzes.png", height: 60 %>
+          <p>3. Access 10 Quizzes For Just $10</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="box">
+          <%= image_tag "boot.png", height: 60 %>
+          <p>4. Play Every Saturday 9am-5pm!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-to-action">
+    <%= link_to( 'Join the team', new_user_registration_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+  </div>
+
+</section>
+
+
+
+
+
+<% if false %>
+
+<% if current_user %>
+  <%= link_to( fa( "futbol" ) + fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+<% else %>
+  <%= link_to( fa( "sign-in-alt" ) + ' Already on the team', new_user_session_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+<% end %>
+<% if current_admin && current_admin.quizmaster? %>
+  <%= link_to( fa( "chess-queen" ) + ' Quizmaster', quizmaster_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+<% end %>
+
+<% end %>
