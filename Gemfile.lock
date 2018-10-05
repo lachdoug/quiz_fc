@@ -81,9 +81,6 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    devise_ldap_authenticatable (0.8.6)
-      devise (>= 3.4.1)
-      net-ldap (>= 0.16.0)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -269,7 +266,6 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   damerau-levenshtein
   devise
-  devise_ldap_authenticatable
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mysql2

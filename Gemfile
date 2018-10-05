@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Added gems
 gem 'devise'
 gem 'net-ldap'
-gem "devise_ldap_authenticatable"
+# gem "devise_ldap_authenticatable"
 # gem 'activeadmin'
 gem 'rails_admin'
 gem 'omniauth'
