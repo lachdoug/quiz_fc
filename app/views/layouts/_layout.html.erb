@@ -19,7 +19,7 @@
 
   </head>
 
-  <body class="<%= devise_controller? || controller_name == 'index' ? 'landing' : '' %>">
+  <body class="<%= controller_name == 'index' ? 'landing' : '' %>">
 
     <div class="container-fluid">
       <%= render '/layouts/navbar' %>
@@ -30,42 +30,10 @@
     <div class="<%= controller_name == 'index' ? '' : 'container page' %>">
       <%= yield %>
     </div>
-    <% if devise_controller? || controller_name == 'index' %>
-      <section class="supported-by text-center">
-        <div class="container">
-          <p>Proudly Supported By</p>
-          <div class="row vertical-align">
-            <div class="col-sm-6 col-md-4 col-lg-2">
-              <p><strong>BT ENTERPRISES</strong></p>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-2">
-              <%= image_tag "supporter-logos-granite.png", class: "img-fluid" %>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-2">
-              <%= image_tag "supporter-logos-fof.png", class: "img-fluid" %>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-2">
-              <%= image_tag "supporter-logos-axis.png", class: "img-fluid" %>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-2">
-              <p>ETW MANAGEMENT</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <% if devise_controller? %>
+      <%= render '/layouts/supporters' %>
     <% end %>
-    <section class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <p><span>© 2018 Copyright QuizFC</span></p>
-          </div>
-          <div class="col-sm-6 text-right">
-            <p><a href="##"><span>Privacy Policy </span></a>| <a href="##"><span>Terms Of Use</span></a></p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <%= render '/layouts/footer' %>
 
   </body>
 </html>

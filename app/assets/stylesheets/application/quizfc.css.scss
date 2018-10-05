@@ -64,13 +64,6 @@ h3 { font-weight: 400; margin-bottom: 50px; }
 .landing section {
   margin-bottom: 75px;
 }
-.landing .supported-by {
-  background-color: #F3F3F3;
-  padding: 25px;
-}
-.landing .supported-by .row {
-  color: #959595;
-}
 
 .landing .what-is-quizfc .box {
   -webkit-box-shadow:0px 10px 49px -20px rgba(0,31,94,0.3);
@@ -138,6 +131,16 @@ h3 { font-weight: 400; margin-bottom: 50px; }
 
 .landing .how-to-play .call-to-action {
   padding: 50px 0;
+}
+
+// Supporters
+
+.supported-by {
+  background-color: #F3F3F3;
+  padding: 25px;
+}
+.supported-by .row {
+  color: #959595;
 }
 
 // Footer

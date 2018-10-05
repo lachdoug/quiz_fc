@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>Duration</strong> <%= @quiz.duration_value %> <%= @quiz.duration_units %>
+  <strong>Duration</strong> <%= pluralize( @quiz.duration_value, @quiz.duration_units.singularize ) %>
 </p>
 
 <div class="clearfix">

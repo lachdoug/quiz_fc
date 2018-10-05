@@ -52,9 +52,11 @@
             <%= fa "user" %> <%= current_admin.email %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-            <%= content_tag :div, content_tag( :strong, "Admin" ), class: "dropdown-item"  %>
-            <% current_admin.roles.each do |role| %>
-              <%= content_tag :div, content_tag( :small, role ), class: "dropdown-item"  %>
+            <%= content_tag :div, class: "dropdown-label" do %>
+              <%= content_tag :div, content_tag( :strong, "Admin" )  %>
+              <% current_admin.roles.each do |role| %>
+                <%= content_tag :div, content_tag( :small, role )  %>
+              <% end %>
             <% end %>
             <div class="dropdown-divider"></div>
             <%= link_to fa("edit") + " Edit", edit_admin_registration_path, class: "dropdown-item" %>
