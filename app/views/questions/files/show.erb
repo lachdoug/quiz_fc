@@ -1,7 +1,7 @@
 <%= link_to fa("arrow-up"), question_path( @question ), class: "btn btn-outline-primary float-right" %>
 <h3>
-  <%= @question %> File #
-  <%= @file.record.files.find_index @file %>
+  <%= @question %> File
+  #<%= @file.record.files.find_index( @file ) + 1 %>
 </h3>
 
 <p style="overflow-x: auto">
