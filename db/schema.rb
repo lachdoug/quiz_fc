@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_12_235209) do
+ActiveRecord::Schema.define(version: 2018_10_07_195007) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2018_08_12_235209) do
     t.text "ask"
     t.text "answer"
     t.integer "points", default: 1
-    t.integer "form_type", default: 0
+    t.integer "template", default: 0
     t.text "config"
     t.text "scoring"
     t.text "explanation"

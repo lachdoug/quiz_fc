@@ -2,52 +2,7 @@
 
   <%= render "/errors", object: question %>
 
-  <div class="form-group">
-    <%= render 'ask_help' %>
-    <%= form.label :ask %>
-    <div class="markdown-editor">
-      <%= form.text_area :ask %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :answer %>
-    <%= form.text_field :answer, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :explanation %>
-    <button class="btn btn-light btn-sm" type="button" data-toggle="collapse" data-target="#questionExplanationFieldCollapse">
-      <%= fa "pencil-alt" %>
-    </button>
-    <div class="collapse <%= :show if question.explanation.present? %>" id="questionExplanationFieldCollapse">
-      <div class="markdown-editor">
-        <%= form.text_area :explanation %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col form-group">
-      <%= form.label :points %>
-      <%= form.number_field :points, class: "form-control" %>
-    </div>
-
-    <div class="col form-group">
-      <%= form.label :form_type %>
-      <%= form.select :form_type, Question.form_types.map { |k,v| [ k.humanize, k ] }, {}, class: "form-control" %>
-    </div>
-
-  </div>
-
-  <div class="form-group">
-    <%= render 'config_help' %>
-    <%= form.label :config_yaml, "Config" %>
-    <div class="yaml-editor">
-      <%= form.text_area :config_yaml %>
-    </div>
-  </div>
+  <%= render "/questions/templates/#{ question.template }/edit", form: form %>
 
   <div class="form-group">
     <%= link_to :Cancel, question_path( @question ), class: "btn btn-secondary" %>

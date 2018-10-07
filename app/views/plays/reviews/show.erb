@@ -15,7 +15,7 @@
 <% answer_attempt = @play.answer_for( @question ).join(", ") %>
 <% points_scored = @play.points_for @question %>
 
-<%= render '/questions/rendered/result',
+<%= render '/questions/partials/result',
       answer_attempt: answer_attempt,
       points_scored: points_scored,
       question: @question %>

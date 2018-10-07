@@ -1,0 +1,6 @@
+<h2><%= @question %></h2>
+
+<%= render "/questions/templates/form",
+question: @question,
+url: question_template_path(),
+cancel: @question %>

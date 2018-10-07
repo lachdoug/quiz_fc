@@ -19,7 +19,7 @@
     </div>
   <% elsif @quiz.playing? %>
     <div class="float-right">
-      <%= link_to fa("flag-checkered") + ' Stop play', quiz_stop_playing_path(@quiz), method: :POST, class: "btn btn-warning",
+      <%= link_to fa("flag-checkered") + ' Stop play', quiz_stop_playing_path(@quiz), method: :POST, class: "btn btn-outline-danger",
       data: { confirm: "Are you sure that you want to stop the quiz?" } %>
     </div>
   <% elsif false && @quiz.start && @quiz.start.future? %>
@@ -40,8 +40,8 @@
 
 <hr>
 
-<%= link_to fa("plus") + ' New', questions_path( quiz_id: @quiz.id ),
-method: :POST, class: "btn btn-outline-primary float-right #{ @quiz.queued? ? 'disabled' : '' }" %>
+<%= link_to fa("plus") + ' New', new_question_path( quiz_id: @quiz.id ),
+class: "btn btn-outline-primary float-right #{ @quiz.queued? ? 'disabled' : '' }" %>
 <h2>Questions</h2>
 <ol>
   <% @quiz.questions.each do |question| %>

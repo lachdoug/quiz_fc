@@ -7,13 +7,16 @@ class QuestionsController < ApplicationController
   def show
   end
 
-  def edit
+  def new
+    @quiz = Quiz.find( params[:quiz_id] )
+    @question = @quiz.questions.build template: @quiz.questions.last ? @quiz.questions.last.template : "default"
   end
 
   def create
     @quiz = Quiz.find( params[:quiz_id] )
     @questions = @quiz.questions
-    @question = @questions.build( number: @questions.count + 1 )
+    new_question_params = question_params.merge ( { number: @questions.count + 1 } )
+    @question = @questions.build( new_question_params )
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -23,6 +26,9 @@ class QuestionsController < ApplicationController
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def edit
   end
 
   def update
@@ -54,7 +60,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:ask, :answer, :points, :explanation, :form_type, :config_yaml)
+      params.require(:question).permit(:ask, :answer, :points, :explanation, :template, :config_yaml, config_params: {} )
     end
 
 end

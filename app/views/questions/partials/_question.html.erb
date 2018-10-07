@@ -1,0 +1,6 @@
+<%= render 'questions/partials/preamble', question: question %>
+<h2><%= question %></h2>
+<%= form_with url: url, method: method, local: local do |form| %>
+  <% #= question.ask_html %>
+  <%= render 'questions/partials/body', question: question %>
+<% end %>

@@ -1,0 +1,99 @@
+<% config = form.object.config || {} %>
+<p class="clearfix"><%= render '/questions/templates/aukland/help' %></p>
+
+<div class="form-group">
+  <%= form.label 'question[config_params][preamble]', "Preamble" %>
+  <div class="">
+    <%= text_area_tag 'question[config_params][preamble]', config["preamble"], class: "form-control" %>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][left_box]', "Left" %>
+    <div class="">
+      <%= text_area_tag 'question[config_params][left_box]', config["left_box"], class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][centre_box]', "Centre" %>
+    <div class="">
+      <%= text_area_tag 'question[config_params][centre_box]', config["centre_box"], class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][right_box]', "Right" %>
+    <div class="">
+      <%= text_area_tag 'question[config_params][right_box]', config["right_box"], class: "form-control" %>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="form-group">
+  <%= form.label :ask %>
+  <div class="">
+    <%= form.text_area :ask, class: "form-control" %>
+  </div>
+</div>
+
+<% #= hidden_field_tag 'question[config_params][form_type]', "buttons" %>
+
+<% options = @question.config["options"] || [] %>
+
+<div class="row">
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][options][]', "Button A" %>
+    <div class="">
+      <%= text_field_tag 'question[config_params][options][]', options[0], class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][options][]', "Button B" %>
+    <div class="">
+      <%= text_field_tag 'question[config_params][options][]', options[1], class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][options][]', "Button C" %>
+    <div class="">
+      <%= text_field_tag 'question[config_params][options][]', options[2], class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="col form-group">
+    <%= form.label 'question[config_params][options][]', "Button D" %>
+    <div class="">
+      <%= text_field_tag 'question[config_params][options][]', options[3], class: "form-control" %>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-9 form-group">
+    <%= form.label :answer %>
+    <%= form.text_field :answer, class: "form-control" %>
+  </div>
+
+  <div class="col-sm-3 form-group">
+    <%= form.label :points %>
+    <%= form.number_field :points, class: "form-control" %>
+  </div>
+
+</div>
+
+<div class="form-group">
+  <%= form.label :explanation %>
+  <div class="">
+    <%= form.text_area :explanation, class: "form-control" %>
+  </div>
+</div>

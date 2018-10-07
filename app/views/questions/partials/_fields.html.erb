@@ -1,3 +1,4 @@
+<% form_type ||= config["form_type"] || "input_field" %>
 <% begin %>
   <%= content_tag :div, config["answer"] do %>
     <% if form_type == "input_field" %>
@@ -115,7 +116,7 @@
         ) do %>
         <%= fa("arrow-right") %>
       <% end %>
-    <% elsif form_type == "custom" %>
+    <% elsif form_type == "none" %>
       <% # Empty - the answer form should be defined using HTML in ask %>
     <% else %>
       <% raise "No form for type '#{form_type}'." %>

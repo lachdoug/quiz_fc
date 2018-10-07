@@ -4,6 +4,6 @@
     <%= content_tag :div, config["question"] do %>
       <%= markdown( question.ask ) %>
     <% end %>
-    <%= render 'questions/rendered/fields', form_type: question.form_type, config: config %>
+    <%= render 'questions/partials/fields', config: config %>
   <% end %>
 </div>
