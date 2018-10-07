@@ -17,16 +17,17 @@
       <%= link_to fa("calculator") + ' Recalculate', quiz_recalculate_path(@quiz), method: :POST, class: "btn btn-danger",
       data: { confirm: "Are you sure that you want to recalculate the scores on all plays of this quiz?" } %>
     </div>
+  <% elsif @quiz.playing? %>
+    <div class="float-right">
+      <%= link_to fa("flag-checkered") + ' Stop play', quiz_stop_playing_path(@quiz), method: :POST, class: "btn btn-warning",
+      data: { confirm: "Are you sure that you want to stop the quiz?" } %>
+    </div>
   <% else %>
     <%= link_to fa("edit") + ' Edit', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
     <div class="float-right">
-
-      <% if @quiz.draft? %>
-        <%= link_to fa("flag") + ' Start playing', quiz_start_playing_path(@quiz), method: :POST, class: "btn btn-warning",
-        data: { confirm: "Are you sure that the quiz is ready to start?" } %>
-      <% end %>
-
-      <% if @quiz.start && @quiz.start.future? %>
+      <%= link_to fa("flag") + ' Start play', quiz_start_playing_path(@quiz), method: :POST, class: "btn btn-warning",
+      data: { confirm: "Are you sure that the quiz is ready to start?" } %>
+      <% if false && @quiz.start && @quiz.start.future? %>
         <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning",
         data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
       <% end %>
