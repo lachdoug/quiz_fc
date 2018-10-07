@@ -45,6 +45,8 @@ Rails.application.routes.draw do
         resource :recalculate, only: [ :create ], module: :quizzes
         resource :enqueue, only: [ :create ], module: :quizzes
         resource :dequeue, only: [ :create ], module: :quizzes
+        resource :start_playing, only: [ :create ], module: :quizzes
+        resource :stop_playing, only: [ :create ], module: :quizzes
       end
 
       resources :questions, except: [ :index ] do

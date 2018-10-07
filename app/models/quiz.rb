@@ -13,6 +13,11 @@ class Quiz < ApplicationRecord
     start.present? ? start.strftime("%A %d %B %Y at %H:%M %Z") : "Unsheduled"
   end
 
+  def duration_in_words
+    return '' unless duration_value
+    pluralize( duration_value, ( duration_units || '' ).singularize )
+  end
+
   def recalculate!
     plays.each &:calculate_score
   end

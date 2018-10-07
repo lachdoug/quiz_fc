@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <strong>Duration</strong> <%= pluralize( @quiz.duration_value, @quiz.duration_units.singularize ) %>
+  <strong>Duration</strong> <%= @quiz.duration_in_words %>
 </p>
 
 <div class="clearfix">
@@ -20,6 +20,12 @@
   <% else %>
     <%= link_to fa("edit") + ' Edit', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
     <div class="float-right">
+
+      <% if @quiz.draft? %>
+        <%= link_to fa("flag") + ' Start playing', quiz_start_playing_path(@quiz), method: :POST, class: "btn btn-warning",
+        data: { confirm: "Are you sure that the quiz is ready to start?" } %>
+      <% end %>
+
       <% if @quiz.start && @quiz.start.future? %>
         <%= link_to fa("clock") + ' Enqueue', quiz_enqueue_path(@quiz), method: :POST, class: "btn btn-warning",
         data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
