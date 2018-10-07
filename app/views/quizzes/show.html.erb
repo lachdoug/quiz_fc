@@ -30,10 +30,10 @@
   <% else %>
     <%= link_to fa("edit") + ' Edit', edit_quiz_path(@quiz), class: "btn btn-outline-primary" %>
     <div class="float-right">
-      <%= link_to fa("flag") + ' Start play', quiz_start_playing_path(@quiz), method: :POST, class: "btn btn-warning",
-      data: { confirm: "Are you sure that the quiz is ready to start?" } %>
       <%= link_to fa("trash") + ' Delete', quiz_path(@quiz), method: :DELETE,
       data: { confirm: "Are you sure that you want to delete this quiz?" }, class: "btn btn-outline-danger #{'disabled' if @quiz.questions.any?}" %>
+      <%= link_to fa("flag") + ' Start play', quiz_start_playing_path(@quiz), method: :POST, class: "btn btn-outline-success",
+      data: { confirm: "Are you sure that the quiz is ready to start?" } %>
     </div>
   <% end %>
 </div>
