@@ -1,10 +1,7 @@
-<%= link_to fa("arrow-up"),
-@question,
-class: "btn btn-outline-primary float-right" %>
-
 <%= render 'questions/partials/question',
 question: @question,
 url: question_test_path( @question ),
+up: @question,
 method: :POST,
 local: false %>
 

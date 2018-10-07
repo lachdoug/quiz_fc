@@ -1,5 +1,17 @@
 <%= render 'questions/partials/preamble', question: question %>
-<h2><%= question %></h2>
+
+<div class="float-right">
+  <%= link_to fa("arrow-up"),
+  up,
+  class: "btn btn-outline-primary" %>
+</div>
+
+<h2>
+  <%= question %>
+  <div class="badge badge-light">
+    <%= pluralize @question.points, 'point' %>
+  </div>
+</h2>
 <%= form_with url: url, method: method, local: local do |form| %>
   <% #= question.ask_html %>
   <%= render 'questions/partials/body', question: question %>

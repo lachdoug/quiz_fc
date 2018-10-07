@@ -1,9 +1,6 @@
-<%= link_to fa("arrow-up"),
-plays_path( quiz_id: @play.quiz_id ),
-class: "btn btn-outline-primary float-right" %>
-
 <%= render 'questions/partials/question',
 question: @question,
 url: play_question_path( @play, @question ),
+up: plays_path( quiz_id: @play.quiz_id ),
 method: :PATCH,
 local: true %>
