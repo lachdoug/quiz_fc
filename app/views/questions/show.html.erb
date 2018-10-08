@@ -64,14 +64,14 @@
       class: "dropdown-item #{
         @question.previous_question ? '' : 'disabled'
       }" do %>
-        <%= fa("caret-up") + ' Up' %>
+        <%= fa("arrow-up") + ' Up' %>
       <% end %>
       <%= button_to question_movedown_path(@question),
       disabled: @question.next_question ? nil : 'disabled',
       class: "dropdown-item #{
         @question.next_question ? '' : 'disabled'
       }" do %>
-        <%= fa("caret-down") + ' Down' %>
+        <%= fa("arrow-down") + ' Down' %>
       <% end %>
     </div>
   </div>

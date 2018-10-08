@@ -31,7 +31,7 @@ class MarkdownRenderer
       # file( #FILE_NUMBER =WIDTH(optional) )
       # e.g. file( #1 =300 )
       document.to_enum(:scan, regex).map { Regexp.last_match }.each do |match|
-        document.gsub!( match.to_s, file_tag_for( match[2], width: match[3][1..-1], alt: match[1] ) )
+        document.gsub!( match.to_s, file_tag_for( match[2], width: match[3][1..-1], alt: match[1][1..-2] ) )
       end
       document
     end

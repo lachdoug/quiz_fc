@@ -43,7 +43,8 @@
 
 <% #= hidden_field_tag 'question[config_params][form_type]', "buttons" %>
 
-<% options = @question.config["options"] || [] %>
+<% config = @question.config || {} %>
+<% options = config["options"] || [] %>
 
 <div class="row">
 
