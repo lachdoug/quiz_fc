@@ -44,8 +44,9 @@ class MarkdownRenderer
       return '' unless file
 
       if file.image?
-        tag_options = {}
-        tag_options = { width: "#{ options[:width] }px", alt: options[:width] }.merge tag_options
+        tag_options = { class: "img-fluid" }
+        tag_options = { width: "#{ options[:width] }px", alt: options[:alt] }.merge tag_options
+        # tag_options = tag.options.merge( { width: "#{ options[:width] }px" } )
         view_context.image_tag file, tag_options
       elsif file.video?
         tag_options = { controls: true }

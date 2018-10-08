@@ -1,9 +1,9 @@
 <% config = question.config || {} %>
 <div class="rendered_markdown">
   <div class="row">
-    <div class="col"><%= markdown( config["left_box"] ) %></div>
-    <div class="col"><%= markdown( config["centre_box"] ) %></div>
-    <div class="col"><%= markdown( config["right_box"] ) %></div>
+    <div class="col-md"><%= markdown( config["left_box"] ) %></div>
+    <div class="col-md"><%= markdown( config["centre_box"] ) %></div>
+    <div class="col-md"><%= markdown( config["right_box"] ) %></div>
   </div>
   <%= markdown( question.ask ) %>
   <%= render 'questions/partials/fields', form_type: "buttons", config: config %>

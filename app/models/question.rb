@@ -8,7 +8,7 @@ class Question < ApplicationRecord
 
   enum template: {
     default: 0,
-    aukland: 1
+    auckland: 1
   }, _prefix: :templated_with
 
   serialize :config
@@ -48,7 +48,15 @@ class Question < ApplicationRecord
   end
 
   def move_up
-    previous_question.update( number: number ) && update( number: number - 1 )
+    previous_question &&
+    previous_question.update( number: number ) &&
+    update( number: number - 1 )
+  end
+
+  def move_down
+    next_question &&
+    next_question.update( number: number ) &&
+    update( number: number + 1 )
   end
 
   def destroy
@@ -67,7 +75,7 @@ class Question < ApplicationRecord
   def config_updated
     if config_yaml
       config_from_yaml
-    else
+    elsif config_params
       config_from_params
     end && config_is_a_hash_or_nil
   end
