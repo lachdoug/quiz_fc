@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: "homes#show", as: :user_root
   end
-  root to: "index#show"
+  root to: "landings#show"
 
   authenticate :user do
     resource :home, only: [ :show ]

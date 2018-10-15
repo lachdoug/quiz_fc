@@ -19,7 +19,7 @@
 
   </head>
 
-  <body class="<%= controller_name == 'index' ? 'landing' : '' %>">
+  <body class="<%= controller_name == 'landings' ? 'landing' : '' %>">
 
     <div class="container-fluid">
       <%= render '/layouts/navbar' %>
@@ -27,9 +27,9 @@
     <div class="container">
       <%= render '/layouts/flash_messages' %>
     </div>
-    <div class="<%= controller_name == 'index' ? '' : 'container page' %>">
+    <main class="<%= controller_name == 'landings' ? '' : 'container page' %>">
       <%= yield %>
-    </div>
+    </main>
     <% if devise_controller? %>
       <%= render '/layouts/supporters' %>
     <% end %>

@@ -5,8 +5,8 @@ class Quiz < ApplicationRecord
   has_many :plays, dependent: :destroy
 
   def to_s( type=nil )
-    return "Quiz #{id} #{status.capitalize}" if type.to_s == "short"
-    "#{id} #{status.capitalize} #{formatted_start}"
+    return "Quiz #{id}" if type.to_s == "short"
+    "Quiz #{id} #{status.capitalize} #{formatted_start}"
   end
 
   def formatted_start
