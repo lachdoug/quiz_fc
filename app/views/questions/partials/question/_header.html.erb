@@ -1,15 +1,15 @@
 <div class="row">
-  <div class="col">
+  <div class="col-sm">
     <h2>
       <%= question.quiz.to_s :short %>
     </h2>
   </div>
-  <div class="col text-center">
+  <div class="col-sm text-center">
     <h2>
       <%= question %>
     </h2>
   </div>
-  <div class="col text-right">
+  <div class="col-sm text-right">
     <h2>
       <div class="badge badge-light">
         <%= pluralize question.points, 'point' %>

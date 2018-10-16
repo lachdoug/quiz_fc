@@ -28,7 +28,7 @@ class Question < ApplicationRecord
   # end
 
   def to_s
-    "Question #{ number } of #{ quiz.questions.count }"
+    "Question #{ number }&nbsp;of&nbsp;#{ quiz.questions.count }".html_safe
   end
 
   def config_as_yaml
