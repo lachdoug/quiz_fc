@@ -1,34 +1,36 @@
 <div class="float-right">
-  <form class="form-inline">
-    <%= select_tag nil,
-      options_for_select( {
-      "Full" => '100% x 1600px',
-      "iPad Pro 1024x1366" => "1024px x 1366px",
-      "Samsung Galaxy Tab 10 800x1280" => "800px x 1280px",
-      "iPad" => "768px x 1024px",
-      "Nexus 7 600x960" => "600px x 960px",
-      "One Plus 3 480x853" => "480px x 853px",
-      "LG G5 480x853" => "480px x 853px",
-      "iPhone XR 414x896" => "414px x 896px",
-      "iPhone 6/7/8 Plus 414x736" => "414px x 736px",
-      "Google Pixel 3 412x824" => "412px x 824px",
-      "iPhone X 375x812" => "375px x 812px",
-      "iPhone 6/7/8 375x667" => "375px x 667px",
-      "Samsung Galaxy S8/S9 360x740" => "360px x 740px",
-      "Samsung Galaxy S7 360x640" => "360px x 640px",
-      "iPhone 5 320x568" => "320px x 568px",
-      } ),
-      id: "questionTestMediaWidthSelect",
-      class: "form-control mr-1" %>
-    <%= link_to fa("arrow-up"),
-    @question,
-    class: "btn btn-outline-primary" %>
-  </form>
-
+  <%= link_to fa("arrow-up"),
+  @question,
+  class: "btn btn-outline-primary" %>
 </div>
 <h2>
 <%= fa 'vial' %> Test <%= @question.quiz.to_s :short %> <%= @question %>
 </h2>
+
+<form class="form-inline">
+  <%= select_tag nil,
+    options_for_select( {
+    "Fit" => '100% x 1600px',
+    "1080p 1920x1080" => "1920px x 1080px",
+    "720p 1280x720" => "1280px x 720px",
+    "iPad Pro 1024x1366" => "1024px x 1366px",
+    "Samsung Galaxy Tab 10 800x1280" => "800px x 1280px",
+    "iPad" => "768px x 1024px",
+    "Nexus 7 600x960" => "600px x 960px",
+    "LG G5 480x853" => "480px x 853px",
+    "iPhone 6/7/8 Plus 414x736" => "414px x 736px",
+    "iPhone X 375x812" => "375px x 812px",
+    "Samsung Galaxy S8/S9 360x740" => "360px x 740px",
+    "iPhone 5 320x568" => "320px x 568px",
+    } ),
+    id: "questionTestMediaWidthSelect",
+    class: "form-control mr-1" %>
+  <%= button_tag type: :button, id: "questionTestMediaWidthPreviousButton", class: "btn btn-outline-primary mr-1" do %><%= fa("chevron-up") %><% end %>
+  <%= button_tag type: :button, id: "questionTestMediaWidthNextButton", class: "btn btn-outline-primary" do %><%= fa("chevron-down") %><% end %>
+
+</form>
+
+
 <hr>
 
 <iframe src="<%= new_question_test_path( @question ) %>" id="questionTestIframe"></iframe>

@@ -1,5 +1,7 @@
 #questionTestIframe {
   margin: auto;
   display: block;
-  height: 1024;
+  position: absolute;
+  left: -9999px;
+  right: -9999px;
 }
