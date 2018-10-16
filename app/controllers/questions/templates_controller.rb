@@ -1,6 +1,8 @@
 module Questions
   class TemplatesController < ApplicationController
 
+    layout 'admin'
+
     def edit
       @question = Question.find params[:question_id]
     end

@@ -33,7 +33,9 @@
     <% if devise_controller? %>
       <%= render '/layouts/supporters' %>
     <% end %>
+    <% if layout != "admin" %>
     <%= render '/layouts/footer' %>
+    <% end %>
 
   </body>
 </html>

@@ -2,22 +2,28 @@
 
 <script>
 
-  function resizeTextArea(element) {
+  let resizeTextArea = function( element ) {
     element.style.height = "0px";
     element.style.height = (element.scrollHeight + 2)+"px";
   }
 
-  $( document ).on('turbolinks:load', function() {
-    document.querySelectorAll(".auto-height-text-area").forEach( function( element ) {
+  let bindTextAreaResize = function() {
+    document.querySelectorAll(".auckland textarea").forEach( function( element ) {
       resizeTextArea( element )
       element.addEventListener( 'input', function () { resizeTextArea( this ) } )
     } )
+  }
 
+  let bindNewButtonButtonClick = function() {
     $( '#aucklandEditNewButtonButton' ).on( 'click', function(e) {
       // debugger
       $( '#aucklandEditAnswerButtons' ).children().last().before( $( '#aucklandEditButtonTemplate' ).html() )
+      bindDeleteButtonButtonClick()
     } )
+  }
 
+  let bindDeleteButtonButtonClick = function() {
+    $( '.auckland-edit-delete-button-button' ).off( 'click' )
     $( '.auckland-edit-delete-button-button' ).on( 'click', function(e) {
 
       let target = $( e.target )
@@ -34,32 +40,45 @@
 
     } )
 
+  }
+
+  $( document ).on('turbolinks:load', function() {
+    bindTextAreaResize()
+    bindNewButtonButtonClick()
+    bindDeleteButtonButtonClick()
+
   })
 
 </script>
+
+<style>
+.auckland textarea {
+  font-family: monospace;
+}
+</style>
 
 <p class="clearfix"><%= render '/questions/templates/auckland/help' %></p>
 
 <div class="form-group">
   <%= form.label 'question[config_params][preamble]', "Preamble" %>
-  <%= text_area_tag 'question[config_params][preamble]', config["preamble"], class: "form-control auto-height-text-area" %>
+  <%= text_area_tag 'question[config_params][preamble]', config["preamble"], class: "form-control" %>
 </div>
 
 <div class="row">
 
   <div class="col form-group">
     <%= form.label 'question[config_params][left_box]', "Left" %>
-    <%= text_area_tag 'question[config_params][left_box]', config["left_box"], class: "form-control auto-height-text-area" %>
+    <%= text_area_tag 'question[config_params][left_box]', config["left_box"], class: "form-control" %>
   </div>
 
   <div class="col form-group">
     <%= form.label 'question[config_params][centre_box]', "Centre" %>
-    <%= text_area_tag 'question[config_params][centre_box]', config["centre_box"], class: "form-control auto-height-text-area" %>
+    <%= text_area_tag 'question[config_params][centre_box]', config["centre_box"], class: "form-control" %>
   </div>
 
   <div class="col form-group">
     <%= form.label 'question[config_params][right_box]', "Right" %>
-    <%= text_area_tag 'question[config_params][right_box]', config["right_box"], class: "form-control auto-height-text-area" %>
+    <%= text_area_tag 'question[config_params][right_box]', config["right_box"], class: "form-control" %>
   </div>
 
 </div>
@@ -67,7 +86,7 @@
 
 <div class="form-group">
   <%= form.label :ask %>
-  <%= form.text_area :ask, class: "form-control auto-height-text-area" %>
+  <%= form.text_area :ask, class: "form-control" %>
 </div>
 
 <% #= hidden_field_tag 'question[config_params][form_type]', "buttons" %>
@@ -143,7 +162,7 @@
 
 <div class="form-group">
   <%= form.label :explanation %>
-  <%= form.text_area :explanation, class: "form-control auto-height-text-area" %>
+  <%= form.text_area :explanation, class: "form-control" %>
 </div>
 
 <template id="aucklandEditButtonTemplate">

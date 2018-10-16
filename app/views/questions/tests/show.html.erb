@@ -1,0 +1,59 @@
+<div class="float-right">
+  <form class="form-inline">
+    <%= select_tag nil,
+      options_for_select( {
+      "Full" => '100% x 1000px',
+      "iPhone 5 320x568" => "320px x 568px",
+      "iPod Touch 320x568" => "320px x 568px",
+      "Samsung Galaxy S7 Edge 360x640" => "360px x 640px",
+      "Samsung Galaxy S7 360x640" => "360px x 640px",
+      "Samsung Galaxy Note 9 360x740" => "360px x 740px",
+      "Samsung Galaxy S9+ 360x740" => "360px x 740px",
+      "Samsung Galaxy S9 360x740" => "360px x 740px",
+      "Samsung Galaxy S8+ 360x740" => "360px x 740px",
+      "Samsung Galaxy S8 360x740" => "360px x 740px",
+      "iPhone 8 375x667" => "375px x 667px",
+      "iPhone 7 375x667" => "375px x 667px",
+      "iPhone 6/6S 375x667" => "375px x 667px",
+      "iPhone XS 375x812" => "375px x 812px",
+      "iPhone X 375x812" => "375px x 812px",
+      "Nexus 6P 412x732" => "412px x 732px",
+      "Nexus 5X 412x732" => "412px x 732px",
+      "Google Pixel 2 XL 412x732" => "412px x 732px",
+      "Google Pixel 2 412x732" => "412px x 732px",
+      "Google Pixel XL 412x732" => "412px x 732px",
+      "Google Pixel 412x732" => "412px x 732px",
+      "Google Pixel 3 412x824" => "412px x 824px",
+      "Google Pixel 3 XL 412x847" => "412px x 847px",
+      "iPhone 8 Plus 414x736" => "414px x 736px",
+      "iPhone 7 Plus 414x736" => "414px x 736px",
+      "iPhone 6 Plus/6S Plus 414x736" => "414px x 736px",
+      "iPhone XR 414x896" => "414px x 896px",
+      "iPhone XS Max 414x896" => "414px x 896px",
+      "Samsung Galaxy Note 5 480x853" => "480px x 853px",
+      "LG G5 480x853" => "480px x 853px",
+      "One Plus 3 480x853" => "480px x 853px",
+      "Nexus 7 (2013) 600x960" => "600px x 960px",
+      "iPad Third & Fourth Generation 768x1024" => "768px x 1024px",
+      "iPad Air 1 & 2 768x1024" => "768px x 1024px",
+      "iPad Mini 2 & 3 768x1024" => "768px x 1024px",
+      "iPad Mini 768x1024" => "768px x 1024px",
+      "Nexus 9 768x1024" => "768px x 1024px",
+      "Samsung Galaxy Tab 10 800x1280" => "800px x 1280px",
+      "iPad Pro 1024x1366" => "1024px x 1366px",
+      "Chromebook Pixel 1280x850" => "1280px x 850px",
+      } ),
+      id: "questionTestMediaWidthSelect",
+      class: "form-control mr-1" %>
+    <%= link_to fa("arrow-up"),
+    @question,
+    class: "btn btn-outline-primary" %>
+  </form>
+
+</div>
+<h2>
+<%= fa 'vial' %> Test <%= @question.quiz.to_s :short %> <%= @question %>
+</h2>
+<hr>
+
+<iframe src="<%= new_question_test_path( @question ) %>" id="questionTestIframe"></iframe>

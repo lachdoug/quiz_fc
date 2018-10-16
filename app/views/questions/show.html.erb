@@ -5,12 +5,7 @@
   <%= link_to fa("arrow-right") + " Next", next_question, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
   <%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary" %>
 </div>
-<h2><%= @question %></h2>
-
-<p>
-  <strong>Quiz</strong>
-  <%= @question.quiz %>
-</p>
+<h2><%= @question.quiz.to_s :short %> <%= @question %></h2>
 
 <p>
   <strong>Template</strong>
@@ -50,7 +45,7 @@
 </button>
 
 <%= link_to fa("edit") + ' Edit', edit_question_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? ? 'disabled' : '' }" %>
-<%= link_to fa("vial") + ' Test', new_question_test_path(@question), class: "btn btn-outline-primary" %>
+<%= link_to fa("vial") + ' Test', question_test_path(@question), class: "btn btn-outline-primary" %>
 
 <div class="float-right">
   <div class="dropdown d-inline-block">

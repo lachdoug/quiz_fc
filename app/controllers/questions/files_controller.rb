@@ -3,6 +3,8 @@ module Questions
 
     before_action :set_question
 
+    layout 'admin'
+
     def show
       @file = @question.files.find params[:id]
     end

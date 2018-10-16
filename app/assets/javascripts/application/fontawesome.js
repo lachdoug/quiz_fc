@@ -1,3 +1,3 @@
-// document.addEventListener("turbolinks:load", function() {
+// document.addEventListener("page:change", function() {
 //   FontAwesome.dom.i2svg();
 // });

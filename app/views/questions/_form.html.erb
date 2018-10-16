@@ -2,7 +2,9 @@
 
   <%= render "/errors", object: question %>
 
-  <%= render "/questions/templates/#{ question.template }/edit", form: form %>
+  <div class="<%= question.template %>">
+    <%= render "/questions/templates/#{ question.template }/edit", form: form %>
+  </div>
 
   <div class="form-group">
     <%= link_to :Cancel, question_path( @question ), class: "btn btn-secondary" %>

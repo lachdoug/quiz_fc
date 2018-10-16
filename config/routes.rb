@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
       resources :questions, except: [ :index ] do
         resources :files, only: [ :show, :new, :create, :destroy], module: :questions
-        resource :test, only: [ :new, :create ], module: :questions
+        resource :test, only: [ :show, :new, :create ], module: :questions
         resource :template, only: [ :edit, :update ], module: :questions
         resource :moveup, only: [ :create ], module: :questions
         resource :movedown, only: [ :create ], module: :questions
