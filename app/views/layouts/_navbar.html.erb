@@ -1,8 +1,9 @@
 <nav class="navbar <%= 'navbar-expand' unless current_admin || current_admin %> navbar-expand-lg navbar-light bg-transparent">
-  <a class="navbar-brand" href="/">
-    <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
-  </a>
   <% unless controller_name == "tests" && action_name == "new" %>
+
+    <a class="navbar-brand" href="/">
+      <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
+    </a>
 
     <% if !devise_controller? %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +71,12 @@
         <% end %>
       </ul>
     </div>
+
+  <% else %>
+
+    <span class="navbar-brand">
+      <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
+    </span>
 
   <% end %>
 
