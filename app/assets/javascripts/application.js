@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery-3.3.1/jquery.slim.min
-//= require popperjs-1.14.3/popperjs.min
+//= require popperjs-1.14.3/popper
 //= require bootstrap-4.1.3/js/bootstrap
 //= require rails-ujs
 //= require activestorage

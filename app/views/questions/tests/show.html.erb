@@ -1,4 +1,10 @@
+<% previous_question = @question.previous_question %>
+<% next_question = @question.next_question %>
 <div class="float-right">
+  <%= link_to fa("arrow-left") + " Previous", previous_question ? question_test_path( previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-right") + " Next", next_question ? question_test_path( next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
+
+
   <%= link_to fa("arrow-up"),
   @question,
   class: "btn btn-outline-primary" %>
@@ -7,28 +13,33 @@
 <%= fa 'vial' %> Test <%= @question.quiz.to_s :short %> <%= @question %>
 </h2>
 
-<form class="form-inline">
-  <%= select_tag nil,
+<%= form_with(
+  url: session_path,
+  id: "questionTestMediaWidthForm",
+  class: "form-inline",
+  method: :PATCH,
+  local: false ) do %>
+  <%= select_tag "question_test_size",
     options_for_select( {
     "Fit" => '100% x 1600px',
     "1080p 1920x1080" => "1920px x 1080px",
     "720p 1280x720" => "1280px x 720px",
     "iPad Pro 1024x1366" => "1024px x 1366px",
-    "Samsung Galaxy Tab 10 800x1280" => "800px x 1280px",
-    "iPad" => "768px x 1024px",
+    "Galaxy Tab 10 800x1280" => "800px x 1280px",
+    "iPad 768x1024" => "768px x 1024px",
     "Nexus 7 600x960" => "600px x 960px",
     "LG G5 480x853" => "480px x 853px",
     "iPhone 6/7/8 Plus 414x736" => "414px x 736px",
     "iPhone X 375x812" => "375px x 812px",
-    "Samsung Galaxy S8/S9 360x740" => "360px x 740px",
+    "Galaxy S8/S9 360x740" => "360px x 740px",
     "iPhone 5 320x568" => "320px x 568px",
-    } ),
+    }, selected: session[:question_test_size] ),
     id: "questionTestMediaWidthSelect",
     class: "form-control mr-1" %>
   <%= button_tag type: :button, id: "questionTestMediaWidthPreviousButton", class: "btn btn-outline-primary mr-1" do %><%= fa("chevron-up") %><% end %>
   <%= button_tag type: :button, id: "questionTestMediaWidthNextButton", class: "btn btn-outline-primary" do %><%= fa("chevron-down") %><% end %>
 
-</form>
+<% end %>
 
 
 <hr>

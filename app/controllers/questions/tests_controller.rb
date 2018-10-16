@@ -9,6 +9,7 @@ module Questions
 
     def new
       @question = Question.find( params[:question_id] )
+      render layout: 'application'
     end
 
     def create

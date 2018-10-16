@@ -1,13 +1,18 @@
 $( document ).on('turbolinks:load', function() {
 
   var questionTestResizeIframe = function () {
-    var selection = $( "#questionTestMediaWidthSelect" ).val().split(' x ')
-    $( '#questionTestIframe ').css( "width", selection[0] )
-    $( '#questionTestIframe ').css( "height", selection[1] )
+    var size = $( "#questionTestMediaWidthSelect" ).val().split(' x ')
+    $( '#questionTestIframe ').css( "width", size[0] )
+    $( '#questionTestIframe ').css( "height", size[1] )
+  }
+
+  var questionTestMediaWidthSubmit = function () {
+    $( '#questionTestMediaWidthForm' ).submit()
   }
 
   $( "#questionTestMediaWidthSelect" ).on('change', function(e) {
     questionTestResizeIframe()
+    questionTestMediaWidthSubmit()
   })
 
   $( "#questionTestMediaWidthPreviousButton" ).on('click', function(e) {
@@ -22,6 +27,7 @@ $( document ).on('turbolinks:load', function() {
           .prop("selected", true);
     }
     questionTestResizeIframe()
+    questionTestMediaWidthSubmit()
   })
 
   $( "#questionTestMediaWidthNextButton" ).on('click', function(e) {
@@ -30,8 +36,9 @@ $( document ).on('turbolinks:load', function() {
         .next()
         .prop("selected", true);
     questionTestResizeIframe()
+    questionTestMediaWidthSubmit()
   })
 
-  if ( $( "#questionTestMediaWidthSelect" ).length ) { questionTestResizeIframe() }
+  questionTestResizeIframe()
 
 } )
