@@ -1,7 +1,7 @@
 $( document ).on('turbolinks:load', function() {
 
-  let questionTestResizeIframe = function () {
-    let selection = $( "#questionTestMediaWidthSelect" ).val().split(' x ')
+  var questionTestResizeIframe = function () {
+    var selection = $( "#questionTestMediaWidthSelect" ).val().split(' x ')
     $( '#questionTestIframe ').css( "width", selection[0] )
     $( '#questionTestIframe ').css( "height", selection[1] )
   }

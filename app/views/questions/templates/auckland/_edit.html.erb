@@ -2,19 +2,19 @@
 
 <script>
 
-  let resizeTextArea = function( element ) {
+  var resizeTextArea = function( element ) {
     element.style.height = "0px";
     element.style.height = (element.scrollHeight + 2)+"px";
   }
 
-  let bindTextAreaResize = function() {
+  var bindTextAreaResize = function() {
     document.querySelectorAll(".auckland textarea").forEach( function( element ) {
       resizeTextArea( element )
       element.addEventListener( 'input', function () { resizeTextArea( this ) } )
     } )
   }
 
-  let bindNewButtonButtonClick = function() {
+  var bindNewButtonButtonClick = function() {
     $( '#aucklandEditNewButtonButton' ).on( 'click', function(e) {
       // debugger
       $( '#aucklandEditAnswerButtons' ).children().last().before( $( '#aucklandEditButtonTemplate' ).html() )
@@ -22,13 +22,13 @@
     } )
   }
 
-  let bindDeleteButtonButtonClick = function() {
+  var bindDeleteButtonButtonClick = function() {
     $( '.auckland-edit-delete-button-button' ).off( 'click' )
     $( '.auckland-edit-delete-button-button' ).on( 'click', function(e) {
 
-      let target = $( e.target )
-      let value = target.parent().prev().val()
-      let confirmed
+      var target = $( e.target )
+      var value = target.parent().prev().val()
+      var confirmed
 
       if ( value.length ) {
         confirmed = confirm( "Are you sure that you want to delete button `" + value + "`?" )
