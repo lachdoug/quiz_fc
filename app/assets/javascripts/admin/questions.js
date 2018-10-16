@@ -10,6 +10,6 @@ $( document ).on('turbolinks:load', function() {
     questionTestResizeIframe()
   })
 
-  if ( $( "#questionTestMediaWidthSelect" ).length ) questionTestResizeIframe()
+  if ( $( "#questionTestMediaWidthSelect" ).length ) { questionTestResizeIframe() }
 
 } )
