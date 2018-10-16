@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   authenticate :admin do
-    resource :session, only: [ :update ]
+    resource :session_store, only: [ :update ]
     authorize_admin( :developer ) do
       resource :datadump, only: [ :show ]
     end
