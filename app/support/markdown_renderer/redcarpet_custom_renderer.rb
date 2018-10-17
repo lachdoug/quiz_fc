@@ -11,7 +11,7 @@ class MarkdownRenderer
         %(<img src="#{$1}" style="width: #{$2}" alt="#{alt_text}">)
       elsif link =~ /^(.+?)\s*=+(\d+)(?:px|)x(\d+)(?:px|)$/
         # ![alt](url.png =30x50)
-        %(<img src="#{$1}" style="width: #{$2}px; height: #{$3}px;" alt="#{alt_text}">)
+        %(<img src="#{$1}" style="width: #{$2}; height: #{$3};" alt="#{alt_text}">)
       else
         %(<img src="#{link}" title="#{title}" alt="#{alt_text}">)
       end
@@ -45,16 +45,16 @@ class MarkdownRenderer
 
       if file.image?
         tag_options = { class: "img-fluid" }
-        tag_options = { width: "#{ options[:width] }px", alt: options[:alt] }.merge tag_options
-        # tag_options = tag.options.merge( { width: "#{ options[:width] }px" } )
+        tag_options = { width: "#{ options[:width] }", alt: options[:alt] }.merge tag_options
+        # tag_options = tag.options.merge( { width: "#{ options[:width] }" } )
         view_context.image_tag file, tag_options
       elsif file.video?
         tag_options = { controls: true }
-        tag_options = { width: "#{ options[:width] }px" }.merge tag_options
+        tag_options = { width: "#{ options[:width] }" }.merge tag_options
         view_context.video_tag view_context.rails_blob_path( file ), tag_options
       elsif file.audio?
         tag_options = { controls: true }
-        tag_options = { width: "#{ options[:width] }px" }.merge tag_options
+        tag_options = { width: "#{ options[:width] }" }.merge tag_options
         view_context.audio_tag view_context.rails_blob_path( file ), tag_options
       else
         view_context.content_tag :p, "File of unknown type"
