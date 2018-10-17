@@ -11,13 +11,13 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
+  root to: "landings#show"
   authenticated :admin do
     root to: "quizmasters#show", as: :admin_root
   end
   authenticated :user do
     root to: "homes#show", as: :user_root
   end
-  root to: "landings#show"
 
   authenticate :user do
     resource :home, only: [ :show ]
@@ -37,10 +37,10 @@ Rails.application.routes.draw do
 
   authenticate :admin do
     resource :session_store, only: [ :update ]
-    authorize_admin( :developer ) do
+    # authorize_admin( :developer ) do
       resource :datadump, only: [ :show ]
-    end
-    authorize_admin( :quizmaster ) do
+    # end
+    # authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ]
       resources :quizzes do
         resource :recalculate, only: [ :create ], module: :quizzes
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
         resource :moveup, only: [ :create ], module: :questions
         resource :movedown, only: [ :create ], module: :questions
       end
-    end
+    # end
   end
 
 end

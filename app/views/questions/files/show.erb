@@ -1,8 +1,9 @@
 <%= link_to fa("arrow-up"), question_path( @question ), class: "btn btn-outline-primary float-right" %>
-<h3>
+<h2>
+  <%= @question.quiz.to_s :short %>
   <%= @question %> File
   #<%= @file.record.files.find_index( @file ) + 1 %>
-</h3>
+</h2>
 
 <p style="overflow-x: auto">
   <%= render 'file', file: @file %>

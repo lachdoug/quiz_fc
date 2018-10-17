@@ -1,4 +1,7 @@
-<h2><%= @question %></h2>
+<h2>
+  <%= @question.quiz.to_s :short %>
+  <%= @question %> Template
+</h2>
 
 <%= render "/questions/templates/form",
 question: @question,

@@ -10,6 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require codemirror-5.28.0/lib/codemirror
+//= require codemirror-5.28.0/mode/yaml/yaml
+//= require simplemde-1.11.2/simplemde.min
 //= require jquery-3.3.1/jquery.slim.min
 //= require popperjs-1.14.3/popper
 //= require bootstrap-4.1.3/js/bootstrap

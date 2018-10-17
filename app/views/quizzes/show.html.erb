@@ -42,7 +42,7 @@
 
 <%= link_to fa("plus") + ' New', new_question_path( quiz_id: @quiz.id ),
 class: "btn btn-outline-primary float-right #{ @quiz.queued? ? 'disabled' : '' }" %>
-<h2>Questions</h2>
+<h6><strong>Questions</strong></h6>
 <ol>
   <% @quiz.questions.each do |question| %>
     <%= content_tag :li do %>
