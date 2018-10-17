@@ -1,5 +1,5 @@
 <% if file.image? %>
-  <%= image_tag( file ) %>
+  <%= image_tag( file, class: 'img-thumbnail' ) %>
 <% elsif file.video? %>
   <%= video_tag( rails_blob_path( file ), controls: true ) %>
 <% elsif file.audio? %>
