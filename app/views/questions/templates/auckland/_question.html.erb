@@ -1,0 +1,20 @@
+<style>
+.auckland p {
+  font-size: 1.25em;
+}
+.auckland .btn-auckland {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+.auckland .ask p {
+  font-size: 2em;
+}
+</style>
+
+<% config = question.config || {} %>
+<% config["wrapper"] = { "class" => "auckland" } %>
+<% config["answer"] = { "class" => "row" } %>
+<% config["button_wrapper"] = { "class" => "col-md-6 col-lg-3" } %>
+<% config["button"] = { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland mb-3" } %>
+
+<%= render "/questions/partials/question/question", question: question, url: url, method: method, local: local %>

@@ -33,7 +33,7 @@
     <% if devise_controller? %>
       <%= render '/layouts/supporters' %>
     <% end %>
-    <% if layout != "admin" %>
+    <% if controller_name == 'landings' || devise_controller? %>
     <%= render '/layouts/footer' %>
     <% end %>
 

@@ -39,6 +39,6 @@ $( document ).on('turbolinks:load', function() {
     questionTestMediaWidthSubmit()
   })
 
-  questionTestResizeIframe()
+  if ( $( "#questionTestMediaWidthSelect" )[0] ) questionTestResizeIframe()
 
 } )

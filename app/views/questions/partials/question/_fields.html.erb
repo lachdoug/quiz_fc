@@ -32,7 +32,7 @@
       <% options = config["options"] || [] %>
       <% buttons_config = config["buttons"] || [] %>
       <% button_config = config["button"] || {} %>
-      <% button_wrapper_config = config["buttons_wrapper"] || {} %>
+      <% button_wrapper_config = config["button_wrapper"] || {} %>
       <% options.each.with_index do |option, i| %>
         <% option_label = [ Hash, Array ].member?( option.class ) ? option.first : option %>
         <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>

@@ -1,8 +1,1 @@
-<div class="<%= question.template %>">
-  <%= render 'questions/partials/question/preamble', question: question %>
-  <%= render 'questions/partials/question/header', question: question %>
-  <%= form_with url: url, method: method, local: local do |form| %>
-    <% #= question.ask_html %>
-    <%= render 'questions/partials/question/body', question: question %>
-  <% end %>
-</div>
+<%= render "/questions/templates/#{ question.template }/question", question: question, url: url, method: method, local: local %>

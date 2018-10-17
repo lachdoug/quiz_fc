@@ -8,7 +8,7 @@ class MarkdownRenderer
       if link =~ /^(.+?)\s*=+(\d+)(?:px|)$/
         # ![alt](url.png =100px)
         # ![alt](url.png =100)
-        %(<img src="#{$1}" style="width: #{$2}px" alt="#{alt_text}">)
+        %(<img src="#{$1}" style="width: #{$2}" alt="#{alt_text}">)
       elsif link =~ /^(.+?)\s*=+(\d+)(?:px|)x(\d+)(?:px|)$/
         # ![alt](url.png =30x50)
         %(<img src="#{$1}" style="width: #{$2}px; height: #{$3}px;" alt="#{alt_text}">)
@@ -27,7 +27,7 @@ class MarkdownRenderer
     end
 
     def preprocess_file(document)
-      regex = Regexp.compile(/\bfile\s*(\[\s*.*\s*\]|)\(\s*\#(\d+)\s*(\=\s*\d*\s*|)\)/)
+      regex = Regexp.compile(/\bfile\s*(\[\s*.*\s*\]|)\(\s*\#(\d+)\s*(\=\s*.*\s*|)\)/)
       # file( #FILE_NUMBER =WIDTH(optional) )
       # e.g. file( #1 =300 )
       document.to_enum(:scan, regex).map { Regexp.last_match }.each do |match|

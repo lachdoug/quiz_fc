@@ -1,0 +1,9 @@
+<% config = question.config || {} %>
+<%= content_tag :div, config["wrapper"] do %>
+  <%= render 'questions/partials/question/preamble', question: question %>
+  <%= render 'questions/partials/question/header', question: question %>
+  <%= form_with url: url, method: method, local: local do |form| %>
+    <% #= question.ask_html %>
+    <%= render 'questions/partials/body', question: question %>
+  <% end %>
+<% end %>

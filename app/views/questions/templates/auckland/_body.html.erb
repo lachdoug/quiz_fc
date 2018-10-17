@@ -1,23 +1,12 @@
-<style>
-.auckland p {
-  font-size: 1.25em;
-}
-.auckland .btn-auckland {
-  font-size: 1.25em;
-  font-weight: 700;
-}
-</style>
-
 <% config = question.config || {} %>
-<% config["answer"] = { "class" => "row" } %>
-<% config["buttons_wrapper"] = { "class" => "col-md-6 col-lg-3" } %>
-<% config["button"] = { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland mb-3" } %>
 <div class="rendered_markdown">
   <div class="row">
     <div class="col-md"><%= markdown( config["left_box"] ) %></div>
     <div class="col-md"><%= markdown( config["centre_box"] ) %></div>
     <div class="col-md"><%= markdown( config["right_box"] ) %></div>
   </div>
-  <%= markdown( question.ask ) %>
-  <%= render 'questions/partials/fields', form_type: "buttons", config: config %>
+  <div class="ask">
+    <%= markdown( question.ask ) %>
+  </div>
+  <%= render 'questions/partials/question/fields', form_type: "buttons", config: config %>
 </div>

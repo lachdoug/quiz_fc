@@ -135,15 +135,18 @@ options:
 
 <h4>Tag attributes</h4>
 <p>
+  <ul>
+    <li><code>wrapper: Hash</code> outer DIV wrapper for question</li>
+  </ul>
 </p>
 
 <p>
   All form types:
   <ul>
-    <li><code>wrapper: Hash</code> outer DIV wrapper</li>
     <li><code>question: Hash</code> question DIV wrapper</li>
     <li><code>answer: Hash</code> answer DIV wrapper</li>
     <li><code>button: Hash</code> all BUTTON tags</li>
+    <li><code>button_wrapper: Hash</code> button DIV wrapper</li>
   </ul>
 </p>
 
@@ -158,9 +161,17 @@ options:
 </p>
 
 <p>
-  For :input_field and :select_and_input only:
+  For :buttons only:
+  <ul>
+    <li><code>buttons: Array</code> each BUTTON tag, in order</li>
+  </ul>
+</p>
+
+<p>
+  For :input_field, :two_inputs and :select_and_input only:
   <ul>
     <li><code>input: Hash</code> all INPUT tags</li>
+    <li><code>input_wrapper: Hash</code> all input DIV wrapper</li>
   </ul>
 </p>
 
@@ -172,9 +183,10 @@ options:
 </p>
 
 <p>
-  For :select_menu and :select_and_input only:
+  For :select_menu, :two_selects and :select_and_input only:
   <ul>
     <li><code>select: Hash</code> all SELECT tags</li>
+    <li><code>select_wrapper: Hash</code> all select DIV wrapper</li>
   </ul>
 </p>
 

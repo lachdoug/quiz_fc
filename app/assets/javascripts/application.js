@@ -17,3 +17,12 @@
 //= require activestorage
 //= require turbolinks
 //= require_directory './application'
+
+
+// center/merge sections
+// 4, 4, 4
+// 4, 8, 12
+// 8, 4, 12
+// 12, 4, 8
+// 12, 8, 4
+// answer_type not form_type for config
