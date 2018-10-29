@@ -14,6 +14,11 @@ group :production do
   gem 'mysql2'
 end
 
+# group :development do
+#
+# end
+
+
 gem 'to_regexp'
 gem 'damerau-levenshtein'
 

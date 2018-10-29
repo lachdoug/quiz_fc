@@ -37,10 +37,10 @@ Rails.application.routes.draw do
 
   authenticate :admin do
     resource :session_store, only: [ :update ]
-    # authorize_admin( :developer ) do
+    authorize_admin( :developer ) do
       resource :datadump, only: [ :show ]
-    # end
-    # authorize_admin( :quizmaster ) do
+    end
+    authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ]
       resources :quizzes do
         resource :recalculate, only: [ :create ], module: :quizzes
@@ -49,7 +49,6 @@ Rails.application.routes.draw do
         resource :start_playing, only: [ :create ], module: :quizzes
         resource :stop_playing, only: [ :create ], module: :quizzes
       end
-
       resources :questions, except: [ :index ] do
         resources :files, only: [ :show, :new, :create, :destroy], module: :questions
         resource :test, only: [ :show, :new, :create ], module: :questions
@@ -57,7 +56,7 @@ Rails.application.routes.draw do
         resource :moveup, only: [ :create ], module: :questions
         resource :movedown, only: [ :create ], module: :questions
       end
-    # end
+    end
   end
 
 end
