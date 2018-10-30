@@ -7,7 +7,7 @@ module Plays
       if @next_question
         redirect_to play_question_path( @play, @next_question )
       else
-        redirect_to play_complete_path( @play )
+        redirect_to new_play_complete_path( @play )
       end
     end
 
@@ -24,7 +24,7 @@ module Plays
       if @next_question
         redirect_to play_question_path( @play, @next_question )
       else
-        redirect_to play_complete_path( @play )
+        redirect_to new_play_complete_path( @play )
       end
     end
 

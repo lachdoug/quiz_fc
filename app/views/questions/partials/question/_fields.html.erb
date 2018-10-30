@@ -1,4 +1,6 @@
-<% form_type ||= config["form_type"] || "input_field" %>
+<% config = question.config || {} %>
+<% form_type = config["form_type"] || "input_field" %>
+<% value = @play.answer_for( question ) %>
 <% begin %>
   <%= content_tag :div, config["answer"] do %>
     <% if form_type == "input_field" %>
@@ -7,7 +9,7 @@
       <% button_config = config["button"] || {} %>
       <% button_wrapper_config = config["button_wrapper"] || {} %>
       <%= content_tag :span, input_wrapper_config do %>
-        <%= content_tag :input, nil, input_config.merge( { "name" => 'answer[]', "autocomplete" => "off" } ) %>
+        <%= content_tag :input, nil, input_config.merge( { "name" => 'answer[]', "autocomplete" => "off", "value" => value[0] } ) %>
       <% end %>
       <%= content_tag :button, (
         { "class" => "btn btn-outline-primary" }).merge( button_config ).merge( { "type" => :submit }
@@ -38,7 +40,7 @@
         <% option_value = [ Hash, Array ].member?( option.class ) ? option.last : option %>
         <%= content_tag :span, button_wrapper_config do %>
             <%= content_tag :button, option_label, (
-              { "class" => "btn btn-outline-primary" } ).merge( button_config ).merge( buttons_config[i] || {} ).
+              { "class" => "btn #{ option_value === value[0] ? "btn-outline-primary" : "btn-outline-secondary" }" } ).merge( button_config ).merge( buttons_config[i] || {} ).
               merge( { "name" => 'answer[]', "value" => option_value, "type" => :submit }
             ) %>
         <% end %>

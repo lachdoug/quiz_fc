@@ -1,0 +1,36 @@
+<%= link_to fa("arrow-up"), plays_path( quiz_id: @play.quiz_id ), class: "btn btn-outline-primary float-right" %>
+
+<h2>Quiz <%= @play.quiz_id %> complete</h2>
+<hr>
+<h3>Click OK to submit this quiz for scoring</h3>
+<p>
+  <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
+</p>
+
+<ol>
+  <% @play.questions.each do |question| %>
+    <li>
+      <%= strip_tags markdown( question.ask ) %><br>
+      <strong>
+        <% answer = @play.answer_for question %>
+        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
+      </strong>
+      <%= link_to fa("arrow-right"), play_question_path( @play, question ) %>
+    </li>
+  <% end %>
+</ol>
+
+<hr>
+
+<div class="clearfix">
+  <% if @play.last_question %>
+    <%= link_to fa("arrow-left") + " Previous",
+    play_question_path( @play, @play.last_question ), class: "btn btn-outline-primary float-left" %>
+  <% end %>
+  <% if @play.questions.any? %>
+    <%= button_to play_complete_path( @play ), class: "btn btn-outline-primary float-right" do %>
+      <%= fa("check") + " OK" %>
+    <% end %>
+  <% end %>
+
+</div>

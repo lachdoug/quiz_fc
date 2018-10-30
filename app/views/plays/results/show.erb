@@ -21,11 +21,11 @@
       <%= strip_tags markdown( question.ask ) %><br>
       <strong>
         <% answer = @play.answer_for question %>
-        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered!") %>
+        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
         <% points = @play.points_for question %>
       </strong>
       <%= pluralize points, 'point' %>
-      <%= points > 0 ? fa("check") : ( fa("times") + " (#{question.answer})" ) %>
+      <%= points.to_i > 0 ? fa("check") : ( fa("times") + ( question.answer ? " (#{question.answer})" : "" ) ) %>
       <%= link_to fa("arrow-right"), play_question_review_path( @play, question ) %>
     </li>
   <% end %>

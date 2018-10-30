@@ -6,15 +6,34 @@
   font-size: 1.25em;
   font-weight: 700;
 }
+.auckland .btn-auckland-answered {
+  background-color: #007bff;
+  color: white;
+}
+
+.auckland .btn-auckland-answered:hover {
+  background-color: #0E4EAD;
+}
 .auckland .ask p {
   font-size: 2em;
 }
 </style>
 
 <% config = question.config || {} %>
+<% config["form_type"] = "buttons" %>
 <% config["wrapper"] = { "class" => "auckland" } %>
 <% config["answer"] = { "class" => "row" } %>
 <% config["button_wrapper"] = { "class" => "col-md-6 col-lg-3" } %>
-<% config["button"] = { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland mb-3" } %>
+<% config["buttons"] = config["options"].map do |option|
+  puts "#{question.answer} #{option}"
+  if @play.answer_for( question )[0] === option
+    { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland btn-auckland-answered mb-3" }
+  else
+    { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland mb-3" }
+  end
+end %>
+<%= question.answer %>
+<%= config["options"] %>
+<%= config["buttons"] %>
 
 <%= render "/questions/partials/question/question", question: question, url: url, method: method, local: local %>

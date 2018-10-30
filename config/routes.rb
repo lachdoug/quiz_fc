@@ -11,21 +11,23 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
-  root to: "landings#show"
-  authenticated :admin do
-    root to: "quizmasters#show", as: :admin_root
-  end
   authenticated :user do
     root to: "homes#show", as: :user_root
   end
+  authenticated :admin do
+    authorize_admin( :quizmaster ) do
+      root to: "quizmasters#show", as: :admin_root
+    end
+  end
+  root to: "landings#show"
 
   authenticate :user do
     resource :home, only: [ :show ]
     resources :plays, only: [ :index, :create ] do
       resources :questions, only: [ :new, :show, :update ], module: :plays do
-        resource :review, only: [:show]
+        resource :review, only: [ :show ]
       end
-      resource :complete, only: [ :show ], module: :plays
+      resource :complete, only: [ :new, :create ], module: :plays
       resource :result, only: [ :show ], module: :plays
     end
     namespace :users, as: :user do
@@ -44,10 +46,7 @@ Rails.application.routes.draw do
       resource :quizmaster, only: [ :show ]
       resources :quizzes do
         resource :recalculate, only: [ :create ], module: :quizzes
-        resource :enqueue, only: [ :create ], module: :quizzes
-        resource :dequeue, only: [ :create ], module: :quizzes
-        resource :start_playing, only: [ :create ], module: :quizzes
-        resource :stop_playing, only: [ :create ], module: :quizzes
+        resource :publish, only: [ :create, :destroy ], module: :quizzes
       end
       resources :questions, except: [ :index ] do
         resources :files, only: [ :show, :new, :create, :destroy], module: :questions

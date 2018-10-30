@@ -3,5 +3,5 @@
   <%= content_tag :div, config["question"] do %>
     <%= markdown( question.ask ) %>
   <% end %>
-  <%= render 'questions/partials/fields', config: config %>
+  <%= render '/questions/partials/question/fields', question: question %>
 </div>

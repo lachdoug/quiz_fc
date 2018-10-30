@@ -8,6 +8,8 @@ class Play < ApplicationRecord
   serialize :answers, Array
   serialize :points, Array
 
+  enum status: [ :playing, :played, :scored ]
+
   def calculate_score
     question_points.tap do |points|
       points.sum.tap do |score|
@@ -21,13 +23,12 @@ class Play < ApplicationRecord
   end
 
   def give_answer( number, answer )
-    raise "Already answered" if answers[ number - 1 ]
     answers[ number - 1 ] = answer
     save
   end
 
   def answer_for( question )
-    answers[ question.number - 1 ]
+    answers[ question.number - 1 ] || []
   end
 
   def points_for( question )
@@ -48,6 +49,10 @@ class Play < ApplicationRecord
 
   def find_question_by_number( question_number )
     questions.find_by number: question_number
+  end
+
+  def last_question
+    find_question_by_number( questions.count )
   end
 
 end

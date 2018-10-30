@@ -1,1 +1,12 @@
+<div class="clearfix">
+  <% if question.previous_question %>
+    <%= link_to fa("arrow-left") + " Previous", play_question_path( play_id: @play.id, id: question.previous_question.id ), class: "btn btn-outline-primary" %>
+  <% end %>
+  <% if question.next_question %>
+    <%= link_to "Next ".html_safe + fa("arrow-right"), play_question_path( play_id: @play.id, id: question.next_question.id ), class: "btn btn-outline-primary float-right" %>
+  <% else %>
+    <%= link_to "Next ".html_safe + fa("arrow-right"), new_play_complete_path( play_id: @play.id ), class: "btn btn-outline-primary float-right" %>
+  <% end %>
+</div>
+<hr>
 <%= render "/questions/templates/#{ question.template }/question", question: question, url: url, method: method, local: local %>

@@ -7,6 +7,37 @@
         </h1>
         <h3>Win Cash & Prizes Every Saturday From 9am to 5pm</h3>
         <%= link_to( 'Join the team', new_user_registration_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+
+        <button class="btn btn-outline-secondary btn-lg btn-app" type="button" data-toggle="collapse" data-target="#landingSigninCollapse" aria-expanded="false" aria-controls="collapseExample">
+          Already joined
+        </button>
+
+        <p>
+          <div class="collapse" id="landingSigninCollapse">
+            <div class="card card-body">
+              <%= form_for(:user, :url => session_path(:user)) do |f| %>
+                <p>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= f.email_field :email, placeholder: "Email", autofocus: true, autocomplete: "email", class: "form-control", required: 'required' %>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <%= f.password_field :password, placeholder: "Password", autocomplete: "off", class: "form-control", required: 'required' %>
+                      </div>
+                    </div>
+                  </div>
+                </p>
+                <%= f.submit 'Sign in', class: "btn btn-outline-primary btn-app" %>
+                <%= link_to "Forgot your password?", new_password_path(:user) %>
+              <% end %>
+            </div>
+          </div>
+        </p>
+
       </div>
       <div class="col-lg-5 text-center">
         <%= image_tag "smartphone.png", class: "d-none d-lg-block", height: 500 %>

@@ -1,5 +1,5 @@
 class Quiz < ApplicationRecord
-  enum status: [ :draft, :queued, :playing, :pending, :complete, :archived ]
+  enum status: [ :draft, :published ]
   enum duration_units: [ :hours, :minutes, :seconds ]
   has_many :questions, -> { order( Arel.sql 'number' ) }, dependent: :destroy
   has_many :plays, dependent: :destroy
