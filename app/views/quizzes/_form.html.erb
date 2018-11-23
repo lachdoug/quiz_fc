@@ -1,31 +1,102 @@
-<%= form_with(model: quiz, local: true) do |form| %>
+<%= form_with(model: quiz, url: quizmaster_quiz_path( quiz ), local: true) do |form| %>
 
   <%= render "/errors", object: quiz %>
 
-  <div class="form-group form-group-narrow">
-    <%= form.label :start_date %>
-    <%= date_field_tag 'quiz[start_date]', ( quiz.start || Time.now ).strftime('%Y-%m-%d'), class: "form-control" %>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <%= form.label :fee %>
+    </div>
+    <div class="col-sm-4">
+      <%= form.label :pool %>
+    </div>
   </div>
 
-  <div class="form-group form-group-narrow">
-    <%= form.label :start_time, "Start time (UTC)" %>
-    <%= time_field_tag 'quiz[start_time]', ( quiz.start || Time.now ).strftime('%H:%M'), class: "form-control" %>
-  </div>
-
-  <div class="form-group form-group-narrow">
-    <%= form.label :duration_value, "Duration" %>
-    <div class="row">
-      <div class="col">
-        <%= form.text_field :duration_value, class: "form-control", value: ( quiz.duration_value || 1 ) %>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= form.number_field :fee, class: "form-control", required: true %>
       </div>
-      <div class="col">
-        <%= form.select :duration_units, Quiz.duration_units.keys, {}, class: "form-control" %>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= form.number_field :pool, class: "form-control", required: true %>
       </div>
     </div>
   </div>
 
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <%= label :quiz, :start %>
+    </div>
+    <div class="col-sm-4 d-none d-sm-block">
+      <%= form.label :start_time, "Time (UTC)" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= date_field_tag 'quiz[start_date]', ( quiz.start || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= time_field_tag 'quiz[start_time]', ( quiz.start || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <%= label :quiz, :stop %>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= date_field_tag 'quiz[stop_date]', ( quiz.stop || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= time_field_tag 'quiz[stop_time]', ( quiz.stop || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <%= label :quiz, :tally %>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= date_field_tag 'quiz[tally_date]', ( quiz.tally || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= time_field_tag 'quiz[tally_time]', ( quiz.tally || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <%= label :quiz, :close %>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= date_field_tag 'quiz[close_date]', ( quiz.close || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group form-group-narrow">
+        <%= time_field_tag 'quiz[close_time]', ( quiz.close || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+
   <div class="form-group">
-    <%= link_to "Cancel", quiz_path(quiz), class: "btn btn-secondary" %>
+    <%= link_to "Cancel", quizmaster_quiz_path( quiz ), class: "btn btn-secondary" %>
     <%= form.submit class: "btn btn-primary" %>
   </div>
 

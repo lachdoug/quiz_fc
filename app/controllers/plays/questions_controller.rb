@@ -1,31 +1,41 @@
 module Plays
   class QuestionsController < ApplicationController
 
+    before_action :set_member, only: [:new, :show, :update ]
+    before_action :set_play, only: [:new, :show, :update ]
+
     def new
-      @play = Play.find params[:play_id]
       @next_question = @play.next_unanswered_question
       if @next_question
-        redirect_to play_question_path( @play, @next_question )
+        redirect_to member_play_question_path( @member, @play, @next_question )
       else
-        redirect_to new_play_complete_path( @play )
+        redirect_to new_member_play_complete_path( @member, @play )
       end
     end
 
     def show
-      @play = Play.find params[:play_id]
       @question = @play.questions.find params[:id]
     end
 
     def update
-      @play = Play.find params[:play_id]
       @question = @play.questions.find params[:id]
       @play.give_answer @question.number, ( params[:answer] || [] )
       @next_question = @question.next_question
       if @next_question
-        redirect_to play_question_path( @play, @next_question )
+        redirect_to member_play_question_path( @member, @play, @next_question )
       else
-        redirect_to new_play_complete_path( @play )
+        redirect_to new_member_play_complete_path( @member, @play )
       end
+    end
+
+    private
+
+    def set_member
+      @member = Profile.for( current_user ).members.find( params[:member_id] )
+    end
+
+    def set_play
+      @play = @member.plays.find( params[:play_id] )
     end
 
   end

@@ -1,0 +1,114 @@
+<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<h2><%= @quizbook %></h2>
+<h4><%= quizbook_status_badge @quizbook %></h4>
+
+<% if @quizbook.draft? %>
+  <div class="float-right">
+    <% if @quizbook.questions.any? %>
+      <%= link_to fa("trash") + ' Delete', nil,
+      data: { alert: "You must delete all quizbook questions first." },
+      class: "btn btn-outline-danger" %>
+    <% else %>
+      <%= link_to fa("trash") + ' Delete',
+      quizmaster_quizbook_path( @quizbook ), method: :DELETE,
+      data: { confirm: "Are you sure that you want to delete this quizbook?" },
+      class: "btn btn-outline-danger" %>
+    <% end %>
+    <div class="btn-group">
+      <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :ready ),
+      method: :patch,
+      class: "btn btn-outline-success",
+      data: { confirm: "Are you sure that you want to publish this quizbook?" } do %>
+        <%= fa("file-upload") + ' Publish' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% if @quizbook.ready? %>
+  <div class="float-right">
+    <%= link_to fa("plus") + " Create quiz", new_quizmaster_quizbook_quiz_path( quizbook_id: @quizbook.id ), class: "btn btn-outline-primary" %>
+    <div class="btn-group">
+      <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :draft ),
+      method: :patch,
+      class: "btn btn-outline-danger",
+      data: { confirm: "Are you sure that you want to unpublish this quizbook?" } do %>
+        <%= fa("file-download") + ' Unpublish' %>
+      <% end %>
+      <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :finalised ),
+      method: :patch,
+      class: "btn btn-outline-success",
+      data: { confirm: "Are you sure that you want to finalise this quizbook? Have correct answer been provided for all questions?" } do %>
+        <%= fa("file-alt") + ' Finalise' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% if @quizbook.finalised? %>
+  <div class="float-right">
+    <%= link_to fa("plus") + " Create quiz", new_quizmaster_quizbook_quiz_path( quizbook_id: @quizbook.id ), class: "btn btn-outline-primary" %>
+    <div class="btn-group">
+      <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :draft ),
+      method: :patch,
+      class: "btn btn-outline-danger",
+      data: { confirm: "Are you sure that you want to unpublish this quizbook?" } do %>
+        <%= fa("file-download") + ' Unpublish' %>
+      <% end %>
+      <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :archived ),
+      method: :patch,
+      class: "btn btn-outline-secondary",
+      data: { confirm: "Are you sure that you want to archive this quizbook?" } do %>
+        <%= fa("file-archive") + ' Archive' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<% if @quizbook.archived? %>
+  <div class="float-right">
+    <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :finalised ),
+    method: :patch,
+    class: "btn btn-outline-secondary",
+    data: { confirm: "Are you sure that you want to republish this quizbook?" } do %>
+      <%= fa("file-upload") + ' Republish' %>
+    <% end %>
+  </div>
+<% end %>
+
+
+<div class="clearfix">
+
+
+  <% if false && @quizbook.approved && @quizbook.start.future? %>
+
+    <div class="float-right">
+      <%= link_to fa("clock") + ' Publish', quizbook_publish_path( @quizbook ), method: :POST, class: "btn btn-danger",
+      data: { confirm: "Are you sure that you want the quizbook removed from the queue?" } %>
+      <%= link_to fa("calculator") + ' Recalculate', quizbook_recalculate_path( @quizbook ), method: :POST, class: "btn btn-danger",
+      data: { confirm: "Are you sure that you want to recalculate the scores on all plays of this quizbook?" } %>
+    </div>
+
+    <div class="float-right">
+      <%= link_to fa("clock") + ' Enqueue', quizbook_enqueue_path( @quizbook ), method: :POST, class: "btn btn-warning",
+      data: { confirm: "Are you sure that the quizbook is ready to go into the queue?" } %>
+    </div>
+
+  <% end %>
+
+</div>
+
+<hr>
+<% if @quizbook.draft? %>
+  <%= link_to fa("plus") + ' New', new_quizmaster_question_path( quizbook_id: @quizbook.id ),
+  class: "btn btn-outline-primary float-right" %>
+<% end %>
+<h6><strong>Questions</strong></h6>
+<ol>
+  <% @quizbook.questions.each do |question| %>
+    <%= content_tag :li do %>
+      <%= link_to quizmaster_question_path( question ), class: "" do %>
+        <%= content_tag :span, strip_tags( markdown question.ask ) %>
+        <%= content_tag :strong, question.answer %>
+        <%= content_tag :i, pluralize( question.points, 'point' ) %>
+      <% end %>
+    <% end %>
+<% end %>
+</ol>

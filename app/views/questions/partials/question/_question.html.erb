@@ -4,6 +4,6 @@
   <%= render 'questions/partials/question/header', question: question %>
   <%= form_with url: url, method: method, local: local do |form| %>
     <% #= question.ask_html %>
-    <%= render 'questions/partials/body', question: question %>
+    <%= render 'questions/partials/question/body', question: question %>
   <% end %>
 <% end %>

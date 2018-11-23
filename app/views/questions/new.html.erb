@@ -2,5 +2,5 @@
 
 <%= render "/questions/templates/form",
 question: @question,
-url: questions_path( quiz_id: @quiz ),
-cancel: @quiz %>
+url: quizmaster_questions_path( quizbook_id: @quizbook ),
+cancel: quizmaster_quizbook_path( @quizbook ) %>

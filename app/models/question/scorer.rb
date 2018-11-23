@@ -10,7 +10,7 @@ class Question
 
     def process
       return apply_scoring_strategy @question.scoring, @answer_attempt.join(', ') if @question.scoring.is_a? Hash
-      scoring.map.with_index { |scoring_part, i| apply_scoring_strategy scoring_part, @answer_attempt[i] }.sum
+      @question.scoring.map.with_index { |scoring_part, i| apply_scoring_strategy scoring_part, @answer_attempt[i] }.sum
     end
 
     private

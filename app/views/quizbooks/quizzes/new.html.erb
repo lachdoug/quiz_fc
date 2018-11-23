@@ -1,0 +1,19 @@
+<h2>New Quiz</h2>
+
+<%= form_with(model: @quiz, url: quizmaster_quizbook_quizzes_path, local: true) do |form| %>
+
+  <%= render "/errors", object: @quiz %>
+
+  <%= form.hidden_field :quizbook_id %>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :league %>
+    <%= form.select :league_id, options_for_select( League.all.map { |l| [ l.name, l.id ] } ), { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= link_to "Cancel", quizmaster_quizbook_path( @quiz.quizbook ), class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+<% end %>

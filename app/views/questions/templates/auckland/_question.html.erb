@@ -24,16 +24,13 @@
 <% config["wrapper"] = { "class" => "auckland" } %>
 <% config["answer"] = { "class" => "row" } %>
 <% config["button_wrapper"] = { "class" => "col-md-6 col-lg-3" } %>
-<% config["buttons"] = config["options"].map do |option|
+<% config["buttons"] = ( config["options"] || [] ).map do |option|
   puts "#{question.answer} #{option}"
-  if @play.answer_for( question )[0] === option
+  if @play && @play.answer_for( question )[0] === option
     { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland btn-auckland-answered mb-3" }
   else
     { "class" => "btn btn-outline-primary btn-block btn-app btn-auckland mb-3" }
   end
 end %>
-<%= question.answer %>
-<%= config["options"] %>
-<%= config["buttons"] %>
 
 <%= render "/questions/partials/question/question", question: question, url: url, method: method, local: local %>

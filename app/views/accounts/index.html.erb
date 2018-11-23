@@ -1,0 +1,24 @@
+<%= link_to fa('arrow-up'), comptroller_path, class: "btn btn-outline-primary float-right" %>
+<h2>Accounts</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>For</th>
+      <th>Balance</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.id %></td>
+        <td><%= account.accountable %></td>
+        <td><%= account.balance %></td>
+        <td width="1"><%= link_to fa("arrow-right"), comptroller_account_path( account ) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

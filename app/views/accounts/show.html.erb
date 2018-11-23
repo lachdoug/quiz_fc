@@ -1,0 +1,31 @@
+<%= link_to fa('arrow-up'), comptroller_path( id: @account.accountable_id ), class: "btn btn-outline-primary float-right" %>
+
+<h2>
+  <%= @account %>
+</h2>
+
+<p>
+  <strong>For</strong>
+  <%= @account.accountable %>
+</p>
+
+<p>
+  <strong>Balance</strong>
+  <%= number_with_precision( @account.balance, precision: 2 ) %>
+</p>
+
+<strong>Transactions</strong>
+<% if @account.transactions.any? %>
+  <table class="table">
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Detail</th>
+    </tr>
+    <%= render(
+      collection: @account.transactions,
+      partial: 'accounts/transaction' ) %>
+  </table>
+<% else %>
+   None
+<% end %>

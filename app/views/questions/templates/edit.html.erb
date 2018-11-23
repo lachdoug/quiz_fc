@@ -1,9 +1,9 @@
 <h2>
-  <%= @question.quiz.to_s :short %>
+  <%= @question.quizbook %>
   <%= @question %> Template
 </h2>
 
 <%= render "/questions/templates/form",
 question: @question,
-url: question_template_path(),
-cancel: @question %>
+url: quizmaster_question_template_path(),
+cancel: quizmaster_question_path( @question ) %>

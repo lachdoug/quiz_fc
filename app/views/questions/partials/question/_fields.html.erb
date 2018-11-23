@@ -1,6 +1,11 @@
 <% config = question.config || {} %>
 <% form_type = config["form_type"] || "input_field" %>
-<% value = @play.answer_for( question ) %>
+<% if @play %>
+  <% value = @play.answer_for( question ) %>
+<% else %>
+  <% value = [] %>
+<% end %>
+
 <% begin %>
   <%= content_tag :div, config["answer"] do %>
     <% if form_type == "input_field" %>

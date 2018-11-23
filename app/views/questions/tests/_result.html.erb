@@ -1,7 +1,7 @@
 <% answer_attempt = @answer_attempt.join(", ") %>
 <% points_scored = @question.score_for( @answer_attempt ) %>
 
-<%= render '/questions/partials/result',
+<%= render '/questions/partials/question/result',
       answer_attempt: answer_attempt,
       points_scored: points_scored,
       question: @question %>

@@ -1,0 +1,7 @@
+i.quizbook-status-icon.draft { color: #007bff; }
+i.quizbook-status-icon.ready { color: #ffc107; }
+i.quizbook-status-icon.finalised { color: #28a745; }
+/*i.quizbook-status-icon.live.pending { color: #007bff; }
+i.quizbook-status-icon.live.results { color: #ffc107; }
+i.quizbook-status-icon.live.complete { color: #dc3545; }*/
+i.quizbook-status-icon.archived { color: grey; }

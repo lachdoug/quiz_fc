@@ -3,7 +3,7 @@
 <div class="float-right">
   <%= link_to fa("arrow-left") + " Previous", previous_question ? play_question_review_path( @play, previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
   <%= link_to fa("arrow-right") + " Next", next_question ? play_question_review_path( @play, next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-up"), play_result_path( @play ), class: "btn btn-outline-primary" %>
+  <%= link_to fa("arrow-up"), member_play_path( @member, @play ), class: "btn btn-outline-primary" %>
 </div>
 
 
@@ -13,9 +13,9 @@
 <%= markdown @question.ask %>
 
 <% answer_attempt = @play.answer_for( @question ).join(", ") %>
-<% points_scored = @play.points_for @question %>
+<% points_scored = @play.scored? ? @play.points_for( @question ) : nil %>
 
-<%= render '/questions/partials/result',
+<%= render '/questions/partials/question/result',
       answer_attempt: answer_attempt,
       points_scored: points_scored,
       question: @question %>

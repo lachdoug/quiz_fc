@@ -13,6 +13,34 @@
       </div>
       <div class="modal-body">
 
+<h4>Ask</h4>
+
+Config must have key <code>ask</code> with text value in markdown.
+
+<h4>Answer</h4>
+
+Config must have key <code>answer</code> with string value of up to 255 characters.
+
+<h4>Points</h4>
+
+Config can have key <code>points</code> with numerical value. Default is 1.
+
+<h4>Explanation</h4>
+
+Config can have key <code>explanation</code> with value in markdown.
+
+<h4>Markdown</h4>
+
+<p>
+  Show files with
+<code>file( #FILE_NUMBER =WIDTH(optional) )</code>
+</p>
+
+<pre>#EXAMPLE
+### Who is this?
+file( #1 =300 )
+</pre>
+
 <h4>Form type</h4>
 
 <p>
@@ -32,9 +60,6 @@ none
 form_type: input_field
 </pre>
 </p>
-
-
-
 
 <h4>Scoring</h4>
 

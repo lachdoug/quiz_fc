@@ -1,34 +1,22 @@
 class Question < ApplicationRecord
 
-  belongs_to :quiz
+  belongs_to :quizbook
   has_many_attached :files
 
   validate :config_updated
-  validate :scoring_updated
+  validate :output_updated
 
-  enum template: {
-    default: 0,
-    auckland: 1
-  }, _prefix: :templated_with
+  def self.templates
+    [ :default, :auckland ]
+  end
 
   serialize :config
   serialize :scoring
 
   attr_accessor :config_yaml, :config_params
 
-  # def self.templates
-  #   [
-  #     [ "None", nil ],
-  #     [ "Aukland", :aukland ],
-  #   ]
-  # end
-
-  # def config
-  #   super || {}
-  # end
-
   def to_s
-    "Question #{ number }&nbsp;of&nbsp;#{ quiz.questions.count }".html_safe
+    "Question #{ number }&nbsp;of&nbsp;#{ quizbook.questions.count }".html_safe
   end
 
   def config_as_yaml
@@ -40,23 +28,28 @@ class Question < ApplicationRecord
   end
 
   def next_question
-    quiz.questions.find_by number: ( number + 1 )
+    quizbook.questions.find_by number: ( number + 1 )
   end
 
   def previous_question
-    quiz.questions.find_by number: ( number - 1 )
+    quizbook.questions.find_by number: ( number - 1 )
   end
 
   def move_up
     previous_question &&
-    previous_question.update( number: number ) &&
-    update( number: number - 1 )
+    previous_question.to( number ) &&
+    to( number - 1 )
   end
 
   def move_down
     next_question &&
-    next_question.update( number: number ) &&
-    update( number: number + 1 )
+    next_question.to( number ) &&
+    to( number + 1 )
+  end
+
+  def to( number )
+    self.number = number
+    save # validate: false
   end
 
   def destroy
@@ -70,9 +63,14 @@ class Question < ApplicationRecord
     end
   end
 
+  def final_edit?
+    !quizbook.draft?
+  end
+
   private
 
   def config_updated
+    # debugger
     if config_yaml
       config_from_yaml
     elsif config_params
@@ -83,22 +81,55 @@ class Question < ApplicationRecord
   def config_from_yaml
     self.config = YAML.load( "---\n" + self.config_yaml.strip + "\n..." )
   rescue Psych::SyntaxError => e
-    errors.add(:config, "invalid - there is a syntax error (line #{ e.line - 1 })")
+    errors.add :config, "invalid - there is a syntax error (line #{ e.line - 1 })"
   end
 
   def config_from_params
     self.config = config_params.to_h
   end
 
+  def output_updated
+    ask_updated &&
+    answer_updated &&
+    points_updated &&
+    scoring_updated
+  end
+
+  def ask_updated
+    # debugger
+    ask = ( config || {} )["ask"]
+    self.ask = ask
+    # if ask
+    # else
+    #   errors.add :base, "Configuration error - config requires 'ask'"
+    # end
+  end
+
+  def answer_updated
+    answer = ( config || {} )["answer"]
+    self.answer = answer
+    # if answer
+    # else
+    #   errors.add :base, "Configuration error - config requires 'answer'"
+    # end
+  end
+
+  def points_updated
+    points = ( config || {} )["points"]
+    points = 1 if points === ""
+    self.points = points.to_i
+  end
+
   def scoring_updated
+    # debugger
     self.scoring = Scoring.new( self ).process
   rescue RegexpError
-    errors.add(:config, "invalid - failed to interpret scoring")
+    errors.add :base, "Configuration error - failed to interpret scoring"
   end
 
   def config_is_a_hash_or_nil
     unless config.is_a?(Hash) || config.nil?
-      errors.add(:config, "invalid - must be a hash")
+      errors.add :base, "Configuration error - config must be a hash"
     end
   end
 

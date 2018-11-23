@@ -1,0 +1,33 @@
+<div class="float-right">
+  <%= link_to fa("plus") + " New", new_comptroller_league_path, class: "btn btn-outline-primary" %>
+  <%= link_to fa('arrow-up'), comptroller_path, class: "btn btn-outline-primary" %>
+</div>
+
+
+<h2>Leagues</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Timezone</th>
+      <th>Currency</th>
+      <th>Account</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @leagues.each do |league| %>
+      <tr>
+        <td><%= league.id %></td>
+        <td><%= league.name %></td>
+        <td><%= league.timezone %></td>
+        <td><%= league.currency %></td>
+        <td><%= link_to league.account, comptroller_account_path( league.account ) %></td>
+        <td width="1"><%= link_to fa("arrow-right"), comptroller_league_path( league ) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

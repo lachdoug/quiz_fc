@@ -1,6 +1,6 @@
-<%= link_to fa("arrow-up"), question_path( @question ), class: "btn btn-outline-primary float-right" %>
+<%= link_to fa("arrow-up"), quizmaster_question_path( @question ), class: "btn btn-outline-primary float-right" %>
 <h2>
-  <%= @question.quiz.to_s :short %>
+  <%= @question.quizbook %>
   <%= @question %> File
   #<%= @file.record.files.find_index( @file ) + 1 %>
 </h2>
@@ -8,4 +8,4 @@
 <p style="overflow-x: auto">
   <%= render 'file', file: @file %>
 </p>
-<%= link_to fa("trash") + ' Delete', question_file_path( @question, @file ), method: :DELETE, data: { confirm: "Are you sure that you want to delete this attachment?" }, class: "btn btn-outline-danger float-right" %>
+<%= link_to fa("trash") + ' Delete', quizmaster_question_file_path( @question, @file ), method: :DELETE, data: { confirm: "Are you sure that you want to delete this attachment?" }, class: "btn btn-outline-danger float-right" %>

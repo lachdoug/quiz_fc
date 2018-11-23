@@ -1,0 +1,35 @@
+<h2><%= @member.league %></h2>
+
+<p>
+  <strong>Member number</strong> <%= @member.id %>
+</p>
+
+
+  <% @member.quizzes.each do |quiz| %>
+    <h3><%= quiz %></h3>
+    <p>
+      <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
+        <%= fa("futbol") %> Play
+      <% end %>
+    </p>
+  <% end %>
+
+
+  <% @member.plays.each do |play| %>
+    <h3><%= play.quiz %> - <%= time_ago_in_words play.created_at %> ago</h3>
+    <p>
+      <% if play.playing? %>
+        <%= link_to new_member_play_question_path( @member, play ), class: "btn btn-outline-primary" do %>
+          <%= fa("futbol") %> Resume
+        <% end %>
+      <% elsif play.complete? %>
+        <%= link_to member_play_complete_path( @member, play ), class: "btn btn-outline-primary" do %>
+          <%= fa("futbol") %> Complete
+        <% end %>
+      <% else %>
+        <%= link_to member_play_result_path( @member, play ), class: "btn btn-outline-primary" do %>
+          <%= fa("futbol") %> Result
+        <% end %>
+      <% end %>
+    </p>
+  <% end %>

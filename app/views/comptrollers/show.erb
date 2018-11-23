@@ -1,0 +1,16 @@
+<div class="float-right">
+  <%= link_to fa("trophy") + " Leagues", comptroller_leagues_path, class: "btn btn-outline-primary" %>
+  <%= link_to fa("file-invoice-dollar") + " Accounts", comptroller_accounts_path, class: "btn btn-outline-primary" %>
+</div>
+
+<h2>Comptroller</h2>
+
+<% @leagues.each do |league| %>
+  <div class="float-right">
+    <%= link_to fa("money-bill-alt ") + " Transact", new_comptroller_transactor_path( league_id: league.id ), class: "btn btn-outline-primary" %>
+  </div>
+  <h3><%= league %></h3>
+  <strong>Balance</strong> <%= league.account.balance %>
+  <%= link_to fa("arrow-right"), comptroller_account_path( league.account ) %>
+  <br>
+<% end %>

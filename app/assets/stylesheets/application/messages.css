@@ -1,0 +1,8 @@
+.flash-messages {
+  text-align: center;
+  padding: 10px;
+}
+
+.flash-alert {
+  color: red;
+}

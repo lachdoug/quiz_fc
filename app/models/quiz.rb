@@ -1,21 +1,40 @@
 class Quiz < ApplicationRecord
-  enum status: [ :draft, :published ]
-  enum duration_units: [ :hours, :minutes, :seconds ]
-  has_many :questions, -> { order( Arel.sql 'number' ) }, dependent: :destroy
-  has_many :plays, dependent: :destroy
 
-  def to_s( type=nil )
-    return "Quiz #{id}" if type.to_s == "short"
-    "Quiz #{id} #{status.capitalize} #{formatted_start}"
+  belongs_to :league
+  belongs_to :quizbook
+  has_many :plays
+  has_many :questions, through: :quizbook
+
+  enum status: [ :draft, :live, :archived ]
+
+  before_validation( on: :create ) do
+    self.number = league.next_quiz_number
   end
 
-  def formatted_start
-    start.present? ? start.strftime("%A %d %B %Y at %H:%M %Z") : "Unsheduled"
+  validate :has_all_datetimes
+
+  def to_s
+    "Quiz #{ number }"
   end
 
-  def duration_in_words
-    return '' unless duration_value
-    pluralize( duration_value, ( duration_units || '' ).singularize )
+  def stage
+    if draft? || archived?
+      nil
+    elsif now < start
+      :waiting
+    elsif now < stop
+      :current
+    elsif now < tally
+      :pending
+    elsif now < close
+      :results
+    else
+      :complete
+    end
+  end
+
+  def now
+    @now ||= Time.now.utc
   end
 
   def recalculate!
@@ -27,34 +46,39 @@ class Quiz < ApplicationRecord
   end
 
   def update( params )
-    yr, mon, day = params[:start_date].split( "-" ).map &:to_i
-    hr, min = params[:start_time].split( ":" ).map &:to_i
-    start = DateTime.new(yr, mon, day, hr, min)
-    super params.except( :start_date, :start_time ).merge( { start: start } )
+    [ "start", "stop", "tally", "close" ].each do |event|
+      yr, mon, day = params["#{ event }_date"].split( "-" ).map &:to_i
+      hr, min = params["#{ event }_time"].split( ":" ).map &:to_i
+      datetime = DateTime.new(yr, mon, day, hr, min)
+      params = params.except( "#{ event }_date", "#{ event }_time" ).merge( { event => datetime } )
+    end
+    super params
   end
 
-  def self.drafts
-    where( status: 0 )
+  def destroy
+    if draft?
+      super
+    else
+      errors.add(:base, "Failed to delete. You can delete draft quizzes only.")
+      return false
+    end
   end
 
-  def self.queued
-    where( status: 1 ).order( Arel.sql "start ASC" )
+  def fee
+    super || 1
   end
 
-  def self.playing
-    where( status: 2 ).order( Arel.sql "start ASC" )
+  def pool
+    super || 50
   end
 
-  def self.pending
-    where( status: 3 ).order( Arel.sql "start ASC" )
-  end
 
-  def self.complete
-    where( status: 4 ).order( Arel.sql "start ASC" )
-  end
+  private
 
-  def self.archived
-    where( status: 5 ).order( Arel.sql "start ASC" )
+  def has_all_datetimes
+    if status == "live" && ! ( start && stop && tally && close )
+      errors.add( :base, "Failed to luanch quiz. Please provide all dates." )
+    end
   end
 
 end

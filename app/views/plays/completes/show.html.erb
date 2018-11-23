@@ -1,0 +1,26 @@
+<%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
+
+<h2>Quiz <%= @play.quiz_id %> complete</h2>
+<hr>
+
+<%= link_to fa("arrow-right") + " Review", member_play_question_review_path( @member, @play, @play.questions.first ), class: "btn btn-outline-primary float-right" if @play.questions.any? %>
+
+<p>
+  <% if false %>
+  <strong>Quiz</strong> <%= @play.quiz.formatted_start %><br>
+  <% end %>
+  <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
+</p>
+
+<ol>
+  <% @play.questions.each do |question| %>
+    <li>
+      <%= strip_tags markdown( question.ask ) %><br>
+      <strong>
+        <% answer = @play.answer_for question %>
+        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
+      </strong>
+      <%= link_to fa("arrow-right"), member_play_question_review_path( @member, @play, question ) %>
+    </li>
+  <% end %>
+</ol>

@@ -1,0 +1,34 @@
+<h2>Transact</h2>
+
+<%= form_with(model: @transactor, url: comptroller_transactor_path, local: true) do |form| %>
+
+  <%= render "/errors", object: @transactor %>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :account_id %>
+    <%= form.select :account_id,
+    options_for_select(
+      @league.members.map do |member|
+        [ "#{ member.profile.user.email } - #{ member.account } (#{ number_with_precision( member.account.balance, precision: 2 ) })", member.account.id ]
+      end
+    ), { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class: "form-control" %>
+    <small>positive to credit, negative to debit</small>
+  </div>
+
+  <div class="form-group form-group-narrow" id="newComptrollerAccountsTransactorComment">
+    <%= form.label :comment %>
+    <br>
+    <%= form.text_area :comment, class: "form-control", id: "newComptrollerAccountsTransactorCommentEntry" %>
+  </div>
+
+  <div class="form-group">
+    <%= link_to "Cancel", comptroller_path, class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+<% end %>

@@ -1,0 +1,22 @@
+<%= link_to fa('arrow-up'), comptroller_path, class: "btn btn-outline-primary float-right" %>
+
+<h2><%= @league %></h2>
+
+<p class="float-right">
+  <strong>ID</strong> <%= @league.id %>
+</p>
+
+<p>
+  <strong>Currency</strong> <%= @league.currency %>
+  <br>
+  <strong>Timezone</strong> <%= @league.timezone %>
+</p>
+
+<hr>
+
+<div class="clearfix">
+  <p class="float-left">
+    <strong>Balance</strong> <%= @league.account.balance %>
+  </p>
+  <%= link_to fa("file-invoice-dollar") + " Account", comptroller_account_path( @league.account ), class: "btn btn-outline-primary float-right" %>
+</div>

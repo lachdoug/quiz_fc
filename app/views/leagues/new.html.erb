@@ -1,0 +1,27 @@
+<h2>New League</h2>
+
+<%= form_with(model: @league, url: comptroller_leagues_path, local: true) do |form| %>
+
+  <%= render "/errors", object: @league %>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :timezone %>
+    <%= form.select :timezone, options_for_select( League.timezones ), { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="form-group form-group-narrow">
+    <%= form.label :currency %>
+    <%= form.select :currency, options_for_select( League.currencies ), { include_blank: true }, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= link_to "Cancel", comptroller_leagues_path, class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+<% end %>

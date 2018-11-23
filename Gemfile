@@ -10,6 +10,7 @@ gem 'rails_admin'
 gem 'omniauth'
 gem 'redcarpet'
 gem 'seed_dump'
+gem 'dotiw' # better distance_of_time_in_words
 group :production do
   gem 'mysql2'
 end

@@ -5,8 +5,10 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>League</th>
+      <th>Number</th>
+      <th>Quizbook</th>
       <th>Status</th>
-      <th>Start</th>
       <th></th>
     </tr>
   </thead>
@@ -15,9 +17,11 @@
     <% @quizzes.each do |quiz| %>
       <tr>
         <td><%= quiz.id %></td>
-        <td><%= quiz.status %></td>
-        <td><%= quiz.start %></td>
-        <td width="1"><%= link_to fa("arrow-right"), quiz %></td>
+        <td><%= quiz.league %></td>
+        <td><%= quiz.number %></td>
+        <td><%= quiz.quizbook %></td>
+        <td><%= quiz_status_badge quiz %></td>
+        <td width="1"><%= link_to fa("arrow-right"), quizmaster_quiz_path( quiz ) %></td>
       </tr>
     <% end %>
   </tbody>

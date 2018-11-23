@@ -8,23 +8,20 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @quiz = Quiz.find( params[:quiz_id] )
-    @question = @quiz.questions.build template: @quiz.questions.last ? @quiz.questions.last.template : "default"
+    @quizbook = Quizbook.find( params[:quizbook_id] )
+    @question = @quizbook.questions.build template: @quizbook.questions.last ? @quizbook.questions.last.template : "default"
   end
 
   def create
-    @quiz = Quiz.find( params[:quiz_id] )
-    @questions = @quiz.questions
+    @quizbook = Quizbook.find( params[:quizbook_id] )
+    @questions = @quizbook.questions
     new_question_params = question_params.merge ( { number: @questions.count + 1 } )
     @question = @questions.build( new_question_params )
+    @question.save # validate: false
+    # debugger
     respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { redirect_to @quiz, alert: 'Failed to create question.' }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to quizmaster_question_path( @question ), notice: 'Question was successfully created.' }
+      format.json { render :show, status: :created, location: @question }
     end
   end
 
@@ -32,9 +29,10 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    # debugger
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to quizmaster_question_path( @question ), notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
         flash.now.alert = 'Failed to update question.'
@@ -45,10 +43,11 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @quiz = @question.quiz
+    @quizbook = @question.quizbook
+    @number = @question.number
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to quiz_path( @quiz ), notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to quizmaster_quizbook_path( @quizbook ), notice: "Question #{ @number } was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -60,7 +59,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:ask, :answer, :points, :explanation, :template, :config_yaml, config_params: {} )
+      params.require(:question).permit(:template, :config_yaml, config_params: {} )
     end
 
 end

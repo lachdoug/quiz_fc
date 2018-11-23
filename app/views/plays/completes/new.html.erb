@@ -1,8 +1,8 @@
-<%= link_to fa("arrow-up"), plays_path( quiz_id: @play.quiz_id ), class: "btn btn-outline-primary float-right" %>
+<%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
 
 <h2>Quiz <%= @play.quiz_id %> complete</h2>
 <hr>
-<h3>Click OK to submit this quiz for scoring</h3>
+<h4>Click OK to submit this quiz for scoring. This will cost you <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You will then be in the running to win the prize.</h4>
 <p>
   <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
 </p>
@@ -15,7 +15,7 @@
         <% answer = @play.answer_for question %>
         <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
       </strong>
-      <%= link_to fa("arrow-right"), play_question_path( @play, question ) %>
+      <%= link_to fa("arrow-right"), member_play_question_path( @member, @play, question ) %>
     </li>
   <% end %>
 </ol>
@@ -25,10 +25,10 @@
 <div class="clearfix">
   <% if @play.last_question %>
     <%= link_to fa("arrow-left") + " Previous",
-    play_question_path( @play, @play.last_question ), class: "btn btn-outline-primary float-left" %>
+    member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary float-left" %>
   <% end %>
   <% if @play.questions.any? %>
-    <%= button_to play_complete_path( @play ), class: "btn btn-outline-primary float-right" do %>
+    <%= button_to member_play_complete_path( @member, @play ), class: "btn btn-outline-primary float-right" do %>
       <%= fa("check") + " OK" %>
     <% end %>
   <% end %>

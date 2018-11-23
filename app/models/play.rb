@@ -1,14 +1,14 @@
 class Play < ApplicationRecord
 
   belongs_to :quiz
-  belongs_to :profile
+  belongs_to :member
 
   has_many :questions, -> { order( Arel.sql('number') ) }, through: :quiz
 
   serialize :answers, Array
   serialize :points, Array
 
-  enum status: [ :playing, :played, :scored ]
+  enum status: [ :playing, :complete, :scored, :archived ]
 
   def calculate_score
     question_points.tap do |points|
@@ -53,6 +53,14 @@ class Play < ApplicationRecord
 
   def last_question
     find_question_by_number( questions.count )
+  end
+
+  def completion
+    playing? && complete! && transact
+  end
+
+  def transact
+    Transactor.new( account_id: member.account_id, amount: -quiz.fee, params: { play_id: id } ).process
   end
 
 end

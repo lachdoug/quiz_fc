@@ -1,0 +1,7 @@
+i.quiz-status-icon.draft { color: #007bff; }
+i.quiz-status-icon.live.waiting { color: #17a2b8; }
+i.quiz-status-icon.live.current { color: #28a745; }
+i.quiz-status-icon.live.pending { color: #007bff; }
+i.quiz-status-icon.live.results { color: #ffc107; }
+i.quiz-status-icon.live.complete { color: #dc3545; }
+i.quiz-status-icon.archived { color: grey; }

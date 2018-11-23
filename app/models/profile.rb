@@ -1,10 +1,25 @@
 class Profile < ApplicationRecord
 
-  has_many :plays
-  has_many :quizzes, through: :plays
+  has_many :members
+  has_many :leagues, through: :members
+  has_many :quizzes
+
+  belongs_to :user
+
+  def to_s
+    user.email
+  end
 
   def self.for( current_user )
-    current_user.profile || create( user_id: current_user.id )
+    current_user.profile || create_profile( current_user )
+  end
+
+  def self.create_profile( current_user )
+    create( user_id: current_user.id )
+  end
+
+  def membership
+    members.first || members.create( league_id: 1 )
   end
 
   def played_quizzes

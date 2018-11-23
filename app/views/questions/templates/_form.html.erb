@@ -3,7 +3,7 @@
   <div class="form-group form-group-narrow">
     <%= form.label :template %>
     <%= form.select :template,
-    Question.templates.map { |k,v| [ k.humanize, k ] },
+    Question.templates.map { |t| [ t.to_s.humanize, t ] },
     {},
     class: "form-control" %>
   </div>

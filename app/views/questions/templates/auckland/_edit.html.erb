@@ -1,4 +1,5 @@
 <% config = form.object.config || {} %>
+<% options = config["options"] || [] %>
 
 <script>
 
@@ -61,22 +62,32 @@
 
 <div class="form-group">
   <%= form.label 'question[config_params][preamble]', "Preamble" %>
-  <%= text_area_tag 'question[config_params][preamble]', config["preamble"], class: "form-control" %>
+  <%= text_area_tag 'question[config_params][preamble]',
+  config["preamble"], class: "form-control",
+  disabled: @question.final_edit? %>
 </div>
 
 <%= form.label 'question[config_params][left_box]', "Body" %>
 <div class="row">
   <div class="col form-group">
-    <%= text_area_tag 'question[config_params][left_box]', config["left_box"], class: "form-control" %>
-    <% #= number_tag 'question[config_params][left_box]', config["left_box"], class: "form-control" %>
+    <%= text_area_tag 'question[config_params][left_box]',
+    config["left_box"],
+    class: "form-control",
+    disabled: @question.final_edit? %>
   </div>
 
   <div class="col form-group">
-    <%= text_area_tag 'question[config_params][centre_box]', config["centre_box"], class: "form-control" %>
+    <%= text_area_tag 'question[config_params][centre_box]',
+    config["centre_box"],
+    class: "form-control",
+    disabled: @question.final_edit? %>
   </div>
 
   <div class="col form-group">
-    <%= text_area_tag 'question[config_params][right_box]', config["right_box"], class: "form-control" %>
+    <%= text_area_tag 'question[config_params][right_box]',
+    config["right_box"],
+    class: "form-control",
+    disabled: @question.final_edit? %>
   </div>
 
 </div>
@@ -84,13 +95,14 @@
 
 <div class="form-group">
   <%= form.label :ask %>
-  <%= form.text_area :ask, class: "form-control" %>
+  <%= text_area_tag 'question[config_params][ask]',
+    config["ask"],
+    class: "form-control",
+    disabled: @question.final_edit? %>
 </div>
 
 <% #= hidden_field_tag 'question[config_params][form_type]', "buttons" %>
 
-<% config = @question.config || {} %>
-<% options = config["options"] || [] %>
 
 <div id="aucklandEditAnswerButtons" class="row">
 
@@ -102,14 +114,17 @@
 
     <div class="col-md-3 form-group">
       <div class="input-group">
-        <%= text_field_tag 'question[config_params][options][]', option, class: "form-control" %>
+        <%= text_field_tag 'question[config_params][options][]',
+        option,
+        class: "form-control",
+        disabled: @question.final_edit? %>
         <% if i >= 4 %>
           <div class="input-group-append">
-            <button
-              class="auckland-edit-delete-button-button btn btn-outline-secondary"
-              type="button" >
+            <%= button_tag type: "button",
+            class: "auckland-edit-delete-button-button btn btn-outline-secondary",
+            disabled: @question.final_edit? do %>
               <%= fa 'times' %>
-            </button>
+            <% end %>
           </div>
         <% end %>
       </div>
@@ -124,23 +139,25 @@
     <% ( buttonCount + 1 .. 4 ).to_a.each do |option| %>
 
       <div class="col-md-3 form-group">
-        <%= text_field_tag 'question[config_params][options][]', nil, class: "form-control" %>
+        <%= text_field_tag 'question[config_params][options][]',
+        nil,
+        class: "form-control",
+        disabled: @question.final_edit? %>
       </div>
-
     <% end %>
 
   <% end %>
 
   <div class="col-md-3 form-group">
     <p>
-      <button id="aucklandEditNewButtonButton" class="btn btn-outline-dark" type="button" title="New button">
+      <%= button_tag type: "button",
+      id: "aucklandEditNewButtonButton",
+      class: "btn btn-outline-dark",
+      disabled: @question.final_edit? do %>
         <%= fa "plus" %> New button
-      </button>
+      <% end %>
     </p>
   </div>
-
-
-
 
 </div>
 
@@ -148,19 +165,22 @@
 
   <div class="col-sm-9 form-group">
     <%= form.label :answer %>
-    <%= form.text_field :answer, class: "form-control" %>
+    <%= text_field_tag 'question[config_params][answer]', config["answer"], class: "form-control" %>
   </div>
 
   <div class="col-sm-3 form-group">
     <%= form.label :points %>
-    <%= form.number_field :points, class: "form-control" %>
+    <%= number_field_tag 'question[config_params][points]',
+    config["points"],
+    class: "form-control",
+    disabled: @question.final_edit? %>
   </div>
 
 </div>
 
 <div class="form-group">
   <%= form.label :explanation %>
-  <%= form.text_area :explanation, class: "form-control" %>
+  <%= text_area_tag 'question[config_params][explanation]', config["explanation"], class: "form-control" %>
 </div>
 
 <template id="aucklandEditButtonTemplate">

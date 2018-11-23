@@ -1,11 +1,29 @@
 <% previous_question = @question.previous_question %>
 <% next_question = @question.next_question %>
 <div class="float-right">
-  <%= link_to fa("arrow-left") + " Previous", previous_question, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-right") + " Next", next_question, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-up"), @question.quiz, class: "btn btn-outline-primary" %>
+  <% if previous_question %>
+    <%= link_to fa("arrow-left") + " Previous", quizmaster_question_path( previous_question ), class: "btn btn-outline-primary" %>
+  <% else %>
+    <%= link_to fa("arrow-left") + " Previous", nil, class: "btn btn-outline-primary disabled" %>
+  <% end %>
+  <% if next_question %>
+    <%= link_to fa("arrow-right") + " Next", quizmaster_question_path( next_question ), class: "btn btn-outline-primary" %>
+  <% else %>
+    <%= link_to fa("arrow-right") + " Next", nil, class: "btn btn-outline-primary disabled" %>
+  <% end %>
+  <%= link_to fa("arrow-up"), quizmaster_quizbook_path( @question.quizbook ), class: "btn btn-outline-primary" %>
 </div>
-<h2><%= @question.quiz.to_s :short %> <%= @question %></h2>
+
+<h2><%= @question %></h2>
+<h4><%= quizbook_status_badge @question.quizbook %></h4>
+
+<p class="float-right">
+  <strong>ID</strong> <%= @question.id %>
+</p>
+
+<p>
+  <strong>Quizbook</strong> <%= @question.quizbook %>
+</p>
 
 <p>
   <strong>Template</strong>
@@ -15,19 +33,13 @@
 <p>
   <strong>Ask</strong>
   <%= strip_tags( markdown @question.ask ) %>
-</p>
-
-<p>
+  <br>
   <strong>Answer</strong>
   <%= @question.answer %>
-</p>
-
-<p>
+  <br>
   <strong>Explanation</strong>
   <%= strip_tags( markdown @question.explanation ) %>
-</p>
-
-<p>
+  <br>
   <strong>Points</strong>
   <%= @question.points %>
 </p>
@@ -35,7 +47,6 @@
 <div class="collapse" id="questionAdvancedDetailCollapse">
   <strong>Config</strong>
   <pre><%= @question.config_as_yaml %></pre>
-
   <strong>Scoring</strong>
   <pre><%= @question.scoring %></pre>
 </div>
@@ -44,8 +55,12 @@
   <%= fa "ellipsis-h" %>
 </button>
 
-<%= link_to fa("edit") + ' Edit', edit_question_path(@question), class: "btn btn-outline-primary #{ @question.quiz.queued? ? 'disabled' : '' }" %>
-<%= link_to fa("vial") + ' Test', question_test_path(@question), class: "btn btn-outline-primary" %>
+<%= link_to fa("edit") + ' Edit',
+  edit_quizmaster_question_path(@question),
+  class: "btn btn-outline-primary #{ @question.quizbook.editable? ? '' : 'disabled' }" %>
+<%= link_to fa("vial") + ' Test',
+  quizmaster_question_test_path(@question),
+  class: "btn btn-outline-primary" %>
 
 <div class="float-right">
   <div class="dropdown d-inline-block">
@@ -54,14 +69,14 @@
       <%= fa("arrows-alt-v") + " Move" %>
     </button>
     <div class="dropdown-menu" aria-labelledby="questionMoveMenu">
-      <%= button_to question_moveup_path(@question),
+      <%= button_to quizmaster_question_moveup_path(@question),
       disabled: @question.previous_question ? nil : 'disabled',
       class: "dropdown-item #{
         @question.previous_question ? '' : 'disabled'
       }" do %>
         <%= fa("arrow-up") + ' Up' %>
       <% end %>
-      <%= button_to question_movedown_path(@question),
+      <%= button_to quizmaster_question_movedown_path(@question),
       disabled: @question.next_question ? nil : 'disabled',
       class: "dropdown-item #{
         @question.next_question ? '' : 'disabled'
@@ -71,16 +86,16 @@
     </div>
   </div>
   <%= link_to fa("crop") + ' Template',
-  edit_question_template_path(@question),
+  edit_quizmaster_question_template_path(@question),
   class: "btn btn-outline-info" %>
   <%= link_to fa("trash") + ' Delete',
-  question_path(@question),
+  quizmaster_question_path(@question),
   method: :DELETE,
   data: { confirm:
     "Are you sure that you want to delete this question?"
   },
   class: "btn btn-outline-danger #{
-    @question.quiz.queued? ? 'disabled' : ''
+    @question.quizbook.draft? ? '' : 'disabled'
   }" %>
 </div>
 

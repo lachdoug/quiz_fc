@@ -1,6 +1,3 @@
 Quiz.create!([
-  {start: "2018-08-14 06:04:00", duration_value: nil, duration_units: nil, status: "queued"},
-  {start: "2018-08-15 06:04:00", duration_value: nil, duration_units: nil, status: "queued"},
-  {start: "2018-08-05 02:06:00", duration_value: nil, duration_units: nil, status: "draft"},
-  {start: "2018-08-05 02:17:00", duration_value: nil, duration_units: nil, status: "draft"}
+  {league_id: 1, quizbook_id: 1, status: "live", number: 1, fee: nil, pool: nil, start: "2018-11-22 16:32:00", stop: "2018-11-22 16:32:00", tally: "2018-11-22 16:32:00", close: "2018-11-22 16:32:00"}
 ])

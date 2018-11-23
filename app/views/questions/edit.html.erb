@@ -1,6 +1,4 @@
-<h2>
-  <%= @question.quiz.to_s :short %>
-  <%= @question %> Edit
-</h2>
+<h2>Edit <%= @question %></h2>
+<h4><%= quizbook_status_badge @question.quizbook %></h4>
 
 <%= render 'form', question: @question %>

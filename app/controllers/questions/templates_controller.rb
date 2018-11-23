@@ -10,7 +10,7 @@ module Questions
     def update
       @question = Question.find params[:question_id]
       @question.update( template: params[:question][:template] )
-      redirect_to @question, notice: "Question is now using template `#{ @question.template.humanize }`."
+      redirect_to quizmaster_question_path( @question ), notice: "Question is now using template #{ @question.template.humanize }."
     end
 
   end

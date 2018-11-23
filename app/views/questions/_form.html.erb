@@ -1,4 +1,4 @@
-<%= form_with(model: question, local: true) do |form| %>
+<%= form_with(url: quizmaster_question_path( question ), model: question, local: true) do |form| %>
 
   <%= render "/errors", object: question %>
 
@@ -7,7 +7,7 @@
   </div>
 
   <div class="form-group">
-    <%= link_to :Cancel, question_path( @question ), class: "btn btn-secondary" %>
+    <%= link_to :Cancel, quizmaster_question_path( question ), class: "btn btn-secondary" %>
     <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

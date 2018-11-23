@@ -15,7 +15,7 @@ module Questions
     def create
       respond_to do |format|
         if @question.attach( uploaded_files )
-          format.html { redirect_to @question, notice: 'File was successfully attached.' }
+          format.html { redirect_to quizmaster_question_path( @question ), notice: 'File was successfully attached.' }
           format.json { render :show, status: :ok, location: @question }
         else
           flash.now.alert = 'Failed to attach file.'

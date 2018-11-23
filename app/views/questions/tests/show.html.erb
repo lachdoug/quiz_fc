@@ -1,20 +1,32 @@
 <% previous_question = @question.previous_question %>
 <% next_question = @question.next_question %>
 <div class="float-right">
-  <%= link_to fa("arrow-left") + " Previous", previous_question ? question_test_path( previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-right") + " Next", next_question ? question_test_path( next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
-
-
-  <%= link_to fa("arrow-up"),
-  @question,
-  class: "btn btn-outline-primary" %>
+  <% if previous_question %>
+    <%= link_to fa("arrow-left") + " Previous",
+    quizmaster_question_test_path( previous_question ),
+    class: "btn btn-outline-primary" %>
+  <% else %>
+    <%= link_to fa("arrow-left") + " Previous",
+    nil,
+    class: "btn btn-outline-primary disabled" %>
+  <% end %>
+  <% if next_question %>
+    <%= link_to fa("arrow-right") + " Next",
+    quizmaster_question_test_path( next_question ),
+    class: "btn btn-outline-primary" %>
+  <% else %>
+    <%= link_to fa("arrow-right") + " Next",
+    nil,
+    class: "btn btn-outline-primary disabled" %>
+  <% end %>
+  <%= link_to fa("arrow-up"), quizmaster_question_path( @question ), class: "btn btn-outline-primary" %>
 </div>
 <h2>
-<%= fa 'vial' %> Test <%= @question.quiz.to_s :short %> <%= @question %>
+<%= fa 'vial' %> Test <%= @question %>
 </h2>
 
 <%= form_with(
-  url: session_store_path,
+  url: quizmaster_session_store_path,
   id: "questionTestMediaWidthForm",
   class: "form-inline",
   method: :PATCH,
@@ -44,4 +56,4 @@
 
 <br>
 
-<iframe src="<%= new_question_test_path( @question ) %>" id="questionTestIframe"></iframe>
+<iframe src="<%= new_quizmaster_question_test_path( @question ) %>" id="questionTestIframe"></iframe>

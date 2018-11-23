@@ -1,7 +1,11 @@
 <p>
   <strong>User</strong>
-  <%= @profile.user_id %>
+  <%= @profile.user.email %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<p>
+  <strong>Members</strong>
+  <% @profile.members.each do |member| %>
+    <%= link_to member.league.to_s, member %>
+  <% end %>
+</p>

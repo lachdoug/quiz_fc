@@ -47,6 +47,9 @@
               <% if current_admin.quizmaster? %>
                 <%= link_to fa("chess-queen") + " Quizmaster", quizmaster_path, class: "dropdown-item" %>
               <% end %>
+              <% if current_admin.comptroller? %>
+                <%= link_to fa("calculator ") + " Comptroller", comptroller_path, class: "dropdown-item" %>
+              <% end %>
               <% if current_admin.developer? %>
                 <%= link_to fa("database") + " Database", rails_admin_path, class: "dropdown-item" %>
                 <%= link_to fa("download") + " Datadump", datadump_path, target: "quizfc_admin_datadump", class: "dropdown-item" %>

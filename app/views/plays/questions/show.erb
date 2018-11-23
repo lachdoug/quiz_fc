@@ -1,6 +1,6 @@
 <%= render 'questions/partials/question',
 question: @question,
-url: play_question_path( @play, @question ),
-up: plays_path( quiz_id: @play.quiz_id ),
+url: member_play_question_path( @member, @play, @question ),
+up: member_plays_path( @member, quiz_id: @play.quiz_id ),
 method: :PATCH,
 local: true %>

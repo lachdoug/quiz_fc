@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
   def index
-    @quizzes = Quiz.all.reverse
+    @quizzes = Quiz.all
   end
 
   def show
@@ -14,23 +14,10 @@ class QuizzesController < ApplicationController
   def edit
   end
 
-  def create
-    @quiz = Quiz.new()
-    respond_to do |format|
-      if @quiz.save
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-        format.json { render :show, status: :created, location: @quiz }
-      else
-        format.html { render :new }
-        format.json { render json: @quiz.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def update
     respond_to do |format|
       if @quiz.update(quiz_params)
-        format.html { redirect_to @quiz, notice: 'Quiz was successfully updated.' }
+        format.html { redirect_to quizmaster_quiz_path( @quiz ), notice: 'Quiz was successfully updated.' }
         format.json { render :show, status: :ok, location: @quiz }
       else
         format.html { render :edit }
@@ -40,10 +27,15 @@ class QuizzesController < ApplicationController
   end
 
   def destroy
-    @quiz.destroy
     respond_to do |format|
-      format.html { redirect_to quizmaster_path, notice: 'Quiz was successfully destroyed.' }
-      format.json { head :no_content }
+      if @quiz.destroy
+        format.html { redirect_to quizmaster_path, notice: 'Quiz was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to quizmaster_quiz_path( @quiz ),
+          alert: @quiz.errors.full_messages.join( '<br>'.html_safe ) }
+        format.json { render json: @quiz.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -54,7 +46,13 @@ class QuizzesController < ApplicationController
     end
 
     def quiz_params
-      params.require(:quiz).permit( :start_date, :start_time, :duration_value, :duration_units )
+      params.require(:quiz).permit(
+        :fee, :pool,
+        :start_date, :start_time,
+        :stop_date, :stop_time,
+        :tally_date, :tally_time,
+        :close_date, :close_time,
+      )
     end
 
 end

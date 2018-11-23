@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_050415) do
+ActiveRecord::Schema.define(version: 2018_11_22_182345) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "accountable_id"
+    t.string "accountable_type"
+    t.decimal "balance", precision: 12, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,54 +49,113 @@ ActiveRecord::Schema.define(version: 2018_10_30_050415) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.boolean "developer"
     t.boolean "quizmaster"
-    t.boolean "controller"
+    t.boolean "comptroller"
     t.boolean "auditor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
+  end
+
+  create_table "leagues", force: :cascade do |t|
+    t.string "name"
+    t.string "currency"
+    t.string "timezone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [nil], name: "index_leagues_on_account_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "profile_id"
+    t.string "league_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_members_on_league_id"
+    t.index ["profile_id"], name: "index_members_on_profile_id"
+    t.index [nil], name: "index_members_on_account_id"
   end
 
   create_table "plays", force: :cascade do |t|
     t.integer "quiz_id"
-    t.integer "profile_id"
+    t.integer "member_id"
+    t.integer "status", default: 0
     t.text "answers"
-    t.text "points"
-    t.integer "score"
+    t.text "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
+    t.index ["member_id"], name: "index_plays_on_member_id"
+    t.index ["quiz_id"], name: "index_plays_on_quiz_id"
+    t.index ["status"], name: "index_plays_on_status"
   end
 
   create_table "profiles", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.integer "quiz_id", null: false
+    t.integer "quizbook_id", null: false
     t.integer "number"
-    t.text "ask"
-    t.text "answer"
-    t.integer "points", default: 1
-    t.integer "template", default: 0
+    t.string "template"
     t.text "config"
-    t.text "scoring"
+    t.text "ask"
+    t.string "answer"
     t.text "explanation"
+    t.integer "points"
+    t.text "scoring"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
+    t.index ["number"], name: "index_questions_on_number"
+    t.index ["quizbook_id"], name: "index_questions_on_quizbook_id"
   end
 
-  create_table "quizzes", force: :cascade do |t|
-    t.datetime "start"
-    t.integer "duration_value"
-    t.integer "duration_units"
+  create_table "quizbooks", force: :cascade do |t|
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_quizbooks_on_status"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "league_id"
+    t.integer "quizbook_id"
+    t.integer "status", default: 0
+    t.integer "number"
+    t.integer "fee"
+    t.integer "pool"
+    t.datetime "start"
+    t.datetime "stop"
+    t.datetime "tally"
+    t.datetime "close"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["close"], name: "index_quizzes_on_close"
+    t.index ["league_id"], name: "index_quizzes_on_league_id"
+    t.index ["number"], name: "index_quizzes_on_number"
+    t.index ["quizbook_id"], name: "index_quizzes_on_quizbook_id"
+    t.index ["start"], name: "index_quizzes_on_start"
+    t.index ["status"], name: "index_quizzes_on_status"
+    t.index ["stop"], name: "index_quizzes_on_stop"
+    t.index ["tally"], name: "index_quizzes_on_tally"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "account_id"
+    t.decimal "amount", precision: 8, scale: 2
+    t.integer "code"
+    t.string "params"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|

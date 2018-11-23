@@ -1,0 +1,36 @@
+<% correct_answer = question.answer %>
+<% points_available = question.points %>
+
+<% if points_scored.present? %>
+  <% if points_scored == points_available %>
+    <div class="alert alert-success">
+      <h5>
+        Your answer <strong><%= answer_attempt %></strong> <%= fa "check" %>
+        <small><%= pluralize( points_scored, "point" ) %></small>
+      </h5>
+    </div>
+  <% elsif points_scored > 0 %>
+    <div class="alert alert-info">
+      <h5>
+        Your answer <strong><%= answer_attempt %></strong> <%= fa "star-half-alt" %>
+        <small><%= pluralize( points_scored, "point" ) %></small>
+      </h5>
+      <h5>Correct answer <strong><%= correct_answer %></strong> <small><%= pluralize points_available, "point" %></small></h5>
+    </div>
+  <% else %>
+    <div class="alert alert-warning">
+      <h5>
+        Your answer <strong><%= answer_attempt %></strong> <%= fa "times" %>
+        <small><%= pluralize( points_scored, "point" ) %></small>
+      </h5>
+      <h5>Correct answer <strong><%= correct_answer %></strong> <small><%= pluralize points_available, "point" %></small></h5>
+    </div>
+  <% end %>
+  <%= markdown( question.explanation ) %>
+<% else %>
+  <div class="alert alert-info">
+    <h5>
+      Your answer <strong><%= answer_attempt %></strong>
+    </h5>
+  </div>
+<% end %>

@@ -1,0 +1,3 @@
+Quizbook.create!([
+  {status: "ready"}
+])

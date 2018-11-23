@@ -1,11 +1,11 @@
-<%= link_to fa("paperclip") + " Attach", new_question_file_path( question ), class: "btn btn-outline-primary float-right" %>
+<%= link_to fa("paperclip") + " Attach", new_quizmaster_question_file_path( question ), class: "btn btn-outline-primary float-right" %>
 <h6><strong>Files</strong></h6>
 <% if @question.files.any? %>
   <ol>
     <% @question.files.each do |file| %>
       <li>
         <% file_type = file.image? ? "Image" : file.video? ? "Video" : file.audio? ? "Audio" : "File of unknown type" %>
-        <%= link_to file_type, question_file_path( @question, file ) %>
+        <%= link_to file_type, quizmaster_question_file_path( @question, file ) %>
       </li>
     <% end %>
   </ol>
