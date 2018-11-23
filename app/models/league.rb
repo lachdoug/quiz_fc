@@ -20,7 +20,7 @@ class League < ApplicationRecord
   end
 
   def to_s
-    name
+    "League #{name}"
   end
 
   def live_quizzes

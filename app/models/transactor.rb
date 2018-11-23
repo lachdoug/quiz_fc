@@ -15,13 +15,11 @@ class Transactor < ApplicationForm
   end
 
   def member_transaction
-    member_account.transact( amount.to_f, params: @params, comment: @comment )
+    member_account.transact!( amount.to_f, params: @params, comment: @comment )
   end
 
   def house_transaction
-    house_account.transact( -amount.to_f, params: @params, comment: @comment )
+    house_account.transact!( -amount.to_f, params: @params, comment: @comment )
   end
-
-
 
 end

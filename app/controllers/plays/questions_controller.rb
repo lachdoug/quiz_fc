@@ -18,13 +18,17 @@ module Plays
     end
 
     def update
-      @question = @play.questions.find params[:id]
-      @play.give_answer @question.number, ( params[:answer] || [] )
-      @next_question = @question.next_question
-      if @next_question
-        redirect_to member_play_question_path( @member, @play, @next_question )
+      if @play.quiz.playable?
+        @question = @play.questions.find params[:id]
+        @play.give_answer @question.number, ( params[:answer] || [] )
+        @next_question = @question.next_question
+        if @next_question
+          redirect_to member_play_question_path( @member, @play, @next_question )
+        else
+          redirect_to new_member_play_complete_path( @member, @play )
+        end
       else
-        redirect_to new_member_play_complete_path( @member, @play )
+        redirect_to new_member_play_complete_path( @member, @play ), alert: "Out of time. No longer accpeting answers for this quiz."
       end
     end
 

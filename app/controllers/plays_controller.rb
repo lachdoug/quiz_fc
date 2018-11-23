@@ -16,12 +16,17 @@ class PlaysController < ApplicationController
   end
 
   def create
-    @play = @member.plays.create(
-              member_id: @member.id,
-              quiz_id: params[:quiz_id] )
-    respond_to do |format|
-      format.html { redirect_to new_member_play_question_path( @member, @play ) }
-      format.json { render :show, status: :created, location: @play }
+    @quiz = @member.quizzes.find( params[:quiz_id] )
+    if @quiz.playable?
+      @play = @member.plays.create(
+                member_id: @member.id,
+                quiz_id: params[:quiz_id] )
+      respond_to do |format|
+        format.html { redirect_to new_member_play_question_path( @member, @play ) }
+        format.json { render :show, status: :created, location: @play }
+      end
+    else
+      redirect_to member_path( @member ), alert: "Out of time. This quiz is no longer playable."
     end
   end
 

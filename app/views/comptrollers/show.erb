@@ -9,8 +9,10 @@
   <div class="float-right">
     <%= link_to fa("money-bill-alt ") + " Transact", new_comptroller_transactor_path( league_id: league.id ), class: "btn btn-outline-primary" %>
   </div>
-  <h3><%= league %></h3>
-  <strong>Balance</strong> <%= league.account.balance %>
-  <%= link_to fa("arrow-right"), comptroller_account_path( league.account ) %>
+  <h3>
+    <%= league %>
+    <small><%= link_to fa("arrow-right"), comptroller_account_path( league.account ) %></small>
+  </h3>
+  <strong>Balance</strong> <%= number_with_precision league.account.balance, precision: 2 %>
   <br>
 <% end %>

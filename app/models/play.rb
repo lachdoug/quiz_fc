@@ -56,7 +56,7 @@ class Play < ApplicationRecord
   end
 
   def completion
-    playing? && complete! && transact
+    playing? && transact && complete!
   end
 
   def transact

@@ -1,6 +1,6 @@
 <h2>Transact</h2>
 
-<%= form_with(model: @transactor, url: comptroller_transactor_path, local: true) do |form| %>
+<%= form_with(model: @transactor, url: comptroller_transactor_path( league_id: @league.id ), local: true) do |form| %>
 
   <%= render "/errors", object: @transactor %>
 
@@ -10,7 +10,8 @@
     options_for_select(
       @league.members.map do |member|
         [ "#{ member.profile.user.email } - #{ member.account } (#{ number_with_precision( member.account.balance, precision: 2 ) })", member.account.id ]
-      end
+      end,
+      selected: @transactor.account_id
     ), { include_blank: true }, class: "form-control" %>
   </div>
 

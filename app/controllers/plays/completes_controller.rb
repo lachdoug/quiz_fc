@@ -8,8 +8,12 @@ module Plays
     end
 
     def create
-      @play.completion
-      redirect_to member_play_complete_path( @member, @play )
+      if @play.quiz.completable?
+        @play.completion
+        redirect_to member_play_complete_path( @member, @play ), notice: "Quiz has been submitted for scoring."
+      else
+        redirect_to member_play_complete_path( @member, @play ), alert: "Out of time. No longer accepting sumbissions for this quiz."
+      end
     end
 
     def show

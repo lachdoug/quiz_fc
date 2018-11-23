@@ -7,7 +7,7 @@ class Member < ApplicationRecord
   has_many :quizzes, through: :league
 
   def to_s
-    "#{ league } member #{ id } #{ profile }"
+    "Member #{ league }/#{ id } (#{ profile })"
   end
 
 

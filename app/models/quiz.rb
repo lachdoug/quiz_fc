@@ -18,7 +18,7 @@ class Quiz < ApplicationRecord
   end
 
   def stage
-    if draft? || archived?
+    @stage ||= if draft? || archived?
       nil
     elsif now < start
       :waiting
@@ -31,6 +31,14 @@ class Quiz < ApplicationRecord
     else
       :complete
     end
+  end
+
+  def playable?
+    stage == :current
+  end
+
+  def completable?
+    stage == :pending
   end
 
   def now

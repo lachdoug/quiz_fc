@@ -9,6 +9,8 @@
   <% if false %>
   <strong>Quiz</strong> <%= @play.quiz.formatted_start %><br>
   <% end %>
+  <strong>Status</strong> <%= quiz_status_badge @play.quiz %>
+  <br>
   <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
 </p>
 
