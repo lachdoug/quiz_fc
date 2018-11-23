@@ -1,35 +1,55 @@
+<p class="pull-left">
+  <strong>Member number</strong> <%= @member.id %>
+</p>
 <h2><%= @member.league.name %></h2>
 
 <p>
-  <strong>Member number</strong> <%= @member.id %>
+  <strong>Balance</strong>
+  <%= number_with_precision( @member.account.balance, precision: 2 ) %>
 </p>
 
 
-  <% @member.quizzes.each do |quiz| %>
-    <h3><%= quiz %></h3>
-    <p>
-      <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
-        <%= fa("futbol") %> Play
-      <% end %>
-    </p>
-  <% end %>
-
-
-  <% @member.plays.each do |play| %>
-    <h3><%= play.quiz %> - <%= time_ago_in_words play.created_at %> ago</h3>
-    <p>
-      <% if play.playing? %>
-        <%= link_to new_member_play_question_path( @member, play ), class: "btn btn-outline-primary" do %>
-          <%= fa("futbol") %> Resume
-        <% end %>
-      <% elsif play.complete? %>
-        <%= link_to member_play_complete_path( @member, play ), class: "btn btn-outline-primary" do %>
-          <%= fa("futbol") %> Complete
-        <% end %>
-      <% else %>
-        <%= link_to member_play_result_path( @member, play ), class: "btn btn-outline-primary" do %>
-          <%= fa("futbol") %> Result
+<% @member.live_quizzes.each do |quiz| %>
+  <div>
+    <h1 class="d-inline-block align-middle">
+      <%= quiz %>
+      <small>
+        <%= quiz_stage_badge quiz %>
+      </small>
+    </h1>
+    <div class="btn-group">
+      <% if quiz.playable? %>
+        <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
+          <%= fa("futbol") %> Play
         <% end %>
       <% end %>
-    </p>
-  <% end %>
+    </div>
+  </div>
+<% end %>
+
+<hr>
+
+<% @member.plays.each do |play| %>
+  <div>
+    <h1 class="d-inline-block align-middle">
+      <%= play.quiz %>
+      <small>
+        <%= quiz_stage_badge play.quiz %>
+      </small>
+    </h1>
+    <% if play.playing? %>
+      <%= link_to new_member_play_question_path( @member, play ), class: "btn btn-outline-primary" do %>
+        <%= fa("futbol") %> Resume
+      <% end %>
+    <% elsif play.complete? %>
+      <%= link_to member_play_complete_path( @member, play ), class: "btn btn-outline-primary" do %>
+        <%= fa("futbol") %> Complete
+      <% end %>
+    <% else %>
+      <%= link_to member_play_result_path( @member, play ), class: "btn btn-outline-primary" do %>
+        <%= fa("futbol") %> Result
+      <% end %>
+    <% end %>
+    <strong>Started</strong> <%= time_ago_in_words play.created_at %> ago
+  </div>
+<% end %>

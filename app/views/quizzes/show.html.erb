@@ -80,9 +80,31 @@
       data: { confirm: "Are you sure that you want to abort this quiz?" } do %>
         <%= fa("bomb") + ' Abort' %>
       <% end %>
+      <% if @quiz.stage == :complete %>
+        <%= link_to quizmaster_quiz_status_path( @quiz, status: :archived ),
+        method: :patch,
+        class: "btn btn-outline-secondary",
+        data: { confirm: "Are you sure that you want to archive this quiz?" } do %>
+          <%= fa("file-archive") + ' Archive' %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
+
+<% if @quiz.archived? %>
+  <div class="float-right">
+    <div class="btn-group">
+      <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),
+      method: :patch,
+      class: "btn btn-outline-secondary",
+      data: { confirm: "Are you sure that you want to redraft this quiz?" } do %>
+        <%= fa("file") + ' Redraft' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
 
 
 

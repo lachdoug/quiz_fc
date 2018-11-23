@@ -26,7 +26,7 @@ class PlaysController < ApplicationController
         format.json { render :show, status: :created, location: @play }
       end
     else
-      redirect_to member_path( @member ), alert: "Out of time. This quiz is no longer playable."
+      redirect_to member_path( @member ), alert: "Failed to start quiz. This quiz is not playable."
     end
   end
 

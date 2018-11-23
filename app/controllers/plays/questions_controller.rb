@@ -28,7 +28,7 @@ module Plays
           redirect_to new_member_play_complete_path( @member, @play )
         end
       else
-        redirect_to new_member_play_complete_path( @member, @play ), alert: "Out of time. No longer accpeting answers for this quiz."
+        redirect_to new_member_play_complete_path( @member, @play ), alert: "Failed to submit answer."
       end
     end
 

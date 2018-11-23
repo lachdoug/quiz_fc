@@ -1,11 +1,9 @@
 <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
 
-<% affordable = @member.account.balance >= @play.quiz.fee %>
-
 <h2>Quiz <%= @play.quiz_id %> complete</h2>
 <hr>
 
-<% if affordable %>
+<% if @play.affordable? %>
   <h4>Click OK to submit this quiz for scoring. This will cost you <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You will then be in the running to win a prize.</h4>
 <% else %>
   <h4>To fee to submit this quiz for scoring is <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You do not have enough and will need to add money to your account.</h4>
@@ -35,7 +33,7 @@
     <%= link_to fa("arrow-left") + " Previous",
     member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary float-left" %>
   <% end %>
-  <% if @play.questions.any? %>
+  <% if @play.questions.any? && @play.affordable? %>
     <%= button_to member_play_complete_path( @member, @play ), class: "btn btn-outline-primary float-right" do %>
       <%= fa("check") + " OK" %>
     <% end %>

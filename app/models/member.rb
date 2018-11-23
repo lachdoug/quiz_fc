@@ -10,6 +10,9 @@ class Member < ApplicationRecord
     "Member #{ league }/#{ id } (#{ profile })"
   end
 
+  def live_quizzes
+    quizzes.where( status: 1 )
+  end
 
   def account
     super || create_account

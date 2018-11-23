@@ -64,11 +64,11 @@
 <% end %>
 <% if @quizbook.archived? %>
   <div class="float-right">
-    <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :finalised ),
+    <%= link_to quizmaster_quizbook_status_path( @quizbook, status: :draft ),
     method: :patch,
     class: "btn btn-outline-secondary",
-    data: { confirm: "Are you sure that you want to republish this quizbook?" } do %>
-      <%= fa("file-upload") + ' Republish' %>
+    data: { confirm: "Are you sure that you want to redraft this quizbook?" } do %>
+      <%= fa("file") + ' Redraft' %>
     <% end %>
   </div>
 <% end %>

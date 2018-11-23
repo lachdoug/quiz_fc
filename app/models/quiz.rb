@@ -38,7 +38,7 @@ class Quiz < ApplicationRecord
   end
 
   def completable?
-    stage == :pending
+    playable? || stage == :pending
   end
 
   def now
