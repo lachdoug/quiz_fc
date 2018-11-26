@@ -28,7 +28,7 @@ module Questions
     def destroy
       @file = @question.files.find params[:id]
       @file.purge
-      redirect_to @question
+      redirect_to quizmaster_question_path( @question )
     end
 
     private

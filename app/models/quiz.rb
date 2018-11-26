@@ -64,11 +64,13 @@ class Quiz < ApplicationRecord
   end
 
   def destroy
-    if draft?
-      super
-    else
+    if plays.any?
+      errors.add(:base, "Failed to delete. You can't delete quizzes that have been played.")
+    elsif !draft?
       errors.add(:base, "Failed to delete. You can delete draft quizzes only.")
       return false
+    else
+      super
     end
   end
 
