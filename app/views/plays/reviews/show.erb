@@ -1,8 +1,8 @@
 <% previous_question = @question.previous_question %>
 <% next_question = @question.next_question %>
 <div class="float-right">
-  <%= link_to fa("arrow-left") + " Previous", previous_question ? play_question_review_path( @play, previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
-  <%= link_to fa("arrow-right") + " Next", next_question ? play_question_review_path( @play, next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-left") + " Previous", previous_question ? member_play_question_review_path( @member, @play, previous_question ) : nil, class: "btn btn-outline-primary #{ previous_question ? "" : "disabled" }" %>
+  <%= link_to fa("arrow-right") + " Next", next_question ? member_play_question_review_path( @member, @play, next_question ) : nil, class: "btn btn-outline-primary #{ next_question ? "" : "disabled" }" %>
   <%= link_to fa("arrow-up"), member_play_path( @member, @play ), class: "btn btn-outline-primary" %>
 </div>
 

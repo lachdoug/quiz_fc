@@ -1,37 +1,37 @@
 <%= link_to fa("arrow-up"), user_root_path(), class: "btn btn-outline-primary float-right" %>
 
-<h2>Quiz <%= @quiz.id %></h2>
-<hr>
-
-<% if false %>
-<p>
-  <strong>Start</strong>
-  <%= @quiz.formatted_start %>
-</p>
-<% end %>
-
-<p>
-  <%= button_to plays_path, params: { quiz_id: params[:quiz_id] }, method: :POST, class: "btn btn-outline-primary" do %>
-    <%= fa("futbol") %> Play <%= @plays.any? ? "again" : "" %>
-  <% end %>
-</p>
+<h2>Play history</h2>
 
 <% if @plays.any? %>
   <table class="table table-hover">
     <tr>
+      <th></th>
+      <th>Quiz</th>
+      <th>Play</th>
       <th>Started</th>
-      <th>Score</th>
+      <th>Result</th>
       <th></th>
     </tr>
     <% @plays.each do |play| %>
       <tr>
-        <td><%= time_ago_in_words play.created_at %> ago</td>
-        <td><%= play.score %></td>
         <td>
-          <% if play.score %>
-            <%= link_to fa("arrow-right"), play_result_path( play ), class: "float-right" %>
+          <%= play.quiz %>
+        </td>
+        <td>
+          <%= quiz_status_badge play.quiz %>
+        </td>
+        <td>
+          <%= play_status_badge play %>
+        </td>
+        <td><%= time_ago_in_words play.created_at, vague: true %> ago</td>
+        <td><%= "Score #{ play.result[:score] } ( rank #{ play.result[:rank] } of #{ play.result[:total_plays] } )" if play.result %></td>
+        <td>
+          <% if play.playing? %>
+            <%= link_to fa("arrow-right"), new_member_play_question_path( @member, play ), class: "btn btn-link" %>
+          <% elsif play.complete? %>
+            <%= link_to fa("arrow-right"), member_play_complete_path( @member, play ), class: "btn btn-link" %>
           <% else %>
-            <%= link_to "Resume play ".html_safe + fa("play"), new_play_question_path( play ), class: "float-right" %>
+            <%= link_to fa("arrow-right"), member_play_result_path( @member, play ), class: "btn btn-link" %>
           <% end %>
         </td>
 

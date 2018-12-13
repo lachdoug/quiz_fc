@@ -7,8 +7,9 @@ class Quiz < ApplicationRecord
 
   enum status: [ :draft, :live, :archived ]
 
+
   before_validation( on: :create ) do
-    self.number = league.next_quiz_number
+    assign_attributes( league.next_quiz_defaults )
   end
 
   validate :has_all_datetimes
@@ -29,7 +30,7 @@ class Quiz < ApplicationRecord
     elsif now < close
       :results
     else
-      :complete
+      :closed
     end
   end
 
@@ -37,16 +38,44 @@ class Quiz < ApplicationRecord
     stage == :current
   end
 
+  def up?
+    playable? || stage == :waiting
+  end
+
   def completable?
     playable? || stage == :pending
+  end
+
+  def tallyable?
+    stage == :pending || stage == :results
   end
 
   def now
     @now ||= Time.now.utc
   end
 
-  def recalculate!
-    plays.each &:calculate_score
+  def perform_tally!
+    tallyable? && plays.each( &:calculate_score! ) && rank_plays!
+  end
+
+  def rank_plays!
+    ranked_plays = scored_plays.sort_by do |play|
+      play.result[:score]
+    end.reverse
+    total = ranked_plays.count
+    last_rank = nil
+    last_score = nil
+    ranked_plays.each.with_index do |play, i|
+      this_rank = i + 1
+      this_score = play.result[:score]
+      if this_score === last_score
+        play.update_rank!( last_rank, total )
+      else
+        play.update_rank!( this_rank, total )
+        last_rank = this_rank
+        last_score = this_score
+      end
+    end
   end
 
   def self.next
@@ -74,13 +103,33 @@ class Quiz < ApplicationRecord
     end
   end
 
-  def fee
-    super || 1
+  def start_local
+    start.in_time_zone league.timezone
   end
 
-  def pool
-    super || 50
+  def stop_local
+    stop.in_time_zone league.timezone
   end
+
+  def tally_local
+    tally.in_time_zone league.timezone
+  end
+
+  def close_local
+    close.in_time_zone league.timezone
+  end
+
+  def scored_plays
+    plays.where status: :scored
+  end
+
+  # def fee
+  #   super || 1
+  # end
+  #
+  # def pool
+  #   super || 50
+  # end
 
 
   private

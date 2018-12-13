@@ -1,7 +1,11 @@
 class PlaysController < ApplicationController
 
-  before_action :set_member, only: [:show, :create]
+  before_action :set_member, only: [:index, :show, :create]
   before_action :set_play, only: [:show]
+
+  def index
+    @plays = @member.plays
+  end
 
   def show
     if @play.playing?

@@ -11,7 +11,7 @@
   <% end %>
   <strong>Status</strong> <%= quiz_status_badge @play.quiz %>
   <br>
-  <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
+  <strong>Started</strong> <%= time_ago_in_words @play.created_at, vague: true %> ago
 </p>
 
 <ol>

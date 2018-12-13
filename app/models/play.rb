@@ -6,16 +6,27 @@ class Play < ApplicationRecord
   has_many :questions, -> { order( Arel.sql('number') ) }, through: :quiz
 
   serialize :answers, Array
-  serialize :points, Array
+  # serialize :points, Array
+  serialize :result
 
-  enum status: [ :playing, :complete, :scored, :archived ]
+  enum status: [ :playing, :complete, :scored ]
 
-  def calculate_score
+  def calculate_score!
     question_points.tap do |points|
       points.sum.tap do |score|
-        update points: points, score: score
+        update result: { points: points, score: score }
       end
     end
+    scored!
+  end
+
+  def update_rank!( rank, total )
+    update result: {
+      points: result[:points],
+      score: result[:score],
+      rank: rank,
+      total_plays: total
+    }
   end
 
   def question_points
@@ -23,8 +34,10 @@ class Play < ApplicationRecord
   end
 
   def give_answer( number, answer )
-    answers[ number - 1 ] = answer
-    save
+    quiz.playable? && playing? && (
+      answers[ number - 1 ] = answer
+      save
+    )
   end
 
   def answer_for( question )
@@ -32,10 +45,11 @@ class Play < ApplicationRecord
   end
 
   def points_for( question )
-    points[ question.number - 1 ]
+    result[:points][ question.number - 1 ]
   end
 
   def calculate_score_for( question )
+    # debugger
     question.score_for answers[ question.number - 1 ]
   end
 

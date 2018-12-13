@@ -1,55 +1,72 @@
-<p class="pull-left">
-  <strong>Member number</strong> <%= @member.id %>
-</p>
-<h2><%= @member.league.name %></h2>
+<h2>
+  <%= @member %>
+</h2>
 
 <p>
   <strong>Balance</strong>
-  <%= number_with_precision( @member.account.balance, precision: 2 ) %>
+  <%= number_to_currency( @member.account.balance, unit: "Q$" ) %>
+  <%= link_to fa("wallet"), member_account_path( @member ), class: "btn-link" %><br>
+  <strong>Quizzes played</strong>
+  <%= @member.plays.count %>
+  <%= link_to fa("history"), member_plays_path( @member ), class: "btn-link" %>
 </p>
 
+<h3>Currently playing</h3>
 
-<% @member.live_quizzes.each do |quiz| %>
-  <div>
+<% @member.live_plays.each do |play| %>
+  <p>
     <h1 class="d-inline-block align-middle">
-      <%= quiz %>
       <small>
-        <%= quiz_stage_badge quiz %>
+        <%= quiz_stage_icon play.quiz %>
       </small>
-    </h1>
-    <div class="btn-group">
-      <% if quiz.playable? %>
-        <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
-          <%= fa("futbol") %> Play
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<hr>
-
-<% @member.plays.each do |play| %>
-  <div>
-    <h1 class="d-inline-block align-middle">
       <%= play.quiz %>
-      <small>
-        <%= quiz_stage_badge play.quiz %>
-      </small>
     </h1>
     <% if play.playing? %>
-      <%= link_to new_member_play_question_path( @member, play ), class: "btn btn-outline-primary" do %>
-        <%= fa("futbol") %> Resume
-      <% end %>
+      <%= link_to fa("arrow-right"), new_member_play_question_path( @member, play ), class: "btn btn-link" %>
     <% elsif play.complete? %>
-      <%= link_to member_play_complete_path( @member, play ), class: "btn btn-outline-primary" do %>
-        <%= fa("futbol") %> Complete
-      <% end %>
+      <%= link_to fa("arrow-right"), member_play_complete_path( @member, play ), class: "btn btn-link" %>
     <% else %>
-      <%= link_to member_play_result_path( @member, play ), class: "btn btn-outline-primary" do %>
-        <%= fa("futbol") %> Result
-      <% end %>
+      <%= link_to fa("arrow-right"), member_play_result_path( @member, play ), class: "btn btn-link" %>
     <% end %>
-    <strong>Started</strong> <%= time_ago_in_words play.created_at %> ago
+  </p>
+<% end %>
+
+
+<h3>Upcoming quizzes</h3>
+<% @member.live_quizzes.each do |quiz| %>
+  <% if quiz.up? %>
+    <p>
+      <h1 class="d-inline-block align-middle">
+        <small>
+          <%= quiz_stage_icon quiz %>
+        </small>
+        <%= quiz %>
+      </h1>
+      <div class="btn-group">
+        <% if quiz.playable? %>
+          <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
+            <%= fa("futbol") %> Play
+          <% end %>
+        <% end %>
+      </div>
+    </p>
+  <% end %>
+<% end %>
+
+
+<h3>News</h3>
+
+
+<% @member.league.posts.each do |post| %>
+
+<p>
+  <div class="card">
+    <div class="card-body">
+      <div class="float-right"><small><%= time_ago_in_words post.created_at, vague: true %> ago</small></div>
+      <h3><%= post.title %></h3>
+      <hr>
+      <p><%= markdown( post.body ) %></p>
+    </div>
   </div>
+</p>
 <% end %>

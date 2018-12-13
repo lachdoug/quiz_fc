@@ -18,9 +18,8 @@ module Plays
     end
 
     def update
-      if @play.quiz.playable?
-        @question = @play.questions.find params[:id]
-        @play.give_answer @question.number, ( params[:answer] || [] )
+      @question = @play.questions.find params[:id]
+      if @play.give_answer @question.number, ( params[:answer] || [] )
         @next_question = @question.next_question
         if @next_question
           redirect_to member_play_question_path( @member, @play, @next_question )
@@ -28,7 +27,7 @@ module Plays
           redirect_to new_member_play_complete_path( @member, @play )
         end
       else
-        redirect_to new_member_play_complete_path( @member, @play ), alert: "Failed to submit answer."
+        redirect_to member_path( @member ), alert: "Failed to submit answer."
       end
     end
 

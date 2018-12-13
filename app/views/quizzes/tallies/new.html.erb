@@ -1,0 +1,17 @@
+<h2>
+  Tally <%= @quiz %>
+</h2>
+
+<p>
+  <strong>Total plays</strong> <%= @quiz.plays.count %><br>
+  <strong>Scored plays</strong> <%= @quiz.scored_plays.count %><br>
+</p>
+
+<%= button_to quizmaster_quiz_tally_path( @quiz ),
+  class: "btn btn-warning",
+  data: {
+    confirm: "Are you sure that you want to tally all the plays for this quiz?"
+  } do
+%>
+  <%= fa("exclamation-triangle") + ' Perform tally' %>
+<% end %>

@@ -9,7 +9,7 @@
     <%= form.select :account_id,
     options_for_select(
       @league.members.map do |member|
-        [ "#{ member.profile.user.email } - #{ member.account } (#{ number_with_precision( member.account.balance, precision: 2 ) })", member.account.id ]
+        [ "#{ member.profile.user.email } - #{ member.account } (#{ number_to_currency( member.account.balance, unit: "Q$" ) })", member.account.id ]
       end,
       selected: @transactor.account_id
     ), { include_blank: true }, class: "form-control" %>

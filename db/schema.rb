@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_12_235209) do
+ActiveRecord::Schema.define(version: 2018_12_13_023455) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "accountable_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2018_08_12_235209) do
     t.decimal "balance", precision: 12, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["accountable_id"], name: "index_accounts_on_accountable_id"
+    t.index ["accountable_type"], name: "index_accounts_on_accountable_type"
   end
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -92,6 +94,19 @@ ActiveRecord::Schema.define(version: 2018_08_12_235209) do
     t.index ["member_id"], name: "index_plays_on_member_id"
     t.index ["quiz_id"], name: "index_plays_on_quiz_id"
     t.index ["status"], name: "index_plays_on_status"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer "postable_id"
+    t.string "postable_type"
+    t.integer "status", default: 0
+    t.string "title"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["postable_id"], name: "index_posts_on_postable_id"
+    t.index ["postable_type"], name: "index_posts_on_postable_type"
+    t.index ["status"], name: "index_posts_on_status"
   end
 
   create_table "profiles", force: :cascade do |t|

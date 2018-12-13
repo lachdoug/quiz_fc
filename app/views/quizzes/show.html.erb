@@ -22,13 +22,13 @@
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <strong>Start</strong> <%= @quiz.start %>
+      <strong>Start</strong> <%= @quiz.start %> ( <%= @quiz.start_local %> )
     <br>
-      <strong>Stop</strong> <%= @quiz.stop %>
+      <strong>Stop</strong> <%= @quiz.stop %> ( <%= @quiz.stop_local %> )
     <br>
-      <strong>Tally</strong> <%= @quiz.tally %>
+      <strong>Tally</strong> <%= @quiz.tally %> ( <%= @quiz.tally_local %> )
     <br>
-      <strong>Close</strong> <%= @quiz.close %>
+      <strong>Close</strong> <%= @quiz.close %> ( <%= @quiz.close_local %> )
     </p>
   </div>
   <div class="col-sm-6">
@@ -69,9 +69,13 @@
       <% end %>
     </div>
   </div>
-<% end %>
-
-<% if @quiz.live? %>
+<% elsif @quiz.live? %>
+  <% if @quiz.stage == :pending %>
+    <%= link_to fa("clipboard-check") + ' Tally',
+    new_quizmaster_quiz_tally_path( @quiz ),
+    class: "btn btn-outline-primary"
+  %>
+  <% end %>
   <div class="float-right">
     <div class="btn-group">
       <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),

@@ -13,6 +13,6 @@
     <%= league %>
     <small><%= link_to fa("arrow-right"), comptroller_account_path( league.account ) %></small>
   </h3>
-  <strong>Balance</strong> <%= number_with_precision league.account.balance, precision: 2 %>
+  <strong>Balance</strong> <%= number_to_currency league.account.balance, unit: "Q$" %>
   <br>
 <% end %>

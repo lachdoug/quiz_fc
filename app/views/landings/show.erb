@@ -2,10 +2,48 @@
   <div class="container">
     <div class="row vertical-align">
       <div class="col">
+        <h2>
+          Hello and Welcome To
+        </h2>
         <h1>
           The World's Most Entertaining, Fun & Interesting Football Quiz
         </h1>
-        <h3>Win Cash & Prizes Every Saturday From 9am to 5pm</h3>
+        <h3>
+          Shared Prize Pool
+          <small>50% of all entrant fees distributed as prizes</small>
+        </h3>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Quiz Open</th>
+              <th scope="col">Quiz Close</th>
+              <th scope="col">Results and Prizes Announced</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Auckland Time</th>
+              <td>2.00pm Thursday</td>
+              <td>6.00pm Saturday</td>
+              <td>12 noon Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">Sydney Time</th>
+              <td>12 noon Thursday</td>
+              <td>4.00pm Saturday</td>
+              <td>10.00am Monday</td>
+            </tr>
+            <tr>
+              <th scope="row">UK Time</th>
+              <td>1.00am Thursday</td>
+              <td>5.00am Saturday</td>
+              <td>11.00pm Sunday</td>
+            </tr>
+          </tbody>
+        </table>
+
         <%= link_to( 'Join the team', new_user_registration_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
 
         <button class="btn btn-outline-secondary btn-lg btn-app" type="button" data-toggle="collapse" data-target="#landingSigninCollapse" aria-expanded="false" aria-controls="collapseExample">
@@ -46,55 +84,6 @@
   </div>
 </section>
 
-<section class="what-is-quizfc text-center">
-  <div class="container text-center">
-    <h2>What is QuizFC?</h2>
-    <div class="row">
-      <div class="col-sm-6 col-lg-3">
-        <div class="box">
-          <%= image_tag "ball.png", height: 60 %>
-          <p><strong>Football Only Quiz</strong></p>
-          <p>
-            With 12 Fun & Interesting Football Questions
-          </p>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-3">
-        <div class="box">
-          <%= image_tag "matche.png", height: 60 %>
-          <p><strong>Matches Every Saturday</strong></p>
-          <p>
-            Matches Are Open 9am - 5pm Every Saturday
-          </p>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-3">
-        <div class="box">
-          <%= image_tag "results.png", height: 60 %>
-          <p><strong>Results Provided Mondays</strong></p>
-          <p>
-            We Announce All Results At 12pm Mondays
-          </p>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-lg-3">
-        <div class="box">
-          <%= image_tag "prize.png", height: 60 %>
-          <p><strong>Shared Prize Pool</strong></p>
-          <p>
-            Entrants With The Most Points Share Cash & Prizes
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<%= render '/layouts/supporters' %>
-
 <section class="how-to-play text-center">
   <div class="container">
     <h2>How To Play QuizFC</h2>
@@ -120,7 +109,7 @@
       <div class="col-md-3 text-center">
         <div class="box">
           <%= image_tag "boot.png", height: 60 %>
-          <p>4. Play Every Saturday 9am-5pm!</p>
+          <p>4. Play Every Week!</p>
         </div>
       </div>
     </div>
@@ -131,6 +120,60 @@
   </div>
 
 </section>
+
+<section class="what-is-quizfc text-center">
+  <div class="container text-center">
+    <h2>What is QuizFC?</h2>
+    <div class="row">
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "ball.png", height: 60 %>
+          <p><strong>Football Only Quiz</strong></p>
+          <p>
+            With 12 Fun & Interesting Football Questions
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "matche.png", height: 60 %>
+          <p><strong>One Quiz Every Week</strong></p>
+          <p>
+            Opens 2.00pm Thursday<br>
+            Closes 6.00pm Saturday<br>
+            ( NZ Time )
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "results.png", height: 60 %>
+          <p><strong>Results Provided Mondays</strong></p>
+          <p>
+            All Results Announced 12 noon Monday<br>
+            ( NZ Time )
+          </p>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="box">
+          <%= image_tag "prize.png", height: 60 %>
+          <p><strong>Shared Prize Pool</strong></p>
+          <p>
+            Entrants With The Most Points Share Cash & Prizes<br>
+            50% of all entrant fees distributed as prizes
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render '/layouts/supporters' %>
+
 
 
 

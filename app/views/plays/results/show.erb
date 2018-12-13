@@ -9,10 +9,10 @@
   <% if false %>
   <strong>Quiz</strong> <%= @play.quiz.formatted_start %><br>
   <% end %>
-  <strong>Started</strong> <%= time_ago_in_words @play.created_at %> ago
+  <strong>Started</strong> <%= time_ago_in_words @play.created_at, vague: true %> ago
 </p>
 
-<h3>Your score: <%= @play.score %></h3>
+<h3>Score: <%= @play.result[:score] %> <small >&mdash; Rank: <%= @play.result[:rank] %> of <%= @play.result[:total_plays] %></small></h3>
 
 <ol>
   <% @play.questions.each do |question| %>
@@ -25,7 +25,7 @@
       </strong>
       <%= pluralize points, 'point' %>
       <%= points.to_i > 0 ? fa("check") : ( fa("times") + ( question.answer ? " (#{question.answer})" : "" ) ) %>
-      <%= link_to fa("arrow-right"), play_question_review_path( @play, question ) %>
+      <%= link_to fa("arrow-right"), member_play_question_review_path( @member, @play, question ) %>
     </li>
   <% end %>
 </ol>

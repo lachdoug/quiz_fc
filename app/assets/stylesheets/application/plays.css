@@ -1,0 +1,7 @@
+i.play-status-icon.playing { color: #007bff; }
+i.play-status-icon.complete { color: #17a2b8; }
+i.play-status-icon.scored { color: #28a745; }
+/*i.play-status-icon.live.pending { color: #007bff; }
+i.play-status-icon.live.results { color: #ffc107; }
+i.play-status-icon.live.complete { color: #dc3545; }
+i.play-status-icon.archived { color: grey; }*/

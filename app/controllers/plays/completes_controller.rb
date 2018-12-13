@@ -11,7 +11,7 @@ module Plays
       if @play.completion
         redirect_to member_play_complete_path( @member, @play ), notice: "Quiz has been submitted for scoring."
       else
-        redirect_to member_play_complete_path( @member, @play ), alert: "Failed to submit quiz for scoring."
+        redirect_to member_path( @member ), alert: "Failed to submit quiz for scoring."
       end
     end
 

@@ -1,13 +1,8 @@
-<%= link_to fa('arrow-up'), comptroller_path( id: @account.accountable_id ), class: "btn btn-outline-primary float-right" %>
+<%= link_to fa('arrow-up'), member_path( @member ), class: "btn btn-outline-primary float-right" %>
 
 <h2>
-  <%= @account %>
+  <%= @member %>
 </h2>
-
-<p>
-  <strong>For</strong>
-  <%= @account.accountable %>
-</p>
 
 <p>
   <strong>Balance</strong>

@@ -23,7 +23,8 @@ Rails.application.routes.draw do
     resource :profile, only: [ :show ]
     resources :members, only: [ :show ] do
       # resources :leagues, only: [ :show ]
-      resources :plays, only: [ :show, :create ] do
+      resources :accounts, only: [ :show ], module: :members
+      resources :plays, only: [ :index, :show, :create ] do
         resources :questions, only: [ :new, :show, :update ], module: :plays do
           resource :review, only: [ :show ]
         end
@@ -43,10 +44,12 @@ Rails.application.routes.draw do
     end
     authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ] do
+        resources :news_items
         resource :session_store, only: [ :update ]
         resources :accounts, only: [ :index, :show ]
         resources :quizzes, except: [ :new, :create ] do
-          resource :recalculate, only: [ :create ], module: :quizzes
+          resource :tally, only: [ :new, :create ], module: :quizzes
+          # resource :recalculate, only: [ :create ], module: :quizzes
           resource :status, only: [ :update ], module: :quizzes
         end
         resources :quizbooks, except: [ :edit, :update ] do
