@@ -4,7 +4,8 @@
 <hr>
 
 
-<h3>Score: <%= @play.result[:score] %> <small >&mdash; Rank: <%= @play.result[:rank] %> of <%= @play.result[:total_plays] %></small></h3>
+<h3>Score: <%= pluralize @play.result[:score], "point" %></h3>
+<h4>Rank: <%= @play.result[:rank] %> of <%= @play.result[:total_plays] %></h4>
 
 <hr>
 <%= link_to fa("arrow-right") + " Review", member_play_question_review_path( @member, @play, @play.questions.first ), class: "btn btn-outline-primary float-right" if @play.questions.any? %>
