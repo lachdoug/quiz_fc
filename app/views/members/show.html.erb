@@ -100,7 +100,7 @@
                   </small>
                   <%= quiz %>
                 </h1>
-                <%= link_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
+                <%= link_to member_plays_path( @member, quiz_id: quiz.id ), method: :POST, class: "btn btn-outline-primary" do %>
                   <%= fa("futbol") %> Play
                 <% end %>
               <% else %>
