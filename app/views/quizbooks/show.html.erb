@@ -10,7 +10,7 @@
       class: "btn btn-outline-danger" %>
     <% else %>
       <%= link_to fa("trash") + ' Delete',
-      quizmaster_quizbook_path( @quizbook ), method: :DELETE,
+      quizmaster_quizbook_path( @quizbook ), method: :delete,
       data: { confirm: "Are you sure that you want to delete this quizbook?" },
       class: "btn btn-outline-danger" %>
     <% end %>

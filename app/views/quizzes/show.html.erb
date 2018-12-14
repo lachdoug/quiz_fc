@@ -22,13 +22,24 @@
 <div class="row">
   <div class="col-sm-6">
     <p>
-      <strong>Start</strong> <%= @quiz.start %> ( <%= @quiz.start_local %> )
-    <br>
-      <strong>Stop</strong> <%= @quiz.stop %> ( <%= @quiz.stop_local %> )
-    <br>
-      <strong>Tally</strong> <%= @quiz.tally %> ( <%= @quiz.tally_local %> )
-    <br>
-      <strong>Close</strong> <%= @quiz.close %> ( <%= @quiz.close_local %> )
+      <strong>Start</strong><br>
+      UTC: <%= @quiz.start.strftime("%v at %r") %><br>
+      <%= @quiz.league.timezone %>: <%= @quiz.start_local.strftime("%v at %r") %>
+    </p>
+    <p>
+      <strong>Stop</strong><br>
+      UTC: <%= @quiz.stop.strftime("%v at %r") %><br>
+      <%= @quiz.league.timezone %>: <%= @quiz.stop_local.strftime("%v at %r") %>
+    </p>
+    <p>
+      <strong>Results</strong><br>
+      UTC: <%= @quiz.results.strftime("%v at %r") %><br>
+      <%= @quiz.league.timezone %>: <%= @quiz.results_local.strftime("%v at %r") %>
+    </p>
+    <p>
+      <strong>Close</strong><br>
+      UTC: <%= @quiz.close.strftime("%v at %r") %><br>
+      <%= @quiz.league.timezone %>: <%= @quiz.close_local.strftime("%v at %r") %>
     </p>
   </div>
   <div class="col-sm-6">
@@ -37,12 +48,12 @@
         <strong>Play</strong> <%= distance_of_time_in_words( @quiz.stop - @quiz.start ) %>
         <br>
       <% end %>
-      <% if @quiz.stop && @quiz.tally %>
-        <strong>Pending</strong> <%= distance_of_time_in_words( @quiz.tally - @quiz.stop ) %>
+      <% if @quiz.stop && @quiz.results %>
+        <strong>Pending</strong> <%= distance_of_time_in_words( @quiz.results - @quiz.stop ) %>
         <br>
       <% end %>
-      <% if @quiz.tally && @quiz.close %>
-        <strong>Results</strong> <%= distance_of_time_in_words( @quiz.close - @quiz.tally ) %>
+      <% if @quiz.results && @quiz.close %>
+        <strong>Results</strong> <%= distance_of_time_in_words( @quiz.close - @quiz.results ) %>
         <br>
       <% end %>
     </p>
@@ -51,108 +62,63 @@
 
 <div class="clearfix">
 
-<% if @quiz.draft? %>
-  <%= link_to fa("edit") + ' Edit',
-  edit_quizmaster_quiz_path( @quiz ),
-  class: "btn btn-outline-primary" %>
-  <div class="float-right">
-    <%= link_to fa("trash") + ' Delete',
-    quizmaster_quiz_path( @quiz ), method: :DELETE,
-    data: { confirm: "Are you sure that you want to delete this quiz?" },
-    class: "btn btn-outline-danger" %>
-    <div class="btn-group">
-      <%= link_to quizmaster_quiz_status_path( @quiz, status: :live ),
-      method: :patch,
-      class: "btn btn-outline-success",
-      data: { confirm: "Are you sure that you want this quiz to go live?" } do %>
-        <%= fa("play") + ' Go live' %>
-      <% end %>
+  <% if @quiz.draft? %>
+    <%= link_to fa("edit") + ' Edit',
+    edit_quizmaster_quiz_path( @quiz ),
+    class: "btn btn-outline-primary" %>
+    <div class="float-right">
+      <%= link_to fa("trash") + ' Delete',
+      quizmaster_quiz_path( @quiz ), method: :delete,
+      data: { confirm: "Are you sure that you want to delete this quiz?" },
+      class: "btn btn-outline-danger" %>
+      <div class="btn-group">
+        <%= link_to quizmaster_quiz_status_path( @quiz, status: :live ),
+        method: :patch,
+        class: "btn btn-outline-success",
+        data: { confirm: "Are you sure that you want this quiz to go live?" } do %>
+          <%= fa("play") + ' Go live' %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% elsif @quiz.live? %>
-  <% if @quiz.stage == :pending %>
-    <%= link_to fa("clipboard-check") + ' Tally',
-    new_quizmaster_quiz_tally_path( @quiz ),
-    class: "btn btn-outline-primary"
-  %>
+  <% elsif @quiz.live? %>
+    <% if @quiz.pending? %>
+      <%= link_to fa("clipboard-check") + ' Tally',
+      new_quizmaster_quiz_tally_path( @quiz ),
+      class: "btn btn-outline-primary"
+    %>
+    <% end %>
+    <div class="float-right">
+      <div class="btn-group">
+        <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),
+        method: :patch,
+        class: "btn btn-outline-danger",
+        data: { confirm: "Are you sure that you want to abort this quiz?" } do %>
+          <%= fa("bomb") + ' Abort' %>
+        <% end %>
+        <% if @quiz.closed? %>
+          <%= link_to quizmaster_quiz_status_path( @quiz, status: :archived ),
+          method: :patch,
+          class: "btn btn-outline-secondary",
+          data: { confirm: "Are you sure that you want to archive this quiz?" } do %>
+            <%= fa("file-archive") + ' Archive' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-  <div class="float-right">
-    <div class="btn-group">
-      <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),
-      method: :patch,
-      class: "btn btn-outline-danger",
-      data: { confirm: "Are you sure that you want to abort this quiz?" } do %>
-        <%= fa("bomb") + ' Abort' %>
-      <% end %>
-      <% if @quiz.stage == :complete %>
-        <%= link_to quizmaster_quiz_status_path( @quiz, status: :archived ),
+
+  <% if @quiz.archived? %>
+    <div class="float-right">
+      <div class="btn-group">
+        <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),
         method: :patch,
         class: "btn btn-outline-secondary",
-        data: { confirm: "Are you sure that you want to archive this quiz?" } do %>
-          <%= fa("file-archive") + ' Archive' %>
+        data: { confirm: "Are you sure that you want to redraft this quiz?" } do %>
+          <%= fa("file") + ' Redraft' %>
         <% end %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if @quiz.archived? %>
-  <div class="float-right">
-    <div class="btn-group">
-      <%= link_to quizmaster_quiz_status_path( @quiz, status: :draft ),
-      method: :patch,
-      class: "btn btn-outline-secondary",
-      data: { confirm: "Are you sure that you want to redraft this quiz?" } do %>
-        <%= fa("file") + ' Redraft' %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-
-
-
-<% if false %>
-
-
-
-  <% if @quiz.draft? %>
-  <% end %>
-  <% if @quiz.live? %>
-    <div class="float-right">
-      <%= link_to fa("flag-checkered") + ' Draft', quizmaster_quiz_publish_path( @quiz ), method: :DELETE, class: "btn btn-outline-danger",
-      data: { confirm: "Are you sure that you want this quiz to revert to a draft?" } %>
+      </div>
     </div>
   <% end %>
-
-  <% if false && @quiz.approved && @quiz.start.future? %>
-
-    <div class="float-right">
-      <%= link_to fa("clock") + ' Publish', quizmaster_quiz_publish_path( @quiz ), method: :POST, class: "btn btn-danger",
-      data: { confirm: "Are you sure that you want the quiz removed from the queue?" } %>
-      <%= link_to fa("calculator") + ' Recalculate', quizmaster_quiz_recalculate_path( @quiz ), method: :POST, class: "btn btn-danger",
-      data: { confirm: "Are you sure that you want to recalculate the scores on all plays of this quiz?" } %>
-    </div>
-    <%= link_to fa("trash") + ' Delete',
-    quizmaster_quiz_path( @quiz ), method: :DELETE,
-    data: { confirm: "Are you sure that you want to delete this quiz?" }, class: "btn btn-outline-danger #{'disabled' if @quiz.questions.any?}" %>
-
-    <div class="float-right">
-      <%= link_to fa("clock") + ' Enqueue', quizmaster_quiz_enqueue_path( @quiz ), method: :POST, class: "btn btn-warning",
-      data: { confirm: "Are you sure that the quiz is ready to go into the queue?" } %>
-    </div>
-
-    <% if @quiz.draft? %>
-      <%= link_to fa("plus") + ' New', new_question_path( quiz_id: @quiz.id ),
-      class: "btn btn-outline-primary float-right" %>
-    <% end %>
-
-  <% end %>
-
-
-<% end %>
-
-
 
 </div>
 

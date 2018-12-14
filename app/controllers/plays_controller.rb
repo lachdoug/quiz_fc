@@ -8,14 +8,18 @@ class PlaysController < ApplicationController
   end
 
   def show
-    if @play.playing?
+    if @play.archived?
+      redirect_to member_path( @member ), alert: "Quiz has been archived."
+    elsif @play.closed?
+      redirect_to member_play_closed_path( @member, @play )
+    elsif @play.playing?
       redirect_to new_member_play_question_path( @member, @play )
-    elsif @play.complete?
-      redirect_to member_play_complete_path( @member, @play )
+    elsif @play.complete? || @play.pending?
+      redirect_to member_play_pending_path( @member, @play )
     elsif @play.scored?
       redirect_to member_play_result_path( @member, @play )
     else
-      redirect_to member_path( @member ), alert: "Play has been archived."
+      redirect_to member_path( @member ), alert: "Play is not available."
     end
   end
 

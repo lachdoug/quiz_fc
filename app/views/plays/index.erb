@@ -26,13 +26,7 @@
         <td><%= time_ago_in_words play.created_at, vague: true %> ago</td>
         <td><%= "Score #{ play.result[:score] } ( rank #{ play.result[:rank] } of #{ play.result[:total_plays] } )" if play.result %></td>
         <td>
-          <% if play.playing? %>
-            <%= link_to fa("arrow-right"), new_member_play_question_path( @member, play ), class: "btn btn-link" %>
-          <% elsif play.complete? %>
-            <%= link_to fa("arrow-right"), member_play_complete_path( @member, play ), class: "btn btn-link" %>
-          <% else %>
-            <%= link_to fa("arrow-right"), member_play_result_path( @member, play ), class: "btn btn-link" %>
-          <% end %>
+          <%= link_to fa("arrow-right"), member_play_path( @member, play ), class: "btn btn-link" %>
         </td>
 
       </tr>

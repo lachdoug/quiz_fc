@@ -81,4 +81,20 @@ class Play < ApplicationRecord
     @affordable ||= member.account.balance >= quiz.fee
   end
 
+  def archived?
+    quiz.archived?
+  end
+
+  def closed?
+    quiz.closed?
+  end
+
+  def pending?
+    quiz.pending?
+  end
+
+  def results?
+    quiz.results?
+  end
+
 end

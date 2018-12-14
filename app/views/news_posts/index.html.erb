@@ -1,0 +1,36 @@
+<div class="float-right">
+  <%= link_to fa("plus") + " New post",
+  new_quizmaster_news_post_path,
+  class: "btn btn-outline-primary" %>
+  <%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary" %>
+</div>
+
+<h1>News</h1>
+
+
+
+
+<% if @posts.any? %>
+  <table class="table table-hover">
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Updated</th>
+      <th></th>
+    </tr>
+    <% @posts.each do |post| %>
+      <tr>
+        <td>
+          <%= post.title %>
+        </td>
+        <td>
+          <%= post_status_badge post %>
+        </td>
+        <td><%= time_ago_in_words post.created_at, vague: true %> ago</td>
+        <td>
+          <%= link_to fa("arrow-right"), quizmaster_news_post_path( post ), class: "btn btn-link" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

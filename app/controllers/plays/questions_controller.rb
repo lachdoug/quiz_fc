@@ -9,7 +9,7 @@ module Plays
       if @next_question
         redirect_to member_play_question_path( @member, @play, @next_question )
       else
-        redirect_to new_member_play_complete_path( @member, @play )
+        redirect_to member_play_complete_path( @member, @play )
       end
     end
 
@@ -24,7 +24,7 @@ module Plays
         if @next_question
           redirect_to member_play_question_path( @member, @play, @next_question )
         else
-          redirect_to new_member_play_complete_path( @member, @play )
+          redirect_to member_play_complete_path( @member, @play )
         end
       else
         redirect_to member_path( @member ), alert: "Failed to submit answer."

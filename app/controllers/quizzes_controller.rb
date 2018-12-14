@@ -50,7 +50,7 @@ class QuizzesController < ApplicationController
         :fee, :pool,
         :start_date, :start_time,
         :stop_date, :stop_time,
-        :tally_date, :tally_time,
+        :results_date, :results_time,
         :close_date, :close_time,
       )
     end

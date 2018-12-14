@@ -1,8 +1,8 @@
 module Plays
   class ReviewsController < ApplicationController
 
-    before_action :set_member, only: [:show ]
-    before_action :set_play, only: [:show ]
+    before_action :set_member, only: [ :show ]
+    before_action :set_play, only: [ :show ]
 
     def show
       @question = @play.questions.find params[:question_id]

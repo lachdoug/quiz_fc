@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_023455) do
+ActiveRecord::Schema.define(version: 2018_12_13_192500) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "accountable_id"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_023455) do
     t.integer "pool"
     t.datetime "start"
     t.datetime "stop"
-    t.datetime "tally"
+    t.datetime "results"
     t.datetime "close"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -156,10 +156,10 @@ ActiveRecord::Schema.define(version: 2018_12_13_023455) do
     t.index ["league_id"], name: "index_quizzes_on_league_id"
     t.index ["number"], name: "index_quizzes_on_number"
     t.index ["quizbook_id"], name: "index_quizzes_on_quizbook_id"
+    t.index ["results"], name: "index_quizzes_on_results"
     t.index ["start"], name: "index_quizzes_on_start"
     t.index ["status"], name: "index_quizzes_on_status"
     t.index ["stop"], name: "index_quizzes_on_stop"
-    t.index ["tally"], name: "index_quizzes_on_tally"
   end
 
   create_table "transactions", force: :cascade do |t|

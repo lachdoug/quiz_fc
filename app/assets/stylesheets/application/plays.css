@@ -5,3 +5,5 @@ i.play-status-icon.scored { color: #28a745; }
 i.play-status-icon.live.results { color: #ffc107; }
 i.play-status-icon.live.complete { color: #dc3545; }
 i.play-status-icon.archived { color: grey; }*/
+
+.not-answered { color: red; }

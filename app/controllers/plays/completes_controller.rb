@@ -1,21 +1,18 @@
 module Plays
   class CompletesController < ApplicationController
 
-    before_action :set_member, only: [:show, :new, :create ]
-    before_action :set_play, only: [:show, :new, :create ]
+    before_action :set_member, only: [ :show, :create ]
+    before_action :set_play, only: [ :show, :create ]
 
-    def new
+    def show
     end
 
     def create
       if @play.completion
-        redirect_to member_play_complete_path( @member, @play ), notice: "Quiz has been submitted for scoring."
+        redirect_to member_play_pending_path( @member, @play ), notice: "Quiz has been submitted for scoring."
       else
         redirect_to member_path( @member ), alert: "Failed to submit quiz for scoring."
       end
-    end
-
-    def show
     end
 
     private

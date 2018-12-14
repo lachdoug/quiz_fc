@@ -1,0 +1,7 @@
+i.post-status-icon.draft { color: #007bff; }
+i.post-status-icon.published { color: #17a2b8; }
+i.post-status-icon.archived { color: grey; }
+/*i.post-status-icon.live.pending { color: #007bff; }
+i.post-status-icon.live.results { color: #ffc107; }
+i.post-status-icon.live.complete { color: #dc3545; }
+i.post-status-icon.archived { color: grey; }*/

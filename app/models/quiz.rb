@@ -18,6 +18,8 @@ class Quiz < ApplicationRecord
     "Quiz #{ number }"
   end
 
+  # def results; tally; end # DB col+index need renaming
+
   def stage
     @stage ||= if draft? || archived?
       nil
@@ -25,7 +27,7 @@ class Quiz < ApplicationRecord
       :waiting
     elsif now < stop
       :current
-    elsif now < tally
+    elsif now < results
       :pending
     elsif now < close
       :results
@@ -48,6 +50,18 @@ class Quiz < ApplicationRecord
 
   def tallyable?
     stage == :pending || stage == :results
+  end
+
+  def results?
+    stage == :results
+  end
+
+  def pending?
+    stage == :pending
+  end
+
+  def closed?
+    stage == :closed
   end
 
   def now
@@ -83,7 +97,7 @@ class Quiz < ApplicationRecord
   end
 
   def update( params )
-    [ "start", "stop", "tally", "close" ].each do |event|
+    [ "start", "stop", "results", "close" ].each do |event|
       yr, mon, day = params["#{ event }_date"].split( "-" ).map &:to_i
       hr, min = params["#{ event }_time"].split( ":" ).map &:to_i
       datetime = DateTime.new(yr, mon, day, hr, min)
@@ -111,8 +125,8 @@ class Quiz < ApplicationRecord
     stop.in_time_zone league.timezone
   end
 
-  def tally_local
-    tally.in_time_zone league.timezone
+  def results_local
+    results.in_time_zone league.timezone
   end
 
   def close_local
@@ -135,7 +149,7 @@ class Quiz < ApplicationRecord
   private
 
   def has_all_datetimes
-    if status == "live" && ! ( start && stop && tally && close )
+    if status == "live" && ! ( start && stop && results && close )
       errors.add( :base, "Failed to luanch quiz. Please provide all dates." )
     end
   end

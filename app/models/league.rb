@@ -28,6 +28,10 @@ class League < ApplicationRecord
     quizzes.live
   end
 
+  def published_posts
+    posts.where status: :published
+  end
+
   def next_quiz_defaults
     latest_quiz = quizzes.last
     {

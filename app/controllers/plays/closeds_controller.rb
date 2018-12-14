@@ -1,5 +1,5 @@
 module Plays
-  class ResultsController < ApplicationController
+  class ClosedsController < ApplicationController
 
     before_action :set_member, only: [ :show ]
     before_action :set_play, only: [ :show ]

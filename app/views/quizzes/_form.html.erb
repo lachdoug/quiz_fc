@@ -64,17 +64,17 @@
     </div>
   </div>
 
-  <%= label :quiz, :tally %>
+  <%= label :quiz, :results %>
 
   <div class="row">
     <div class="col-sm-4">
       <div class="form-group form-group-narrow">
-        <%= date_field_tag 'quiz[tally_date]', ( quiz.tally || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
+        <%= date_field_tag 'quiz[results_date]', ( quiz.results || Time.now ).strftime('%Y-%m-%d'), class: "form-control", required: true %>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="form-group form-group-narrow">
-        <%= time_field_tag 'quiz[tally_time]', ( quiz.tally || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
+        <%= time_field_tag 'quiz[results_time]', ( quiz.results || Time.now ).strftime('%H:%M'), class: "form-control", required: true %>
       </div>
     </div>
   </div>

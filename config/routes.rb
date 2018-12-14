@@ -28,8 +28,10 @@ Rails.application.routes.draw do
         resources :questions, only: [ :new, :show, :update ], module: :plays do
           resource :review, only: [ :show ]
         end
-        resource :complete, only: [ :show, :new, :create ], module: :plays
+        resource :complete, only: [ :show, :create ], module: :plays
+        resource :pending, only: [ :show ], module: :plays
         resource :result, only: [ :show ], module: :plays
+        resource :closed, only: [ :show ], module: :plays
       end
     end
     namespace :users, as: :user do
@@ -44,7 +46,9 @@ Rails.application.routes.draw do
     end
     authorize_admin( :quizmaster ) do
       resource :quizmaster, only: [ :show ] do
-        resources :news_items
+        resources :news_posts do
+          resource :status, only: [ :update ], module: :news_posts
+        end
         resource :session_store, only: [ :update ]
         resources :accounts, only: [ :index, :show ]
         resources :quizzes, except: [ :new, :create ] do

@@ -1,18 +1,25 @@
-<%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
+<div class="float-right">
+  <% if @play.last_question %>
+    <%= link_to fa("arrow-left") + " Previous",
+    member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary" %>
+  <% end %>
+  <% if @play.questions.any? && @play.affordable? %>
+    <%= link_to member_play_complete_path( @member, @play ), class: "btn btn-outline-primary" do %>
+      <%= fa("check") + " OK" %>
+    <% end %>
+  <% end %>
+  <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary" %>
+
+</div>
 
 <h2>Quiz <%= @play.quiz_id %> complete</h2>
 <hr>
 
-<%= link_to fa("arrow-right") + " Review", member_play_question_review_path( @member, @play, @play.questions.first ), class: "btn btn-outline-primary float-right" if @play.questions.any? %>
-
-<p>
-  <% if false %>
-  <strong>Quiz</strong> <%= @play.quiz.formatted_start %><br>
-  <% end %>
-  <strong>Status</strong> <%= quiz_status_badge @play.quiz %>
-  <br>
-  <strong>Started</strong> <%= time_ago_in_words @play.created_at, vague: true %> ago
-</p>
+<% if @play.affordable? %>
+  <h4>Click OK to submit this quiz for scoring. This will cost you <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You will then be in the running to win a prize.</h4>
+<% else %>
+  <h4>To fee to submit this quiz for scoring is <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You do not have enough and will need to add money to your account.</h4>
+<% end %>
 
 <ol>
   <% @play.questions.each do |question| %>
@@ -20,9 +27,9 @@
       <%= strip_tags markdown( question.ask ) %><br>
       <strong>
         <% answer = @play.answer_for question %>
-        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
+        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered!", class: "not-answered" ) %>
       </strong>
-      <%= link_to fa("arrow-right"), member_play_question_review_path( @member, @play, question ) %>
+      <%= link_to fa("arrow-right"), member_play_question_path( @member, @play, question ) %>
     </li>
   <% end %>
 </ol>
