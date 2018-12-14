@@ -38,12 +38,12 @@
       <p><i>None</i></p>
     <% end %>
 
-    <h3>Finished playing</h3>
+    <h3>Played</h3>
 
     <% finished_playing_groups = @member.finished_playing_groups %>
 
     <% if finished_playing_groups.any? %>
-      <% [ :pending, :results, :closed ].each do |status| %>
+      <% [ :current, :pending, :results, :closed ].each do |status| %>
         <h5><i><%= status.to_s.titleize %></i></h5>
         <% plays = ( finished_playing_groups[ status ] || [] ) %>
         <% if plays.any? %>
