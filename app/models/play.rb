@@ -90,7 +90,7 @@ class Play < ApplicationRecord
   end
 
   def pending?
-    quiz.pending?
+    complete? && quiz.pending?
   end
 
   def results?

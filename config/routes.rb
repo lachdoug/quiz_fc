@@ -29,6 +29,7 @@ Rails.application.routes.draw do
           resource :review, only: [ :show ]
         end
         resource :complete, only: [ :show, :create ], module: :plays
+        resource :completed, only: [ :show ], module: :plays
         resource :pending, only: [ :show ], module: :plays
         resource :result, only: [ :show ], module: :plays
         resource :closed, only: [ :show ], module: :plays

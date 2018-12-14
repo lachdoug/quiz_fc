@@ -14,10 +14,12 @@ class PlaysController < ApplicationController
       redirect_to member_play_closed_path( @member, @play )
     elsif @play.playing?
       redirect_to new_member_play_question_path( @member, @play )
-    elsif @play.complete? || @play.pending?
+    elsif @play.pending?
       redirect_to member_play_pending_path( @member, @play )
     elsif @play.scored?
       redirect_to member_play_result_path( @member, @play )
+    elsif @play.complete?
+      redirect_to member_play_completed_path( @member, @play )
     else
       redirect_to member_path( @member ), alert: "Play is not available."
     end

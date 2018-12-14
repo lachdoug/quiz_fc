@@ -6,7 +6,7 @@
   <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary" %>
 </div>
 
-<h2>Quiz <%= @play.quiz_id %> complete</h2>
+<h2>Quiz <%= @play.quiz.number %> complete</h2>
 <hr>
 
 <% if @play.affordable? %>

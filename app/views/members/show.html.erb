@@ -44,7 +44,13 @@
 
     <% if finished_playing_groups.any? %>
       <% [ :current, :pending, :results, :closed ].each do |status| %>
-        <h5><i><%= status.to_s.titleize %></i></h5>
+        <h5><i>
+          <% if status == :current %>
+            Completed
+          <% else %>
+            <%= status.to_s.titleize %>
+          <% end %>
+        </i></h5>
         <% plays = ( finished_playing_groups[ status ] || [] ) %>
         <% if plays.any? %>
           <% plays.each do |play| %>
