@@ -25,12 +25,12 @@
     <% if @member.currently_playing.any? %>
       <% @member.currently_playing.each do |play| %>
         <p>
-          <h1 class="d-inline-block align-middle">
+          <h2 class="d-inline-block align-middle">
             <small>
               <%= quiz_stage_icon play.quiz %>
             </small>
             <%= play.quiz %>
-          </h1>
+          </h2>
           <%= link_to fa("arrow-right"), member_play_path( @member, play ), class: "btn btn-link" %>
         </p>
       <% end %>
@@ -55,10 +55,10 @@
         <% if plays.any? %>
           <% plays.each do |play| %>
             <p>
-              <h1 class="d-inline-block align-middle">
+              <h2 class="d-inline-block align-middle">
                 <small><%= quiz_stage_icon play.quiz %></small>
                 <%= play.quiz %>
-              </h1>
+              </h2>
               <%= link_to fa("arrow-right"), member_play_path( @member, play ), class: "btn btn-link" %>
               <% if play.results? %>
                 <%= pluralize( play.result[:score], 'point' ) %>
@@ -93,22 +93,25 @@
           <% quizzes.each do |quiz| %>
           <!-- <% if quiz.up? %> -->
             <p>
-              <h1 class="d-inline-block align-middle">
-                <small>
-                  <%= quiz_stage_icon quiz %>
-                </small>
-                <%= quiz %>
-              </h1>
-              <% if status == :waiting %>
+              <% if status == :current %>
+                <h1 class="d-inline-block align-middle">
+                  <small>
+                    <%= quiz_stage_icon quiz %>
+                  </small>
+                  <%= quiz %>
+                </h1>
+                <%= link_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
+                  <%= fa("futbol") %> Play
+                <% end %>
+              <% else %>
+                <h2 class="d-inline-block align-middle">
+                  <small>
+                    <%= quiz_stage_icon quiz %>
+                  </small>
+                  <%= quiz %>
+                </h2>
                 <br><%= quiz.start_local.strftime("%v at %r") %> <%= quiz.league.timezone %> time
               <% end %>
-              <div class="btn-group">
-                <% if quiz.playable? %>
-                  <%= button_to member_plays_path( @member ), params: { quiz_id: quiz.id }, method: :POST, class: "btn btn-outline-primary" do %>
-                    <%= fa("futbol") %> Play
-                  <% end %>
-                <% end %>
-              </div>
             </p>
           <!-- <% end %> -->
           <% end %>
