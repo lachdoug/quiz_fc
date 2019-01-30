@@ -40,7 +40,7 @@ class League < ApplicationRecord
       pool: 50,
       start: latest_quiz.start + 1.week,
       stop: latest_quiz.stop + 1.week,
-      tally: latest_quiz.tally + 1.week,
+      results: latest_quiz.results + 1.week,
       close: latest_quiz.close + 1.week,
     }
   end

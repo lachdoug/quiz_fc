@@ -1,6 +1,12 @@
 <%= link_to fa("arrow-up"), user_root_path(), class: "btn btn-outline-primary float-right" %>
 
-<h2>Play history</h2>
+<h2><%= @member %></h2>
+<h3>Play history</h3>
+
+<p>
+  <strong>Played</strong>
+  <%= pluralize( @member.plays.count, "quiz" ) %>
+</p>
 
 <% if @plays.any? %>
   <table class="table table-hover">

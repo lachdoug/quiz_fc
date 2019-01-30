@@ -9,7 +9,7 @@
       <strong>Balance</strong>
       <%= number_to_currency( @member.account.balance, unit: "Q$" ) %>
       <%= link_to fa("wallet"), member_account_path( @member ), class: "btn-link" %><br>
-      <strong>History</strong>
+      <strong>Played</strong>
       <%= pluralize( @member.plays.count, "quiz" ) %>
       <%= link_to fa("history"), member_plays_path( @member ), class: "btn-link" %>
     </p>
@@ -85,7 +85,7 @@
           <% if status == :current %>
            Current
           <% else %>
-            Waiting to play
+            Waiting
           <% end %>
         </h3>
         <% quizzes = ( live_quizzes_groups[ status ] || [] ) %>

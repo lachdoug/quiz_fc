@@ -1,15 +1,13 @@
 <%= link_to fa('arrow-up'), member_path( @member ), class: "btn btn-outline-primary float-right" %>
 
-<h2>
-  <%= @member %>
-</h2>
+<h2><%= @member %></h2>
+<h3>Transaction history</h3>
 
 <p>
   <strong>Balance</strong>
   <%= number_to_currency( @account.balance, unit: "Q$" ) %>
 </p>
 
-<strong>Transactions</strong>
 <% if @account.transactions.any? %>
   <table class="table">
     <tr>
