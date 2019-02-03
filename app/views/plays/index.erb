@@ -1,4 +1,4 @@
-<%= link_to fa("arrow-up"), user_root_path(), class: "btn btn-outline-primary float-right" %>
+<%= link_to fa('arrow-up'), user_management_path, class: "btn btn-outline-primary float-right" %>
 
 <h2><%= @member %></h2>
 <h3>Play history</h3>
@@ -16,7 +16,6 @@
       <th>Play</th>
       <th>Started</th>
       <th>Result</th>
-      <th></th>
     </tr>
     <% @plays.each do |play| %>
       <tr>
@@ -31,9 +30,6 @@
         </td>
         <td><%= time_ago_in_words play.created_at, vague: true %> ago</td>
         <td><%= "Score #{ play.result[:score] } ( rank #{ play.result[:rank] } of #{ play.result[:total_plays] } )" if play.result %></td>
-        <td>
-          <%= link_to fa("arrow-right"), member_play_path( @member, play ), class: "btn btn-link" %>
-        </td>
 
       </tr>
     <% end %>

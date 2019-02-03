@@ -5,7 +5,7 @@ class Transaction < ApplicationRecord
   serialize :params, Hash
 
   def detail
-    comment.to_s + params_as_s
+    comment.to_s
   end
 
   def params_as_s

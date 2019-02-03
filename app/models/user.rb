@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :omniauthable
 
-  has_one :profile, dependent: :destroy
+  has_one :profile
 
   def remember_me
     true

@@ -22,8 +22,11 @@ Rails.application.routes.draw do
   authenticate :user do
     resource :profile, only: [ :show ]
     resources :members, only: [ :show ] do
-      # resources :leagues, only: [ :show ]
-      resources :accounts, only: [ :show ], module: :members
+      resource :activity, only: [ :show ]
+      resource :account, only: [ :show ], module: :members do
+        resource :add_money, only: [ :new, :create ], module: :accounts
+        resource :payment, only: [ :new, :create ], module: :accounts
+      end
       resources :plays, only: [ :index, :show, :create ] do
         resources :questions, only: [ :new, :show, :update ], module: :plays do
           resource :review, only: [ :show ]
@@ -38,6 +41,7 @@ Rails.application.routes.draw do
     namespace :users, as: :user do
       resource :management, only: [ :show ]
       resource :termination, only: [ :show, :create ]
+      resource :support, only: [ :new, :create ]
     end
   end
 

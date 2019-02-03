@@ -1,0 +1,28 @@
+<h2>Payment</h2>
+
+<div class="clearfix">
+
+  <h4 class="float-left"><strong><%= number_to_currency( @amount, unit: @member.league.currency ) %></strong></h4>
+
+  <div class="float-right">
+  <%= form_tag member_account_payment_path( @member ), id: "member_account_payment_form" do %>
+    <%= hidden_field_tag 'amount', @amount %>
+
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-amount="<%= @amount.to_i * 100 %>"
+      data-name="QuizFC"
+      data-description="Payment for Quizbucks"
+      data-locale="auto"
+      data-zip-code="true"
+      data-image= "https://stripe.com/favicon.ico">
+    </script>
+
+  <% end %>
+  </div>
+
+</div>
+
+<hr>
+<%= link_to fa("times") + " Cancel", new_member_account_add_money_path( @member ), class: "btn btn-secondary" %><br>

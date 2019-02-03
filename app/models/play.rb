@@ -74,7 +74,12 @@ class Play < ApplicationRecord
   end
 
   def transact
-    Transactor.new( account_id: member.account.id, amount: -quiz.fee, params: { play_id: id } ).process
+    Transactor.new(
+      account_id: member.account.id,
+      amount: -quiz.fee,
+      comment: "#{quiz} fee",
+      params: { play_id: id } 
+    ).process
   end
 
   def affordable?

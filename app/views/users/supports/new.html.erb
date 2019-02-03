@@ -1,0 +1,35 @@
+<h2>Contact QuizFC</h2>
+
+<%= form_for :contact, url: user_support_path do |f| %>
+
+  <div class="row">
+    <div class="col-sm-2">
+      To:
+    </div>
+    <div class="col-sm-8">
+      support@quizfc.com
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      From
+    </div>
+    <div class="col-sm-8">
+      <%= current_user.email %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :message %>
+    <%= f.text_area :message, autofocus: true, rows: 15, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= link_to fa("times") + " Cancel", user_management_path, class: "btn btn-secondary float-left" %>
+    <%= f.button type: :submit, class: "btn btn-primary float-right" do %>
+      <%= fa("paper-plane") + " Send" %>
+    <% end %>
+  </div>
+
+<% end %>

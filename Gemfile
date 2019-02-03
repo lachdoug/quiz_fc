@@ -15,6 +15,8 @@ group :production do
   gem 'mysql2'
 end
 
+gem 'stripe'
+
 # group :development do
 #
 # end
@@ -25,7 +27,7 @@ gem 'damerau-levenshtein'
 
 # Default Rails gems
 
-ruby '2.3.1'
+ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'

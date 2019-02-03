@@ -7,7 +7,7 @@ class Profile < ApplicationRecord
   belongs_to :user
 
   def to_s
-    user.email
+    user && user.email || "No user"
   end
 
   def self.for( current_user )
