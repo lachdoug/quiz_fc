@@ -26,14 +26,6 @@ class QuizbooksController < ApplicationController
     end
   end
 
-  # def update
-  #   @quizbook.update(quiz_params)
-  #   respond_to do |format|
-  #     format.html { redirect_to quizmaster_quizbook_path( @quizbook ), notice: 'Quizbook was successfully updated.' }
-  #     format.json { render :show, status: :ok, location: @quizbook }
-  #   end
-  # end
-
   def destroy
     @quizbook.destroy
     respond_to do |format|
