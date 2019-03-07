@@ -8,6 +8,9 @@ Rails.application.routes.draw do
       put '' => 'devise/registrations#update', as: :admin_registration
     end
   end
+  namespace :users, as: :user do
+    resource :signed_up
+  end
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
