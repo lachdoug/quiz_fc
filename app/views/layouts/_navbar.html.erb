@@ -19,7 +19,7 @@
               <%= fa "user" %> <%= current_user.email %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarUserDropdown">
-              <%= link_to fa("home") + " Home", user_root_path, class: "dropdown-item" %>
+              <%= link_to fa("home") + " Home", profile_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to fa("cog") + " Manage", user_management_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>

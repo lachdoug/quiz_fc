@@ -1,5 +1,5 @@
 namespace :admin_user do
-  desc 'Remove role to an admin user ( developer, quizmaster, comptroller, auditor )'
+  desc 'Remove role from an admin user ( developer, quizmaster, comptroller, auditor )'
 
   task :remove_role, [ :email, :role ] => :environment do | task, args |
     email = args[:email]

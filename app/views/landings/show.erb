@@ -182,7 +182,7 @@
 <% if false %>
 
 <% if current_user %>
-  <%= link_to( fa( "futbol" ) + fa( "home" ) + ' Home', user_root_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
+  <%= link_to( fa( "futbol" ) + fa( "home" ) + ' Home', profile_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
 <% else %>
   <%= link_to( fa( "sign-in-alt" ) + ' Already on the team', new_user_session_path, class: "btn btn-outline-primary btn-lg btn-app" )  %>
 <% end %>

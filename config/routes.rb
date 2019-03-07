@@ -11,12 +11,12 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
-  authenticated :user do
-    root to: "profiles#show", as: :user_root
-  end
-  authenticated :admin do
-    root to: "admins#show", as: :admin_root
-  end
+  # authenticated :user do
+  #   root to: "profiles#show"
+  # end
+  # authenticated :admin do
+  #   root to: "admins#show"
+  # end
   root to: "landings#show"
 
   authenticate :user do

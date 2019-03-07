@@ -15,7 +15,6 @@ class TransactorsController < ApplicationController
         format.json { render :show, status: :created, location: @transactor }
       else
         @league = League.find( params[:league_id] )
-        debugger
         format.html { render :new }
         format.json { render json: @transactor.errors, status: :unprocessable_entity }
       end
