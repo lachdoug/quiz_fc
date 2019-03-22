@@ -1,6 +1,8 @@
 module Quizbooks
   class QuizzesController < ApplicationController
 
+    layout 'admin'
+
     def new
       @quiz = Quiz.new( quizbook_id: params[:quizbook_id] )
     end

@@ -1,28 +1,41 @@
-<h2>Payment</h2>
+<%= banner("Add money") %>
 
-<div class="clearfix">
+<div class="container">
 
-  <h4 class="float-left"><strong><%= number_to_currency( @amount, unit: @member.league.currency ) %></strong></h4>
+  <div class="clearfix">
 
-  <div class="float-right">
-  <%= form_tag member_account_payment_path( @member ), id: "member_account_payment_form" do %>
-    <%= hidden_field_tag 'amount', @amount %>
+    <h4 class="float-left"><strong><%= number_to_currency( @amount, unit: @member.league.currency ) %></strong></h4>
 
-    <script
-      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-      data-amount="<%= @amount.to_i * 100 %>"
-      data-name="QuizFC"
-      data-description="Payment for Quizbucks"
-      data-locale="auto"
-      data-zip-code="true"
-      data-image= "https://stripe.com/favicon.ico">
-    </script>
+    <div class="float-right">
+    <%= form_tag member_account_payment_path( @member ), id: "member_account_payment_form" do %>
+      <%= hidden_field_tag 'amount', @amount %>
 
-  <% end %>
+      <div id="fake_stripe_button" class="btn btn-outline-primary btn-app">
+        Pay with card
+      </div>
+
+      <div id="real_stripe_button" class="d-none">
+
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-amount="<%= @amount.to_i * 100 %>"
+          data-name="QuizFC"
+          data-description="Payment for Quizbucks"
+          data-locale="auto"
+          data-zip-code="true"
+          data-image= "https://www.quizfc.com/wp-content/uploads/2019/02/QuizFC-Logo-Favicon.png">
+        </script>
+
+      </div>
+
+
+    <% end %>
+    </div>
+
   </div>
 
-</div>
+  <hr>
+  <%= link_to fa("times") + " Cancel", new_member_account_add_money_path( @member ), class: "btn btn-outline-secondary btn-app" %><br>
 
-<hr>
-<%= link_to fa("times") + " Cancel", new_member_account_add_money_path( @member ), class: "btn btn-secondary" %><br>
+</div>

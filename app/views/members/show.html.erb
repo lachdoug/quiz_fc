@@ -1,25 +1,8 @@
-<div class="row">
-  <div class="col-sm">
-    <h2>
-      <%= @member %>
-    </h2>
-  </div>
-  <div class="col-sm clearfix">
-    <h2 class="d-inline-block align-middle float-left">
-      <%= number_to_currency( @member.account.balance, unit: "Q$" ) %>
-    </h2>
-    <div class="d-inline-block align-middle float-right">
-      <%= link_to fa("plus") + " Add Q$", new_member_account_add_money_path( @member ), class: "btn btn-lg btn-link p-1" %>
-    </div>
-  </div>
-</div>
+<%= banner("My Account") %>
 
-<hr>
+<div class="container">
 
-
-<div class="row">
-
-  <div class="col-sm">
+  <div class="row">
 
     <% live_quizzes_groups = @member.live_quizzes_groups %>
 
@@ -28,93 +11,175 @@
         <% quizzes = ( live_quizzes_groups[ status ] || [] ) %>
         <% if quizzes.any? %>
           <% quizzes.each do |quiz| %>
-          <!-- <% if quiz.up? %> -->
-            <p>
-              <% if status == :current %>
-                <h1 class="d-inline-block align-middle">
-                  <%= quiz %>
-                </h1>
-                <%= link_to member_plays_path( @member, quiz_id: quiz.id ), method: :POST, class: "btn btn-outline-primary" do %>
-                  <%= fa("futbol") %> Play
-                <% end %>
-              <% else %>
-                <h5 class="d-inline-block align-middle">
-                  <%= quiz %>
-                </h5>
-                <br><%= quiz.start_local.strftime("%v at %r") %> <%= quiz.league.timezone %> time
-              <% end %>
-            </p>
-          <!-- <% end %> -->
+
+            <div class="col-md-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <% if status == :current %>
+                    <h5>Latest Quiz</h5>
+                    <hr>
+                    <p>
+                      The latest quiz (<%= quiz %>) is ready to play.
+                    </p>
+                    <p>
+                      <%= link_to "Play #{ quiz } Now", member_plays_path( @member, quiz_id: quiz.id ), method: :POST, class: "" %>
+                    </p>
+                  <% else %>
+                    <h5>Upcoming Quiz</h5>
+                    <hr>
+                    <p>
+                      <%= quiz %> will start in <%= time_ago_in_words quiz.start_local, vague: true %> at:
+                    </p>
+                    <p>
+                      <%= quiz.start_local.strftime("%v at %r") %> <%= quiz.league.timezone %> time.
+                    </p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
           <% end %>
         <% end %>
       <% end %>
     <% end %>
 
-    <% if @member.currently_playing.any? %>
-      <h4>Playing</h4>
-      <p>
-        <% @member.currently_playing.each do |play| %>
-          <%= link_to member_play_path( @member, play ), class: "btn btn-link" do %>
-            <%= play.quiz %>
-          <% end %>
-          <br>
-      <% end %>
-      </p>
+    <% @member.currently_playing.each do |play| %>
+
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>In Play</h5>
+            <hr>
+            <p>
+              You have started and not finished <%= play.quiz %>.
+            </p>
+            <p>
+              <%= link_to "Resume Play", member_play_path( @member, play ), class: "" %>
+            </p>
+          </div>
+        </div>
+      </div>
+
     <% end %>
 
     <% finished_playing_groups = @member.finished_playing_groups %>
 
-    <% if finished_playing_groups.any? %>
-      <h4>Played</h4>
-      <% [ :current, :pending, :results, :closed ].each do |status| %>
-        <% plays = ( finished_playing_groups[ status ] || [] ) %>
-        <% if plays.any? %>
-          <h6><i>
-            <% if status == :current %>
-            Completed
-            <% else %>
-            <%= status.to_s.titleize %>
-            <% end %>
-          </i></h6>
-          <p>
-            <% plays.each do |play| %>
-              <%= link_to member_play_path( @member, play ), class: "btn btn-link" do %>
-                <%= play.quiz %>
-              <% end %>
-              <% if play.results? %>
-                <%= pluralize( play.result[:score], 'point' ) %>
-              <% end %>
-              <br>
-          <% end %>
-        </p>
-        <% end %>
+    <% [ :current, :pending, :results, :closed ].each do |status| %>
+      <% plays = ( finished_playing_groups[ status ] || [] ) %>
+      <% plays.each do |play| %>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5>
+                Quiz
+                <% if status == :current %>
+                  Completed
+                <% else %>
+                  <%= status.to_s.titleize %>
+                <% end %>
+              </h5>
+              <hr>
+              <p>
+                You have played <%= play.quiz %>.
+                <% if play.results? %>
+                  You scored <%= pluralize( play.result[:score], 'point' ) %>
+                <% else %>
+                  Waiting to be scored.
+                <% end %>
+              </p>
+              <p>
+                <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
+              </p>
+            </div>
+          </div>
+        </div>
+
       <% end %>
     <% end %>
 
-  </div>
-
-  <div class="col-sm">
-
     <% published_posts = @member.league.published_posts %>
-
-    <% if published_posts %>
-      <% published_posts.each do |post| %>
-      <p>
+    <% published_posts.each do |post| %>
+      <div class="col-md-6 mb-4">
         <div class="card">
           <div class="card-body">
             <div class="float-right"><small><%= time_ago_in_words post.updated_at, vague: true %> ago</small></div>
-            <h4><%= post.title %></h4>
+            <h5>News</h5>
             <hr>
-            <p><%= markdown( post.body ) %></p>
+            <p><%= post.title %></p>
+            <p><%= link_to "Read News Post", member_news_post_path( post ) %></p>
           </div>
         </div>
-      </p>
-      <% end %>
-    <% else %>
-      <p><i>None</i></p>
+      </div>
     <% end %>
 
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>
+            Wallet
+          </h5>
+          <hr>
+          <p>
+            Your Quizbuck Balance is <strong><%= number_to_currency( @member.account.balance, unit: "Q$" ) %></strong>
+          </p>
+          <p>
+            <%= link_to "Add Quizbucks Here", new_member_account_add_money_path( @member ), class: "" %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Send QuizFC a Message</h5>
+          <hr>
+          <p>
+            Contact us for support or suggestions.
+          </p>
+          <p>
+            <%= link_to "Send a message", new_user_support_path, class: "" %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Quiz History</h5>
+          <hr>
+          <p>
+            Review your played quizzes.
+          </p>
+          <p>
+            <% current_user.profile.members.each do |member| %>
+              <%= link_to "View my play history", member_plays_path( member ), class: "" %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Transaction History</h5>
+          <hr>
+          <p>
+            Review the transactions on your account.
+          </p>
+          <p>
+            <% current_user.profile.members.each do |member| %>
+              <%= link_to "View my account history", member_account_path( member ), class: "" %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
-
-
 </div>

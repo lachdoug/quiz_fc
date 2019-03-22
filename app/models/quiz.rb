@@ -49,7 +49,7 @@ class Quiz < ApplicationRecord
   end
 
   def tallyable?
-    stage == :pending || stage == :results
+    quizbook.finalised? && ( stage == :pending || stage == :results )
   end
 
   def results?

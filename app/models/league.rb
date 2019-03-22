@@ -34,14 +34,27 @@ class League < ApplicationRecord
 
   def next_quiz_defaults
     latest_quiz = quizzes.last
+    if latest_quiz
+      number = latest_quiz.number + 1
+      start = latest_quiz.start + 1.week
+      stop = latest_quiz.stop + 1.week
+      results = latest_quiz.results + 1.week
+      close = latest_quiz.close + 1.week
+    else
+      number = 1
+      start = Time.now.noon + 1.week
+      stop = start + 1.day
+      results = stop + 1.day
+      close = results + 1.week
+    end
     {
-      number: latest_quiz.number + 1,
+      number: number,
       fee: 1,
       pool: 50,
-      start: latest_quiz.start + 1.week,
-      stop: latest_quiz.stop + 1.week,
-      results: latest_quiz.results + 1.week,
-      close: latest_quiz.close + 1.week,
+      start: start,
+      stop: stop,
+      results: results,
+      close: close,
     }
   end
 

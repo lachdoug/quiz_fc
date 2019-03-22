@@ -1,26 +1,32 @@
-<%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
+<%= banner "Quiz Results" %>
 
-<h2>Quiz <%= @play.quiz.number %> result</h2>
-<hr>
+<div class="container">
+
+  <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary btn-app float-right" %>
+
+  <h2>Quiz <%= @play.quiz.number %> result</h2>
+  <hr>
 
 
-<h3>Score: <%= pluralize @play.result[:score], "point" %></h3>
-<h4>Rank: <%= @play.result[:rank] %> of <%= @play.result[:total_plays] %></h4>
+  <h3>Score: <%= pluralize @play.result[:score], "point" %></h3>
+  <h4>Rank: <%= @play.result[:rank] %> of <%= @play.result[:total_plays] %></h4>
 
-<hr>
-<%= link_to fa("arrow-right") + " Review", member_play_question_review_path( @member, @play, @play.questions.first ), class: "btn btn-outline-primary float-right" if @play.questions.any? %>
-<ol>
-  <% @play.questions.each do |question| %>
-    <li>
-      <%= strip_tags markdown( question.ask ) %><br>
-      <strong>
-        <% answer = @play.answer_for question %>
-        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
-        <% points = @play.points_for question %>
-      </strong>
-      <%= pluralize points, 'point' %>
-      <%= points.to_i > 0 ? fa("check") : ( fa("times") + ( question.answer ? " (#{question.answer})" : "" ) ) %>
-      <%= link_to fa("arrow-right"), member_play_question_review_path( @member, @play, question ) %>
-    </li>
-  <% end %>
-</ol>
+  <hr>
+  <%= link_to fa("arrow-right") + " Review", member_play_question_review_path( @member, @play, @play.questions.first ), class: "btn btn-outline-primary btn-app float-right" if @play.questions.any? %>
+  <ol>
+    <% @play.questions.each do |question| %>
+      <li>
+        <%= strip_tags markdown( question.ask ) %><br>
+        <strong>
+          <% answer = @play.answer_for question %>
+          <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered! ") %>
+          <% points = @play.points_for question %>
+        </strong>
+        <%= pluralize points, 'point' %>
+        <%= points.to_i > 0 ? fa("check") : ( fa("times") + ( question.answer ? " (#{question.answer})" : "" ) ) %>
+        <%= link_to fa("arrow-right"), member_play_question_review_path( @member, @play, question ) %>
+      </li>
+    <% end %>
+  </ol>
+
+</div>

@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 2018_12_13_192500) do
     t.string "timezone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [nil], name: "index_leagues_on_account_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -80,7 +79,6 @@ ActiveRecord::Schema.define(version: 2018_12_13_192500) do
     t.datetime "updated_at", null: false
     t.index ["league_id"], name: "index_members_on_league_id"
     t.index ["profile_id"], name: "index_members_on_profile_id"
-    t.index [nil], name: "index_members_on_account_id"
   end
 
   create_table "plays", force: :cascade do |t|

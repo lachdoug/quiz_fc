@@ -1,30 +1,54 @@
-<h2>Terminate <%= current_user.email %></h2>
-<div class="alert alert-danger">
-  <h3><%= fa( "exclamation-triangle" ) %> Warning</h3>
-  <p>You are about to delete your QuizFC user account.</p>
-  <p>All your data will be lost and not recoverable. Be sure that you want to proceed.</p>
-  <hr>
-  <div class="clearfix">
-    Back to safety
-    <%= link_to fa("check") + " Do not terminate", user_management_path, class: "btn btn-primary float-right" %>
+<%= banner "Terminate My Account" %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="alert alert-danger">
+        <h3><%= fa( "exclamation-triangle" ) %> Warning</h3>
+        <p>You are about to delete your QuizFC user account.</p>
+        <p>All your data will be lost and not recoverable. Be sure that you want to proceed.</p>
+        <hr>
+        <div class="clearfix">
+          Back to safety
+          <%= link_to fa("check") + " Do not terminate", user_management_path, class: "btn btn-primary float-right" %>
+        </div>
+      </div>
+      <div class="form-wrapper">
+        <div class="text-center">
+          <h5>Terminate <%= current_user.email %></h5>
+          <p>
+            Enter your password and the code to terminate.
+          </p>
+        </div>
+
+        <%= form_with model: @user_termination, url: user_termination_path, local: true do |form| %>
+
+          <%= render "/errors", object: @user_termination %>
+
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <div class="form-group">
+                <%= form.label :password %>
+                <%= form.password_field :password_confirmation, placeholder: "Confirm password", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                Confirm by entering code: <%= session[:user_termination_code] %><br>
+                <%= form.label :code %>
+                <%= form.text_field :code_confirmation, placeholder: "Confirm code", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <%= link_to fa("times") + " Cancel", user_management_path, class: "btn btn-outline-secondary btn-app float-left" %>
+            <%= button_tag type: :submit, class: "btn btn-outline-danger btn-app float-right" do %><%= fa("skull") %> Terminate<% end %>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
   </div>
 </div>
-<%= form_with model: @user_termination, url: user_termination_path, local: true do |form| %>
-
-  <%= render "/errors", object: @user_termination %>
-
-  <div class="form-group">
-    <%= form.label :password %>
-    <%= form.password_field :password_confirmation, placeholder: "Confirm password", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    Confirm by entering code: <%= session[:user_termination_code] %><br>
-    <%= form.label :code %>
-    <%= form.text_field :code_confirmation, placeholder: "Confirm code", class: "form-control" %>
-  </div>
-
-  <%= link_to fa("times") + " Cancel", user_management_path, class: "btn btn-secondary" %>
-  <%= button_tag type: :submit, class: "btn btn-danger" do %><%= fa("skull") %> Terminate<% end %>
-
-<% end %>

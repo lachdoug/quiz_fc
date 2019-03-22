@@ -1,6 +1,7 @@
 User.create!([
   {
     email: "lach@engines.org",
+    email_confirmation: "lach@engines.org",
     password: "password",
     password_confirmation: "password",
     confirmation_token: "KwGQJGJDoePzr4u2AjWJ",
@@ -9,6 +10,7 @@ User.create!([
   },
   {
     email: "lachdoug@gmail.com",
+    email_confirmation: "lachdoug@gmail.com",
     password: "password",
     password_confirmation: "password",
     confirmation_token: "KxGQJGJDoePzr4u2AjWJ",
@@ -16,6 +18,7 @@ User.create!([
   },
   {
     email: "alfs@bigpond.com",
+    email_confirmation: "alfs@bigpond.com",
     password: "password",
     password_confirmation: "password",
     confirmation_token: "KxGQJGJDoePzr4u2AjWx",
@@ -24,6 +27,7 @@ User.create!([
   },
   {
     email: "matt@axissocial.com.au",
+    email_confirmation: "matt@axissocial.com.au",
     password: "password",
     password_confirmation: "password",
     confirmation_token: "KxGQJGJDoePzr4u2AjWq",

@@ -3,17 +3,17 @@
     <% if @play && question.previous_question %>
       <%= link_to fa("arrow-left") + " Previous",
       member_play_question_path( @member, play_id: @play.id, id: question.previous_question.id ),
-      class: "btn btn-outline-primary" %>
+      class: "btn btn-outline-primary btn-app" %>
     <% else %>
       <%= link_to fa("arrow-left") + " Previous",
-      nil, class: "btn btn-outline-primary disabled" %>
+      nil, class: "btn btn-outline-primary btn-app disabled" %>
     <% end %>
     <% if @play && question.next_question %>
-      <%= link_to "Next ".html_safe + fa("arrow-right"), member_play_question_path( @member, play_id: @play.id, id: question.next_question.id ), class: "btn btn-outline-primary" %>
+      <%= link_to "Next ".html_safe + fa("arrow-right"), member_play_question_path( @member, play_id: @play.id, id: question.next_question.id ), class: "btn btn-outline-primary btn-app" %>
     <% elsif @play %>
-      <%= link_to "Next ".html_safe + fa("arrow-right"), member_play_complete_path( @member, play_id: @play.id ), class: "btn btn-outline-primary" %>
+      <%= link_to "Next ".html_safe + fa("arrow-right"), member_play_complete_path( @member, play_id: @play.id ), class: "btn btn-outline-primary btn-app" %>
     <% else %>
-      <%= link_to "Next ".html_safe + fa("arrow-right"), nil, class: "btn btn-outline-primary disabled" %>
+      <%= link_to "Next ".html_safe + fa("arrow-right"), nil, class: "btn btn-outline-primary btn-app disabled" %>
     <% end %>
   </div>
 </div>

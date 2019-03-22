@@ -14,22 +14,22 @@
 
   </head>
 
-  <body class="<%= controller_name == 'landings' ? 'landing' : layout %>">
+  <body>
 
-    <div class="container-fluid">
-      <%= render '/layouts/navbar' %>
-    </div>
-    <div class="container">
-      <%= render '/layouts/flash_messages' %>
-    </div>
-    <main class="<%= controller_name == 'landings' ? '' : 'container page' %>">
-      <%= yield %>
-    </main>
-    <% if devise_controller? %>
-      <%= render '/layouts/supporters' %>
+    <%= render '/layouts/navbar' %>
+    <%= render '/layouts/flash_messages' %>
+    <main>
+    <% if layout === "application" %>
+    <%= yield %>
+    <% else %>
+      <div class="container">
+        <%= yield %>
+      </div>
     <% end %>
-    <% if controller_name == 'landings' || devise_controller? %>
-    <%= render '/layouts/footer' %>
+
+    </main>
+    <% if layout === "application" %>
+      <%= render '/layouts/footer' %>
     <% end %>
 
   </body>

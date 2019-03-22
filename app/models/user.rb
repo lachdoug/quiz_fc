@@ -6,7 +6,12 @@ class User < ApplicationRecord
          :confirmable, :lockable
          #, :omniauthable
 
+  attr_accessor :email_confirmation
+
   has_one :profile
+
+  validates :email, confirmation: true
+  validates :email_confirmation, presence: true
 
   def remember_me
     true

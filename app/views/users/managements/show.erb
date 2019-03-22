@@ -1,27 +1,41 @@
-<%= link_to fa("arrow-up"), profile_path(), class: "btn btn-outline-primary float-right" %>
+<%= banner("Manage My Account") %>
 
-<h2><%= current_user.email %></h2>
-<hr>
-<p>
-  Change your username and/or password.
-  <%= link_to "Edit my credentials", edit_user_registration_path, class: "btn-link" %>
-</p>
-<hr>
-<p>
-  If you need help, or if you have a suggestion, please send us a message.
-  <%= link_to "Send QuizFC a message", new_user_support_path, class: "btn-link" %>
-</p>
-<hr>
-<p>
-  <% current_user.profile.members.each do |member| %>
-    Review your played quizzes. <%= link_to "View my play history", member_plays_path( member ), class: "btn-link" %>
-  <% end %>
-</p>
-<hr>
-<p>
-  <% current_user.profile.members.each do |member| %>
-    Review the transactions on your account. <%= link_to "View my account history", member_account_path( member ), class: "btn-link" %>
-  <% end %>
-</p>
-<hr>
-<p>Unhappy. Want to leave QuizFC. <%= link_to "Terminate my account", user_termination_path %></p>
+<div class="container">
+
+  <div class="clearfix mb-4">
+    <%= link_to fa("arrow-up"), profile_path, class: "btn btn-outline-primary btn-app float-right" %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Login Details</h5>
+          <hr>
+          <p>
+            Change your email and/or password.
+          </p>
+          <p>
+            <%= link_to "Edit my credentials", edit_user_registration_path, class: "" %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Terminate Account</h5>
+          <hr>
+          <p>
+            Unhappy. Want to leave QuizFC.
+          </p>
+          <p>
+            <%= link_to "Terminate my account", user_termination_path %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

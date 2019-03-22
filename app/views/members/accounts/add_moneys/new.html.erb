@@ -1,18 +1,47 @@
-<h2>Add money</h2>
+<%= banner("Add money") %>
 
-<%= form_for :add_money, url: member_account_add_money_path( @member ) do |f| %>
+<div class="container">
+  <div class="col-sm-8 offset-sm-2">
+    <div class="form-wrapper">
+      <div class="text-center">
+        <h5>
+          Top up your Quiz FC account
+        </h5>
+        <p>
+          Please enter an amount.
+        </p>
 
-  <div class="form-group form-group-narrow">
-    <%= f.label :amount %> (<%= @member.league.currency %>)<br />
+      </div>
 
-    <%= f.number_field :amount, autofocus: true, min: "10", required: :required, placeholder: "minimum is 10", class: "form-control" %>
+      <%= form_for :add_money, url: member_account_add_money_path( @member ) do |f| %>
+
+        <div class="form-group form-group-narrow">
+        </div>
+
+        <div class="form-group form-group-narrow clearfix">
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="form-group">
+              <%= f.label :amount %> (<%= @member.league.currency %>)<br />
+              <%= f.number_field :amount, autofocus: true, min: "10", required: :required, placeholder: "minimum is 10", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <%= link_to fa("times") + " Cancel", member_path( @member ), class: "btn btn-outline-secondary btn-app float-left" %>
+          <%= f.button type: :submit, class: "btn btn-outline-primary float-right btn-app" do %>
+            <%= fa("check") + " OK" %>
+          <% end %>
+        </div>
+
+
+
+      <% end %>
+
+    </div>
   </div>
-
-  <div class="form-group form-group-narrow clearfix">
-    <%= link_to fa("times") + " Cancel", member_path( @member ), class: "btn btn-secondary float-left" %>
-    <%= f.button type: :submit, class: "btn btn-primary float-right" do %>
-      <%= fa("check") + " OK" %>
-    <% end %>
-  </div>
-
-<% end %>
+</div>

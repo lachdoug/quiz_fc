@@ -1,34 +1,40 @@
-<div class="float-right">
-  <% if @play.last_question %>
-    <%= link_to fa("arrow-left") + " Previous",
-    member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary" %>
+<%= banner "Quiz Complete" %>
+
+<div class="container">
+
+  <div class="float-right">
+    <% if @play.last_question %>
+      <%= link_to fa("arrow-left") + " Previous",
+      member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary btn-app" %>
+    <% end %>
+    <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary btn-app" %>
+  </div>
+
+  <h2>Quiz <%= @play.quiz.number %> complete</h2>
+  <hr>
+
+  <% if @play.affordable? %>
+    <h4>Click OK to submit this quiz for scoring. This will cost you <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You will then be in the running to win a prize.</h4>
+    <%= link_to member_play_complete_path( @member, @play ),
+        method: :post, class: "btn btn-outline-primary btn-app" do %>
+      <%= fa("check") + " OK" %>
+    <% end %>
+  <% else %>
+    <h4>To fee to submit this quiz for scoring is <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You do not have enough and will need to add money to your account.</h4>
   <% end %>
-  <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary" %>
+
+  <hr>
+  <ol>
+    <% @play.questions.each do |question| %>
+      <li>
+        <%= strip_tags markdown( question.ask ) %><br>
+        <strong>
+          <% answer = @play.answer_for question %>
+          <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered!", class: "not-answered" ) %>
+        </strong>
+        <%= link_to fa("arrow-right"), member_play_question_path( @member, @play, question ) %>
+      </li>
+    <% end %>
+  </ol>
+
 </div>
-
-<h2>Quiz <%= @play.quiz.number %> complete</h2>
-<hr>
-
-<% if @play.affordable? %>
-  <h4>Click OK to submit this quiz for scoring. This will cost you <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You will then be in the running to win a prize.</h4>
-  <%= link_to member_play_complete_path( @member, @play ),
-      method: :post, class: "btn btn-outline-primary" do %>
-    <%= fa("check") + " OK" %>
-  <% end %>
-<% else %>
-  <h4>To fee to submit this quiz for scoring is <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You do not have enough and will need to add money to your account.</h4>
-<% end %>
-
-<hr>
-<ol>
-  <% @play.questions.each do |question| %>
-    <li>
-      <%= strip_tags markdown( question.ask ) %><br>
-      <strong>
-        <% answer = @play.answer_for question %>
-        <%= answer.present? ? answer.join(", ") : content_tag( :i, "Not answered!", class: "not-answered" ) %>
-      </strong>
-      <%= link_to fa("arrow-right"), member_play_question_path( @member, @play, question ) %>
-    </li>
-  <% end %>
-</ol>

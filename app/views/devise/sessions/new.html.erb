@@ -1,46 +1,55 @@
-<div class="row">
-  <div class="col-sm-8 offset-sm-2">
-    <div class="form-wrapper">
-      <h3>
-        <% if resource_name == :admin %>
-          Sign in admin
-        <% else %>
-          Welcome Back, Please Sign In Below
-        <% end %>
-      </h3>
+<%= banner("Sign in to QuizFC") %>
 
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= f.label :email %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: 'required' %>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <%= f.label :password %><br />
-              <%= f.password_field :password, autocomplete: "off", class: "form-control", required: 'required' %>
-            </div>
-          </div>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="form-wrapper">
+        <div class="text-center">
+          <h5>
+            <% if resource_name == :admin %>
+              Sign in admin
+            <% else %>
+              Welcome Back!
+            <% end %>
+          </h5>
+          <p>
+            Please Login Below
+          </p>
         </div>
 
-        <div class="text-center">
-          <% if false && devise_mapping.rememberable? %>
-            <div class="form-group">
-              <div class="form-check">
-                <%= f.check_box :remember_me, class: "form-check-input" %>
-                <%= f.label :remember_me, class: "form-check-label" %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: 'required' %>
               </div>
             </div>
-          <% end %>
-          <div class="form-group">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, autocomplete: "off", class: "form-control", required: 'required' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-buttons">
             <%= f.submit "Sign in", class: "btn btn-outline-primary btn-app" %>
           </div>
-        </div>
-      <% end %>
+        <% end %>
 
-      <%= render "devise/shared/links" %>
+        <% if resource_name == :user %>
+          <div class="devise-links">
+            <%= link_to( "Sign up", new_registration_path(resource_name) ) %> |
+            <%= link_to( "Forgot password", new_password_path(resource_name) ) %> |
+            <%= link_to( "Support", user_support_path ) %>
+          </div>
+        <% end %>
+
+      </div>
     </div>
   </div>
+
 </div>

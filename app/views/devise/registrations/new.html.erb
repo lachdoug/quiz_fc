@@ -1,79 +1,67 @@
-<h2>Sign up</h2>
+<%= banner("Sign up to QuizFC") %>
 
-<div class="row">
-  <div class="col-sm-6">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="form-wrapper">
+        <div class="text-center">
+          <h5>
+            Join the Quiz FC Team
+          </h5>
+          <p>
+            We Are Excited to Have You!
+          </p>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
+        </div>
 
-      <div class="form-group form-group-narrow">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-      </div>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
 
-      <div class="form-group form-group-narrow">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :email_confirmation %>
+                <%= f.email_field :email_confirmation, autocomplete: "email", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <% end %>
+                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-buttons">
+            <%= f.submit "Sign up", class: "btn btn-outline-primary btn-app" %>
+          </div>
+
+          <div class="devise-links">
+            <%= link_to( "Sign in", new_session_path(resource_name) ) %> |
+            <%= link_to( "Resend confirmation", new_confirmation_path(resource_name) ) %> |
+            <%= link_to( "Support", user_support_path ) %>
+          </div>
+
         <% end %>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+
       </div>
-
-      <div class="form-group form-group-narrow">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="form-group form-group-narrow">
-        <%= f.submit "Sign up", class: "btn btn-primary" %>
-      </div>
-
-      <%= render "devise/shared/links" %>
-
-    <% end %>
-  </div>
-  <div class="col-sm-6">
-
-    <h3>Thank You for Joining QuizFC</h3>
-
-    <p>A quizFc football quiz is open every week.</p>
-
-    <p>To play each quiz costs one $QuizFC (QuizFC Dollar)</p>
-
-    <p>One $QuizFC equals one $NZ (New Zealand Dollar).</p>
-
-    <p>Thereafter you need to ensure that you have at least one $QuizFC in your account to play the next quiz.</p>
-
-    <p>By playing each QuizFC quiz you have the chance to win a share of the prize pool for that quiz.</p>
-
-    <p>The prize pool will be comprised of 50 % of all entrants fees for that quiz.</p>
-
-    <p>Any SQuizFC held in your account will be transferred to you, on request.</p>
-
-    <hr>
-
-    <p>To increase your $QuizFC Account Balance, please deposit $10 in the bank account below:</p>
-
-    <table class="table">
-      <tbody>
-        <tr>
-          <th scope="row">Bank</th>
-          <td>ANZ</td>
-        </tr>
-        <tr>
-          <th scope="row">Branch Address</th>
-          <td>205 queen Street, Auckland, New Zealand</td>
-        </tr>
-        <tr>
-          <th scope="row">Bank Account Number</th>
-          <td>xx xxxx xxxxxxx xx</td>
-        </tr>
-        <tr>
-          <th scope="row">Swift Code</th>
-          <td>ANZBNZ22</td>
-        </tr>
-      </tbody>
-    </table>
-
+    </div>
   </div>
 </div>

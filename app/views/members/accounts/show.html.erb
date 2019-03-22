@@ -1,24 +1,30 @@
-<%= link_to fa('arrow-up'), user_management_path, class: "btn btn-outline-primary float-right" %>
+<%= banner("Transaction History") %>
 
-<h2><%= @member %></h2>
-<h3>Transaction history</h3>
+<div class="container">
 
-<p>
-  <strong>Balance</strong>
-  <%= number_to_currency( @account.balance, unit: "Q$" ) %>
-</p>
+  <%= link_to fa('arrow-up'), profile_path, class: "btn btn-outline-primary btn-app float-right" %>
 
-<% if @account.transactions.any? %>
-  <table class="table">
-    <tr>
-      <th>Date</th>
-      <th>Amount</th>
-      <th>Comment</th>
-    </tr>
-    <%= render(
-      collection: @account.transactions,
-      partial: 'accounts/transaction' ) %>
-  </table>
-<% else %>
-   None
-<% end %>
+  <h2><%= @member %></h2>
+  <h3>Transaction history</h3>
+
+  <p>
+    <strong>Balance</strong>
+    <%= number_to_currency( @account.balance, unit: "Q$" ) %>
+  </p>
+
+  <% if @account.transactions.any? %>
+    <table class="table">
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Comment</th>
+      </tr>
+      <%= render(
+        collection: @account.transactions,
+        partial: 'accounts/transaction' ) %>
+    </table>
+  <% else %>
+     None
+  <% end %>
+
+</div>

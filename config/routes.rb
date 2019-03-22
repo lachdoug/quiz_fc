@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { registrations: "users/registrations" }
-  devise_for :admins, skip: [ :registrations ], controllers: { sessions: "admins/sessions" }
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions"
+  }
+  devise_for :admins, skip: [
+    :registrations,
+    # :sessions
+    ], controllers: { sessions: "admins/sessions" }
   devise_scope :admin do
     scope :admins do
       get '/edit' => 'devise/registrations#edit', as: :edit_admin_registration
@@ -40,6 +46,7 @@ Rails.application.routes.draw do
         resource :result, only: [ :show ], module: :plays
         resource :closed, only: [ :show ], module: :plays
       end
+      resources :news_posts, only: [ :show ], module: :members
     end
     namespace :users, as: :user do
       resource :management, only: [ :show ]

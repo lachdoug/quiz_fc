@@ -1,6 +1,9 @@
-<%= render 'questions/partials/question',
-question: @question,
-url: member_play_question_path( @member, @play, @question ),
-up: member_plays_path( @member, quiz_id: @play.quiz_id ),
-method: :patch,
-local: true %>
+<%= banner "Quiz Question" %>
+<div class="container">
+  <%= render 'questions/partials/question',
+  question: @question,
+  url: member_play_question_path( @member, @play, @question ),
+  up: member_plays_path( @member, quiz_id: @play.quiz_id ),
+  method: :patch,
+  local: true %>
+</div>

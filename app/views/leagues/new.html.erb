@@ -11,7 +11,7 @@
 
   <div class="form-group form-group-narrow">
     <%= form.label :timezone %>
-    <%= form.select :timezone, options_for_select( League.timezones ), { include_blank: true }, class: "form-control" %>
+    <%= form.time_zone_select :timezone, nil, { include_blank: true }, class: "form-control" %>
   </div>
 
   <div class="form-group form-group-narrow">

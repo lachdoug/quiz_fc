@@ -1,75 +1,79 @@
-<nav class="navbar <%= 'navbar-expand' unless current_admin || current_admin %> navbar-expand-lg navbar-light bg-transparent">
-  <% unless controller_name == "tests" && action_name == "new" %>
+<div class="container-fluid">
 
-    <a class="navbar-brand" href="/">
-      <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
-    </a>
+  <nav class="navbar <%= 'navbar-expand' unless current_admin || current_admin %> navbar-expand-lg navbar-light bg-transparent">
+    <% unless controller_name == "tests" && action_name == "new" %>
 
-    <% if !devise_controller? %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <a class="navbar-brand" href="/">
+        <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
+      </a>
+
+      <% if !devise_controller? %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <% end %>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <% if current_user %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= fa "user" %> <%= current_user.email %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+                <%= link_to fa("home") + " Home", profile_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to fa("cog") + " Manage", user_management_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_user_session_path, class: "dropdown-item", method: :delete) %>
+              </div>
+            </li>
+          <% elsif !devise_controller? %>
+            <li class="nav-item">
+              <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "nav-link" )  %>
+            </li>
+          <% end %>
+          <% if current_admin %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarAdminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= fa "user" %> <%= current_admin.email %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
+                <%= content_tag :div, class: "dropdown-label" do %>
+                  <%= content_tag :div, content_tag( :strong, "Admin" )  %>
+                  <% current_admin.roles.each do |role| %>
+                    <%= content_tag :div, content_tag( :small, role )  %>
+                  <% end %>
+                <% end %>
+                <div class="dropdown-divider"></div>
+                <% if current_admin.quizmaster? %>
+                  <%= link_to fa("chess-queen") + " Quizmaster", quizmaster_path, class: "dropdown-item" %>
+                <% end %>
+                <% if current_admin.comptroller? %>
+                  <%= link_to fa("calculator ") + " Comptroller", comptroller_path, class: "dropdown-item" %>
+                <% end %>
+                <% if current_admin.developer? %>
+                  <%= link_to fa("database") + " Database", rails_admin_path, class: "dropdown-item" %>
+                  <%= link_to fa("download") + " Datadump", datadump_path, target: "quizfc_admin_datadump", class: "dropdown-item" %>
+                <% end %>
+                <div class="dropdown-divider"></div>
+                <%= link_to fa("edit") + " Edit", edit_admin_registration_path, class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
+                <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_admin_session_path, class: "dropdown-item", method: :delete) %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+    <% else %>
+
+      <span class="navbar-brand">
+        <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
+      </span>
+
     <% end %>
 
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav ml-auto">
-        <% if current_user %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= fa "user" %> <%= current_user.email %>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarUserDropdown">
-              <%= link_to fa("home") + " Home", profile_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to fa("cog") + " Manage", user_management_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_user_session_path, class: "dropdown-item", method: :delete) %>
-            </div>
-          </li>
-        <% elsif !devise_controller? %>
-          <li class="nav-item">
-            <%= link_to( fa( "sign-in-alt" ) + ' Sign in', new_user_session_path, class: "nav-link" )  %>
-          </li>
-        <% end %>
-        <% if current_admin %>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarAdminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= fa "user" %> <%= current_admin.email %>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-              <%= content_tag :div, class: "dropdown-label" do %>
-                <%= content_tag :div, content_tag( :strong, "Admin" )  %>
-                <% current_admin.roles.each do |role| %>
-                  <%= content_tag :div, content_tag( :small, role )  %>
-                <% end %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <% if current_admin.quizmaster? %>
-                <%= link_to fa("chess-queen") + " Quizmaster", quizmaster_path, class: "dropdown-item" %>
-              <% end %>
-              <% if current_admin.comptroller? %>
-                <%= link_to fa("calculator ") + " Comptroller", comptroller_path, class: "dropdown-item" %>
-              <% end %>
-              <% if current_admin.developer? %>
-                <%= link_to fa("database") + " Database", rails_admin_path, class: "dropdown-item" %>
-                <%= link_to fa("download") + " Datadump", datadump_path, target: "quizfc_admin_datadump", class: "dropdown-item" %>
-              <% end %>
-              <div class="dropdown-divider"></div>
-              <%= link_to fa("edit") + " Edit", edit_admin_registration_path, class: "dropdown-item" %>
-              <div class="dropdown-divider"></div>
-              <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_admin_session_path, class: "dropdown-item", method: :delete) %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
+  </nav>
 
-  <% else %>
-
-    <span class="navbar-brand">
-      <%= image_tag "quizfc-logo.png", height: 68, width: 171 %>
-    </span>
-
-  <% end %>
-
-</nav>
+</div>
