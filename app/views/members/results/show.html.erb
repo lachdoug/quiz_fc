@@ -1,0 +1,48 @@
+<%= banner("My Results") %>
+
+<div class="container">
+
+  <div class="clearfix mb-4">
+    <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary btn-app float-right" %>
+  </div>
+
+  <div class="row">
+
+    <% finished_playing_groups = @member.finished_playing_groups %>
+
+    <% [ :current, :pending, :results, :closed ].each do |status| %>
+      <% plays = ( finished_playing_groups[ status ] || [] ) %>
+      <% plays.each do |play| %>
+
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5>
+                Quiz
+                <% if status == :current %>
+                  Completed
+                <% else %>
+                  <%= status.to_s.titleize %>
+                <% end %>
+              </h5>
+              <hr>
+              <p>
+                You have played <%= play.quiz %>.
+                <% if play.results? %>
+                  You scored <%= pluralize( play.result[:score], 'point' ) %>.
+                <% else %>
+                  Waiting to be scored.
+                <% end %>
+              </p>
+              <p>
+                <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

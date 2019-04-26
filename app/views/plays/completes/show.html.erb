@@ -7,7 +7,7 @@
       <%= link_to fa("arrow-left") + " Previous",
       member_play_question_path( @member, @play, @play.last_question ), class: "btn btn-outline-primary btn-app" %>
     <% end %>
-    <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary btn-app" %>
+    <%= link_to fa("arrow-up"), member_results_path( @member ), class: "btn btn-outline-primary btn-app" %>
   </div>
 
   <h2>Quiz <%= @play.quiz.number %> complete</h2>

@@ -1,38 +1,27 @@
-<%= link_to fa('arrow-up'), profile_path, class: "btn btn-outline-primary float-right" %>
+<%= banner("Quiz History") %>
 
-<h2><%= @member %></h2>
-<h3>Play history</h3>
+<div class="container">
 
-<p>
-  <strong>Played</strong>
-  <%= pluralize( @member.plays.count, "quiz" ) %>
-</p>
+  <div class="clearfix">
+    <%= link_to fa('arrow-up'), profile_path, class: "btn btn-outline-primary btn-app float-right" %>
+  </div>
 
-<% if @plays.any? %>
-  <table class="table table-hover">
-    <tr>
-      <th></th>
-      <th>Quiz</th>
-      <th>Play</th>
-      <th>Started</th>
-      <th>Result</th>
-    </tr>
-    <% @plays.each do |play| %>
-      <tr>
-        <td>
-          <%= play.quiz %>
-        </td>
-        <td>
-          <%= quiz_status_badge play.quiz %>
-        </td>
-        <td>
-          <%= play_status_badge play %>
-        </td>
-        <td><%= time_ago_in_words play.created_at, vague: true %> ago</td>
-        <td><%= "Score #{ play.result[:score] } ( rank #{ play.result[:rank] } of #{ play.result[:total_plays] } )" if play.result %></td>
+  <p>
+    <strong>Played</strong>
+    <%= pluralize( @member.plays.count, "quiz" ) %>
+  </p>
 
-      </tr>
-    <% end %>
-  </table>
+  <% if @plays.any? %>
+    <table class="table table-hover">
+      <% @plays.each do |play| %>
+        <tr>
+          <td><%= play.quiz %></td>
+          <td><%= play.created_at.in_time_zone( play.quiz.league.timezone ).strftime("%v") %></td>
+          <td><%= "Score #{ play.result[:score] } ( rank #{ play.result[:rank] } of #{ play.result[:total_plays] } )" if play.result %></td>
+        </tr>
+      <% end %>
+    </table>
 
-<% end %>
+  <% end %>
+
+</div>

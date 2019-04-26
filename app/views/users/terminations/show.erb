@@ -11,7 +11,7 @@
         <hr>
         <div class="clearfix">
           Back to safety
-          <%= link_to fa("check") + " Do not terminate", user_management_path, class: "btn btn-primary float-right" %>
+          <%= link_to fa("check") + " Do not terminate", user_management_path, class: "btn btn-outline-secondary btn-app float-right" %>
         </div>
       </div>
       <div class="form-wrapper">
@@ -19,6 +19,9 @@
           <h5>Terminate <%= current_user.email %></h5>
           <p>
             Enter your password and the code to terminate.
+          </p>
+          <p>
+            Termination code: <strong><%= session[:user_termination_code] %></strong>
           </p>
         </div>
 
@@ -30,13 +33,12 @@
             <div class="col-md-6 offset-md-3">
               <div class="form-group">
                 <%= form.label :password %>
-                <%= form.password_field :password_confirmation, placeholder: "Confirm password", class: "form-control" %>
+                <%= form.password_field :password_confirmation, placeholder: "Enter password", class: "form-control" %>
               </div>
 
               <div class="form-group">
-                Confirm by entering code: <%= session[:user_termination_code] %><br>
                 <%= form.label :code %>
-                <%= form.text_field :code_confirmation, placeholder: "Confirm code", class: "form-control" %>
+                <%= form.text_field :code_confirmation, placeholder: "Enter termination code", class: "form-control" %>
               </div>
             </div>
           </div>

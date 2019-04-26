@@ -1,8 +1,12 @@
 module Members
   class NewsPostsController < ApplicationController
 
-    before_action :set_member, only: [:show]
+    before_action :set_member, only: [:index, :show]
     before_action :set_news_post, only: [:show]
+
+    def index
+      @news_posts = @member.league.published_posts
+    end
 
     def show
     end

@@ -1,7 +1,7 @@
 <%= banner "Quiz Result" %>
 
 <div class="container">
-  <%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary btn-app float-right" %>
+  <%= link_to fa("arrow-up"), member_results_path( @member ), class: "btn btn-outline-primary btn-app float-right" %>
 
   <h2>Quiz <%= @play.quiz.number %> pending</h2>
   <hr>

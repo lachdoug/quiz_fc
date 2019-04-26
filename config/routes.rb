@@ -46,7 +46,8 @@ Rails.application.routes.draw do
         resource :result, only: [ :show ], module: :plays
         resource :closed, only: [ :show ], module: :plays
       end
-      resources :news_posts, only: [ :show ], module: :members
+      resource :results, only: [ :show ], module: :members
+      resources :news_posts, only: [ :index, :show ], module: :members
     end
     namespace :users, as: :user do
       resource :management, only: [ :show ]
