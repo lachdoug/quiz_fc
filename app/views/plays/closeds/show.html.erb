@@ -1,5 +1,12 @@
-<%= link_to fa("arrow-up"), member_path( @member ), class: "btn btn-outline-primary float-right" %>
+<%= banner "Quiz Closed" %>
 
-<h2>Quiz <%= @play.quiz.number %> closed</h2>
-<hr>
-<h4>This quiz has closed.</h4>
+<div class="container">
+
+  <%= link_to fa("arrow-up"), member_results_path( @member ), class: "btn btn-outline-primary btn-app float-right" %>
+
+  <h2>Quiz <%= @play.quiz.number %> closed</h2>
+  <hr>
+  <h4>This quiz is closed and is awaiting scoring.</h4>
+  <p>Results will be available <%= @play.quiz.results_local.strftime("%v at %r") %> (<%= @play.quiz.league.timezone %> time).</p>
+
+</div>

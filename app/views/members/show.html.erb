@@ -46,7 +46,7 @@
         </div>
       </div>
 
-    <% else %>
+    <% elsif live_quizzes_groups[:waiting] && live_quizzes_groups[:waiting].any? %>
 
 
       <% quiz = live_quizzes_groups[:waiting].first %>
@@ -66,8 +66,20 @@
         </div>
       </div>
 
-    <% end %>
+    <% else %>
 
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5>Latest Quiz</h5>
+          <hr>
+          <p>There are no queued quizzes.</p>
+          <p>A new quiz will be published soon.</p>
+        </div>
+      </div>
+    </div>
+
+    <% end %>
 
 
     <% finished_playing = @member.finished_playing %>

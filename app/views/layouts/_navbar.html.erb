@@ -34,11 +34,11 @@
           <% if current_admin %>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarAdminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= fa "user" %> <%= current_admin.email %>
+                <%= fa "cogs" %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
                 <%= content_tag :div, class: "dropdown-label" do %>
-                  <%= content_tag :div, content_tag( :strong, "Admin" )  %>
+                  <%= content_tag :div, content_tag( :strong, current_admin.email )  %>
                   <% current_admin.roles.each do |role| %>
                     <%= content_tag :div, content_tag( :small, role )  %>
                   <% end %>
