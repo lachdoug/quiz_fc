@@ -1,5 +1,11 @@
 Rails.application.configure do
 
+
+# production_config = config_for :production
+#
+#   puts "Production Config:\n#{production_config}"
+
+
   # For Devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
