@@ -28,3 +28,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore production.yml. This file does not normally exist, but ignore anyway,
+# in case it's created in debugging.
+/config/production.yml

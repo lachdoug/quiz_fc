@@ -71,6 +71,7 @@ ENV['DEVISE_LDAP_ADMIN_PASSWORD'] default is `nil` - REQUIRED
 Template file to /config/production.yml
 
 `---
+production:
  action_mailer:
   default_url_options:
    host: _Engines_Builder(fqdn)
