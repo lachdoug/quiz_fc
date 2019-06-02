@@ -4,6 +4,8 @@ Rails.application.configure do
 
   production_config = config_for :production
 
+asddadsasdDAs
+
 logger.debug "Production Config:\n#{production_config}"
 
   config.action_mailer = production_config['action_mailer']
