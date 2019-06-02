@@ -5,21 +5,21 @@ Rails.application.configure do
   production_config = config_for :production
   action_mailer_config = production_config['action_mailer']
 
-  config.action_mailer = action_mailer_config
+  # config.action_mailer = action_mailer_config
 
-  # config.action_mailer.default_url_options = {
-  #   protocol: action_mailer_config['default_url_options']['protocol'],
-  #   host: action_mailer_config['default_url_options']['host']
-  # }
-  #
-  # config.action_mailer.delivery_method = action_mailer_config['delivery_method']
-  #
-  # config.action_mailer.smtp_settings = {
-  #   address: action_mailer_config['smtp_settings']['address'],
-  #   port: action_mailer_config['smtp_settings']['port'],
-  #   domain: action_mailer_config['smtp_settings']['domain'],
-  #   enable_starttls_auto:  action_mailer_config['smtp_settings']['enable_starttls_auto'],
-  # }
+  config.action_mailer.default_url_options = {
+    protocol: action_mailer_config['default_url_options']['protocol'],
+    host: action_mailer_config['default_url_options']['host']
+  }
+
+  config.action_mailer.delivery_method = action_mailer_config['delivery_method']
+
+  config.action_mailer.smtp_settings = {
+    address: action_mailer_config['smtp_settings']['address'],
+    port: action_mailer_config['smtp_settings']['port'],
+    domain: action_mailer_config['smtp_settings']['domain'],
+    enable_starttls_auto:  action_mailer_config['smtp_settings']['enable_starttls_auto'],
+  }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
