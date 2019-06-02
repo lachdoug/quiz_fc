@@ -2,13 +2,11 @@ Rails.application.configure do
 
   #setup mail
 
-#   production_config = config_for :production
-#
-# asddadsasdDAs
-#
-# logger.debug "Production Config:\n#{production_config}"
-#
-#   config.action_mailer = production_config['action_mailer']
+  production_config = config_for :production
+
+  logger.debug "Production Config:\n#{production_config}"
+
+  config.action_mailer = production_config['action_mailer']
 
   # Settings specified here will take precedence over those in config/application.rb.
 
