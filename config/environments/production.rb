@@ -4,6 +4,8 @@ Rails.application.configure do
 
   production_config = config_for :production
 
+# puts "Production Config:\n#{production_config}"
+
   config.action_mailer = production_config['action_mailer']
 
   # Settings specified here will take precedence over those in config/application.rb.
