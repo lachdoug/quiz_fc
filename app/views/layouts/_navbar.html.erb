@@ -20,7 +20,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= fa "user" %> <%= current_user.email %>
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarUserDropdown">
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">
                 <%= link_to fa("home") + " Home", profile_path, class: "dropdown-item" %>
                 <div class="dropdown-divider"></div>
                 <%= link_to( fa("sign-out-alt") + ' Sign out', destroy_user_session_path, class: "dropdown-item", method: :delete) %>
@@ -36,7 +36,7 @@
               <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarAdminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= fa "cogs" %>
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarAdminDropdown">
                 <%= content_tag :div, class: "dropdown-label" do %>
                   <%= content_tag :div, content_tag( :strong, current_admin.email )  %>
                   <% current_admin.roles.each do |role| %>
