@@ -1,0 +1,12 @@
+development:
+ action_mailer:
+  default_url_options:
+   host: quizfc.com
+   protocol: https
+  delivery_method: :smtp
+  smtp_settings:
+   address: smtp
+   port: 25
+   domain: quizfc.com
+   enable_starttls_auto : false
+   attachments_storage_path: /tmp
