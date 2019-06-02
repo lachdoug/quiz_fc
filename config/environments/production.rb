@@ -3,7 +3,7 @@ Rails.application.configure do
   #setup mail
 
   production_config = config_for :production
-  action_mailer_config = OpenStruct.new production_config['action_mailer']
+  action_mailer_config = production_config['action_mailer']
 
   config.action_mailer = action_mailer_config
 
