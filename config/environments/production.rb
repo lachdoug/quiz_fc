@@ -3,7 +3,7 @@ Rails.application.configure do
   #setup mail
 
   production_config = config_for :production
-  action_mailer_config = production_config['action_mailer']
+  action_mailer_config = OpenStruct.new production_config['action_mailer']
 
   config.action_mailer = action_mailer_config
 
@@ -85,7 +85,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "quizfc_#{Rails.env}"
 
-  # config.action_mailer.perform_caching = false
+  config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
