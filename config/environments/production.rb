@@ -3,11 +3,7 @@ Rails.application.configure do
   #setup mail
 
   production_config = config_for :production
-
-  Rails.logger.debug "Production Config:\n#{production_config}"
-
   action_mailer_config = production_config['action_mailer']
-
   config.action_mailer.default_url_options.protocol = action_mailer_config['default_url_options']['protocol']
   config.action_mailer.default_url_options.host = action_mailer_config['default_url_options']['host']
   config.action_mailer.delivery_method = action_mailer_config['delivery_method']
