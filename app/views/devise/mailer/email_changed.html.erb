@@ -1,12 +1,14 @@
-<p>Hello <%= @email %>!</p>
+<html>
+  <p>Hello <%= @email %>!</p>
 
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your QuizFC account email is being changed to <%= @resource.unconfirmed_email %>.</p>
-<% else %>
-  <p>We're contacting you to notify you that your QuizFC account email has been changed to <%= @resource.email %>.</p>
-<% end %>
+  <% if @resource.try(:unconfirmed_email?) %>
+    <p>We're contacting you to notify you that your QuizFC account email is being changed to <%= @resource.unconfirmed_email %>.</p>
+  <% else %>
+    <p>We're contacting you to notify you that your QuizFC account email has been changed to <%= @resource.email %>.</p>
+  <% end %>
 
-<p>
-  Thanks,<br>
-  QuizFC Support Team
-</p>
+  <p>
+    Thanks,<br>
+    QuizFC Support Team
+  </p>
+</html>

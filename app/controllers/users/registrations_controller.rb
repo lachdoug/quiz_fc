@@ -14,8 +14,8 @@ module Users
       user_management_path(resource)
     end
 
-    def after_sign_up_path_for(resource)
-      signed_up_path
+    def after_inactive_sign_up_path_for(resource)
+      user_signed_up_path
     end
 
   end

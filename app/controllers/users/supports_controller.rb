@@ -6,7 +6,7 @@ module Users
 
     def create
       SupportMailer.email( current_user, contact_params[:message] ).deliver_now
-      redirect_to user_management_path, notice: "Successfully sent message."
+      redirect_to root_path, notice: "Successfully sent message."
     end
 
     private
