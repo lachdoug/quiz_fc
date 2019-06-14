@@ -19,18 +19,10 @@
           </div>
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group">
                 <%= f.text_field :from, readonly: :readonly,
                 value: "From: #{ current_user.email }",
-                class: "form-control" %>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <%= f.text_field :name,
-                autofocus: true,
-                placeholder: "Your name",
                 class: "form-control" %>
               </div>
             </div>
@@ -41,6 +33,7 @@
               <div class="form-group">
                 <%= f.text_area :message,
                 placeholder: "Your message",
+                autofocus: true,
                 rows: 15,
                 class: "form-control" %>
               </div>
