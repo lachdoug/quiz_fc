@@ -3,6 +3,7 @@ module Users
 
 
     def show
+      @email = params[:email]
     end
 
   end

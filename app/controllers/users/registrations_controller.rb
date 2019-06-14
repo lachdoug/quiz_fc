@@ -15,7 +15,7 @@ module Users
     end
 
     def after_inactive_sign_up_path_for(resource)
-      user_signed_up_path
+      user_signed_up_path( email: resource[:email] )
     end
 
   end
