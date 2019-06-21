@@ -78,7 +78,7 @@ class Play < ApplicationRecord
       account_id: member.account.id,
       amount: -quiz.fee,
       comment: "#{quiz} fee",
-      params: { play_id: id } 
+      params: { play_id: id }
     ).process
   end
 
@@ -95,11 +95,11 @@ class Play < ApplicationRecord
   end
 
   def pending?
-    complete? && quiz.pending?
+    ( complete? || scored? ) && quiz.pending?
   end
 
   def results?
-    quiz.results?
+    scored? && quiz.results?
   end
 
 end

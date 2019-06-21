@@ -8,7 +8,11 @@ class TransactorsController < ApplicationController
   end
 
   def create
-    @transactor = Transactor.new( transactor_params )
+    @transactor = Transactor.new( {
+      params: {
+        manual: current_admin.email
+      }
+    }.merge transactor_params )
     respond_to do |format|
       if @transactor.process
         format.html { redirect_to comptroller_account_path( @transactor.member_account ), notice: 'Transactions were successful.' }
@@ -23,7 +27,7 @@ class TransactorsController < ApplicationController
 
   def transactor_params
     params.require(:transactor).permit(
-      :code, :account_id, :amount, :comment
+      :account_id, :amount, :comment
     )
   end
 

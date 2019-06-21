@@ -64,7 +64,7 @@
   <%= form.label 'question[config_params][preamble]', "Preamble" %>
   <%= text_area_tag 'question[config_params][preamble]',
   config["preamble"], class: "form-control",
-  disabled: @question.final_edit? %>
+  readonly: @question.final_edit? %>
 </div>
 
 <%= form.label 'question[config_params][left_box]', "Body" %>
@@ -73,21 +73,21 @@
     <%= text_area_tag 'question[config_params][left_box]',
     config["left_box"],
     class: "form-control",
-    disabled: @question.final_edit? %>
+    readonly: @question.final_edit? %>
   </div>
 
   <div class="col form-group">
     <%= text_area_tag 'question[config_params][centre_box]',
     config["centre_box"],
     class: "form-control",
-    disabled: @question.final_edit? %>
+    readonly: @question.final_edit? %>
   </div>
 
   <div class="col form-group">
     <%= text_area_tag 'question[config_params][right_box]',
     config["right_box"],
     class: "form-control",
-    disabled: @question.final_edit? %>
+    readonly: @question.final_edit? %>
   </div>
 
 </div>
@@ -98,7 +98,7 @@
   <%= text_area_tag 'question[config_params][ask]',
     config["ask"],
     class: "form-control",
-    disabled: @question.final_edit? %>
+    readonly: @question.final_edit? %>
 </div>
 
 <% #= hidden_field_tag 'question[config_params][form_type]', "buttons" %>
@@ -117,12 +117,12 @@
         <%= text_field_tag 'question[config_params][options][]',
         option,
         class: "form-control",
-        disabled: @question.final_edit? %>
+        readonly: @question.final_edit? %>
         <% if i >= 4 %>
           <div class="input-group-append">
             <%= button_tag type: "button",
             class: "auckland-edit-delete-button-button btn btn-outline-secondary",
-            disabled: @question.final_edit? do %>
+            readonly: @question.final_edit? do %>
               <%= fa 'times' %>
             <% end %>
           </div>
@@ -142,7 +142,7 @@
         <%= text_field_tag 'question[config_params][options][]',
         nil,
         class: "form-control",
-        disabled: @question.final_edit? %>
+        readonly: @question.final_edit? %>
       </div>
     <% end %>
 
@@ -173,7 +173,7 @@
     <%= number_field_tag 'question[config_params][points]',
     config["points"],
     class: "form-control",
-    disabled: @question.final_edit? %>
+    readonly: @question.final_edit? %>
   </div>
 
 </div>

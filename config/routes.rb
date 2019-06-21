@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resource :signed_up
   end
 
+  resource :support
+
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
   # authenticated :user do

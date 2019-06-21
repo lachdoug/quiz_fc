@@ -4,7 +4,7 @@
 
   <div class="row mt-4">
 
-    <% @member.currently_playing.each do |play| %>
+    <% @member.current_plays.each do |play| %>
 
       <div class="col-md-12 mb-4">
         <div class="card">
@@ -16,6 +16,44 @@
             </p>
             <p>
               <%= link_to "Resume Play", member_play_path( @member, play ), class: "" %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+    <% @member.pending_plays.each do |play| %>
+
+      <div class="col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Quiz waiting to be scored.</h5>
+            <hr>
+            <p>
+              You have finished playing <%= play.quiz %>. The results will be available in <%= time_ago_in_words play.quiz.results_local, vague: true %>.
+            </p>
+            <p>
+              <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+    <% @member.results_plays.each do |play| %>
+
+      <div class="col-md-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Quiz scored.</h5>
+            <hr>
+            <p>
+              You played <%= play.quiz %>. The results are now available!
+            </p>
+            <p>
+              <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
             </p>
           </div>
         </div>

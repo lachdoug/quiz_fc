@@ -21,4 +21,8 @@ class Account < ApplicationRecord
     transact!( amount, opts )
   end
 
+  def process_card_payment( params )
+    CardPayment.new( self, params ).process
+  end
+
 end

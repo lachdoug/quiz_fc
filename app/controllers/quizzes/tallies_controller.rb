@@ -11,7 +11,7 @@ module Quizzes
           notice: "Successfully tallied quiz."
       else
         redirect_to quizmaster_quiz_path( @quiz ),
-          alert: "Failed to tally quiz."
+          alert: "Failed to tally quiz. To tally a quiz it must be in pending or results stage, and its quizbook must be finalised."
       end
     end
 

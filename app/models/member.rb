@@ -17,7 +17,7 @@ class Member < ApplicationRecord
   end
 
   def live_quizzes
-    quizzes.where( status: 1 )
+    quizzes.where( status: :ive )
   end
 
   # def live_unscored_plays
@@ -30,12 +30,20 @@ class Member < ApplicationRecord
   #   scored_plays.joins( :quiz ).where( quizzes: { status: :live } )
   # end
 
-  def currently_playing
+  def current_plays
     plays.where( status: :playing ).joins( :quiz ).where( quizzes: { status: :live } )
   end
 
   def finished_playing
     plays.where.not( status: :playing ).joins( :quiz ).where( quizzes: { status: :live } )
+  end
+
+  def pending_plays
+    plays.select &:pending?
+  end
+
+  def results_plays
+    plays.select &:results?
   end
 
   def finished_playing_groups
