@@ -2,7 +2,7 @@ class Profile < ApplicationRecord
 
   has_many :members
   has_many :leagues, through: :members
-  has_many :quizzes
+  # has_many :quizzes
 
   belongs_to :user
 
@@ -22,16 +22,16 @@ class Profile < ApplicationRecord
     members.first || members.create( league_id: 1 )
   end
 
-  def played_quizzes
-    quizzes.distinct.sort
-  end
-
-  def unplayed_quizzes
-    ( Quiz.playing - played_quizzes ).sort
-  end
-
-  def next_quiz
-    Quiz.first
-  end
+  # def played_quizzes
+  #   quizzes.distinct.sort
+  # end
+  #
+  # def unplayed_quizzes
+  #   ( Quiz.playing - played_quizzes ).sort
+  # end
+  #
+  # def next_quiz
+  #   Quiz.first
+  # end
 
 end
