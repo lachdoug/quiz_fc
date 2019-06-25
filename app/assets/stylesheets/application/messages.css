@@ -8,8 +8,10 @@
 
 .flash-alert {
   background-color: red;
+  border-radius: 100px;
 }
 
 .flash-notice {
   background-color: green;
+  border-radius: 100px;
 }
