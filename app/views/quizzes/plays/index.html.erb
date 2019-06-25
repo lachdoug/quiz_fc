@@ -1,4 +1,4 @@
-<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<%= link_to fa('arrow-up'), quizmaster_quiz_path( @quiz ), class: "btn btn-outline-primary float-right" %>
 <h2><%= @quiz %> plays</h2>
 
 <table class="table table-hover">
@@ -8,7 +8,9 @@
       <th>User</th>
       <th>Status</th>
       <th>Answers</th>
-      <th>Result</th>
+      <th>Points</th>
+      <th>Score</th>
+      <th>Rank</th>
     </tr>
   </thead>
 
@@ -18,8 +20,10 @@
         <td><%= play.id %></td>
         <td><%= play.member.profile.user.email %></td>
         <td><%= play.status %></td>
-        <td><pre><%= play.answers.to_yaml %></pre></td>
-        <td><pre><%= play.result.to_yaml %></pre></td>
+        <td><pre><%= play.answers.map.with_index { |answer, index | { index + 1 => answer.join( ', ' ) } }.inject( &:merge ).to_yaml.sub( "---\n", '' ) %></pre></td>
+        <td><pre><%= play.scored? ? play.result[:points].map.with_index { |score, index | { index + 1 => score } }.inject( &:merge ).to_yaml.sub( "---\n", '' ) : '' %></pre></td>
+        <td><%= play.scored? ? play.result[:score] : '' %></td>
+        <td><%= play.scored? ? "#{ play.result[:rank] }/#{ play.result[:total_plays] }" : '' %></td>
       </tr>
     <% end %>
   </tbody>

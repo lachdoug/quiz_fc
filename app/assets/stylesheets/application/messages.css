@@ -1,12 +1,15 @@
 .flash-messages {
   text-align: center;
+  color: white;
   padding: 10px;
+  font-size: 1.5rem;
+  font-weight: bolder;
 }
 
 .flash-alert {
-  color: red;
+  background-color: red;
 }
 
 .flash-notice {
-  color: green;
+  background-color: green;
 }
