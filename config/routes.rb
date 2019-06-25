@@ -68,7 +68,7 @@ Rails.application.routes.draw do
         resources :accounts, only: [ :index, :show ]
         resources :quizzes, except: [ :new, :create ] do
           resource :tally, only: [ :new, :create ], module: :quizzes
-          # resource :recalculate, only: [ :create ], module: :quizzes
+          resources :plays, only: [ :index, :show ], module: :quizzes
           resource :status, only: [ :update ], module: :quizzes
         end
         resources :quizbooks, except: [ :edit, :update ] do

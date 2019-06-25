@@ -1,0 +1,26 @@
+<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<h2><%= @quiz %> plays</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Status</th>
+      <th>Answers</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @quiz.plays.each do |play| %>
+      <tr>
+        <td><%= play.id %></td>
+        <td><%= play.member.profile.user.email %></td>
+        <td><%= play.status %></td>
+        <td><pre><%= play.answers.to_yaml %></pre></td>
+        <td><pre><%= play.result.to_yaml %></pre></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

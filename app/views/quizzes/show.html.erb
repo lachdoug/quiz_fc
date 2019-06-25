@@ -1,4 +1,8 @@
-<%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary float-right" %>
+<div class="float-right">
+  <%= link_to fa('arrow-up'), quizmaster_path, class: "btn btn-outline-primary" %>
+  <%= link_to fa('dice') + ' Plays', quizmaster_quiz_plays_path( quiz_id: @quiz.id ), class: "btn btn-outline-primary" %>
+</div>
+
 
 <h2><%= @quiz %></h2>
 
