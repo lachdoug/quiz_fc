@@ -8,40 +8,45 @@
 
   <div class="row">
 
-    <% grouped_finished_plays = @member.grouped_finished_plays %>
+    <% if @member.finished_plays.any? %>
 
-    <% [ :current, :pending, :results, :closed ].each do |status| %>
-      <% plays = ( grouped_finished_plays[ status ] || [] ) %>
-      <% plays.each do |play| %>
+      <% grouped_finished_plays = @member.grouped_finished_plays %>
 
-        <div class="col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5>
-                Quiz
-                <% if status == :current %>
-                  Completed
-                <% else %>
-                  <%= status.to_s.titleize %>
-                <% end %>
-              </h5>
-              <hr>
-              <p>
-                You have played <%= play.quiz %>.
-                <% if play.results? %>
-                  You scored <%= pluralize( play.result[:score], 'point' ) %>.
-                <% else %>
-                  Waiting to be scored.
-                <% end %>
-              </p>
-              <p>
-                <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
-              </p>
+      <% [ :current, :pending, :results, :closed ].each do |status| %>
+        <% plays = ( grouped_finished_plays[ status ] || [] ) %>
+          <% plays.each do |play| %>
+
+            <div class="col-md-6 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5>
+                    Quiz
+                    <% if status == :current %>
+                      Completed
+                    <% else %>
+                      <%= status.to_s.titleize %>
+                    <% end %>
+                  </h5>
+                  <hr>
+                  <p>
+                    You have played <%= play.quiz %>.
+                    <% if play.results? %>
+                      You scored <%= pluralize( play.result[:score], 'point' ) %>.
+                    <% else %>
+                      Waiting to be scored.
+                    <% end %>
+                  </p>
+                  <p>
+                    <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-      <% end %>
+          <% end %>
+        <% end %>
+    <% else %>
+      <i>None</i>
     <% end %>
 
   </div>
