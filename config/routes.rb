@@ -14,21 +14,16 @@ Rails.application.routes.draw do
       put '' => 'devise/registrations#update', as: :admin_registration
     end
   end
-  namespace :users, as: :user do
-    resource :signed_up
-  end
 
-  resource :support
+  mount StripeEvent::Engine, at: '/stripe_webhooks'
 
   mount RailsAdmin::Engine => '/database', as: 'rails_admin'
 
-  # authenticated :user do
-  #   root to: "profiles#show"
-  # end
-  # authenticated :admin do
-  #   root to: "admins#show"
-  # end
   root to: "landings#show"
+
+  namespace :users, as: :user do
+    resource :signed_up
+  end
 
   authenticate :user do
     resource :profile, only: [ :show ]
@@ -36,7 +31,9 @@ Rails.application.routes.draw do
       resource :activity, only: [ :show ]
       resource :account, only: [ :show ], module: :members do
         resource :add_money, only: [ :new, :create ], module: :accounts
-        resource :payment, only: [ :new, :create ], module: :accounts
+        resource :successful_checkout, only: [ :show ], module: :accounts
+        resource :failed_checkout, only: [ :show ], module: :accounts
+        # resource :payment, only: [ :new, :create ], module: :accounts
       end
       resources :plays, only: [ :index, :show, :create ] do
         resources :questions, only: [ :new, :show, :update ], module: :plays do

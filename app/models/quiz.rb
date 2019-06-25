@@ -36,16 +36,16 @@ class Quiz < ApplicationRecord
     end
   end
 
-  def playable?
+  def current?
     stage == :current
   end
 
   def up?
-    playable? || stage == :waiting
+    current? || stage == :waiting
   end
 
   def completable?
-    playable? || stage == :pending
+    current? || stage == :pending
   end
 
   def tallyable?

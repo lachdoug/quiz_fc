@@ -15,6 +15,7 @@ gem 'dotiw' # better distance_of_time_in_words
 gem 'to_regexp'
 gem 'damerau-levenshtein'
 gem 'stripe'
+gem 'stripe_event'
 
 group :production do
   gem 'mysql2'

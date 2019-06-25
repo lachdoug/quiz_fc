@@ -1,0 +1,28 @@
+<div id="member_account_add_money_create">
+  <h3>Connecting with stripe</h3>
+
+  <%= form_tag member_account_payment_path( @member ), id: "member_account_payment_form" do %>
+    <%= hidden_field_tag 'amount', @amount %>
+
+    <div id="add_money_with_stripe_button" class="xxxxxxxxxd-none">
+
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-amount="<%= @amount.to_i * 100 %>"
+        data-name="QuizFC"
+        data-description="Payment for Quizbucks"
+        data-locale="auto"
+        data-zip-code="true"
+        data-image= "https://quizfc.com/favicon.ico">
+      </script>
+
+      <script>
+      debugger
+      $("#add_money_with_stripe_button .stripe-button-el").click()
+      </script>
+
+    </div>
+
+  <% end %>
+</div>

@@ -71,8 +71,8 @@ class League < ApplicationRecord
     {
       "Australian Dollar" => :AUD,
       "Euro" => :EUR,
-      "New Zealand Dollar" => :UKP,
-      "United Kingdom Pound" => :UKP,
+      "New Zealand Dollar" => :NZD,
+      "Great Britain Pound" => :GBP,
       "United States Dollar" => :USD,
     }
   end

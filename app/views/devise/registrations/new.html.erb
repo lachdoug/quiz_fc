@@ -1,4 +1,4 @@
-<%= banner("Sign up to QuizFC") %>
+<%= banner("Join up to QuizFC") %>
 
 <div class="container">
   <div class="row">
@@ -50,13 +50,13 @@
           </div>
 
           <div class="form-buttons">
-            <%= f.submit "Sign up", class: "btn btn-outline-primary btn-app" %>
+            <%= f.submit "Join up", class: "btn btn-outline-primary btn-app" %>
           </div>
 
           <div class="devise-links">
             <%= link_to( "Sign in", new_session_path(resource_name) ) %> |
             <%= link_to( "Resend confirmation", new_confirmation_path(resource_name) ) %> |
-            <%= link_to( "Support", support_path ) %>
+            <%= link_to( "Contact", "https://www.quizfc.com/contact-us/" ) %>
           </div>
 
         <% end %>

@@ -21,6 +21,8 @@
     <% end %>
   <% else %>
     <h4>To fee to submit this quiz for scoring is <%= pluralize @play.quiz.fee, 'Quizbuck' %>. You do not have enough and will need to add money to your account.</h4>
+    <p><%= link_to "Add money", new_member_account_add_money_path( @member ), class: "btn btn-outline-primary btn-app" %></p>
+
   <% end %>
 
   <hr>

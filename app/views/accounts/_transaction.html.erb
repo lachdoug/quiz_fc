@@ -1,5 +1,5 @@
 <tr>
   <td><%= transaction.created_at %></td>
   <td><%= number_with_precision( transaction.amount, precision: 2 ) %></td>
-  <td><%= transaction.detail %></td>
+  <td><%= markdown transaction.detail %></td>
 <tr>

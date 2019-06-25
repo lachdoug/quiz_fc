@@ -9,7 +9,18 @@ module Members
       end
 
       def create
-        redirect_to new_member_account_payment_path( @member, amount: params[:add_money][:amount] )
+        amount = params[:add_money][:amount].to_i
+        succeeded_path = member_account_successful_checkout_path( member_id: @member.id )
+        failed_path = member_account_failed_checkout_path( member_id: @member.id )
+        @stripe_session = StripeSession.new(
+          @account,
+          amount,
+          succeeded_path,
+          failed_path
+        )
+        respond_to do |format|
+          format.js { render :create }
+        end
       end
 
       private

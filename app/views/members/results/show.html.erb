@@ -8,10 +8,10 @@
 
   <div class="row">
 
-    <% finished_playing_groups = @member.finished_playing_groups %>
+    <% grouped_finished_plays = @member.grouped_finished_plays %>
 
     <% [ :current, :pending, :results, :closed ].each do |status| %>
-      <% plays = ( finished_playing_groups[ status ] || [] ) %>
+      <% plays = ( grouped_finished_plays[ status ] || [] ) %>
       <% plays.each do |play| %>
 
         <div class="col-md-6 mb-4">

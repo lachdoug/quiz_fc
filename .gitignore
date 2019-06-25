@@ -32,3 +32,7 @@
 # Ignore production.yml. This file does not normally exist, but ignore anyway,
 # in case it's created in debugging.
 /config/production.yml
+
+
+#Ignore dev scrap
+/scrap/*

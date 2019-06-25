@@ -27,7 +27,7 @@ class PlaysController < ApplicationController
 
   def create
     @quiz = @member.quizzes.find( params[:quiz_id] )
-    if @quiz.playable?
+    if @quiz.current?
       @play = @member.plays.create(
                 member_id: @member.id,
                 quiz_id: params[:quiz_id] )

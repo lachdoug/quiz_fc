@@ -1,0 +1,10 @@
+// $("#member_account_add_money_form").replaceWith(
+//   "< %= j render( 'create' ) %>"
+// )
+
+
+var stripe = Stripe('<%= @stripe_session.publishable_key %>');
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @stripe_session.id %>'
+});

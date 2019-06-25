@@ -12,6 +12,7 @@ class Play < ApplicationRecord
   enum status: [ :playing, :complete, :scored ]
 
   def calculate_score!
+    return if playing?
     question_points.tap do |points|
       points.sum.tap do |score|
         update result: { points: points, score: score }
@@ -34,7 +35,7 @@ class Play < ApplicationRecord
   end
 
   def give_answer( number, answer )
-    quiz.playable? && playing? && (
+    quiz.current? && playing? && (
       answers[ number - 1 ] = answer
       save
     )
@@ -94,8 +95,12 @@ class Play < ApplicationRecord
     quiz.closed?
   end
 
+  def current?
+    quiz.current?
+  end
+
   def pending?
-    ( complete? || scored? ) && quiz.pending?
+    ( complete? || scored? ) && ( quiz.current? || quiz.pending? )
   end
 
   def results?

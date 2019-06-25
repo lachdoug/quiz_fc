@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_192500) do
+ActiveRecord::Schema.define(version: 2019_06_23_222813) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "accountable_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2018_12_13_192500) do
     t.string "postable_type"
     t.integer "status", default: 0
     t.string "title"
-    t.string "body"
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["postable_id"], name: "index_posts_on_postable_id"

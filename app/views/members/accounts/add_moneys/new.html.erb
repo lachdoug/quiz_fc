@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="col-sm-8 offset-sm-2">
-    <div class="form-wrapper">
+    <div id="member_account_add_money_form" class="form-wrapper">
       <div class="text-center">
         <h5>
           Top up your Quiz FC account
@@ -13,14 +13,15 @@
 
       </div>
 
-      <%= form_for :add_money, url: member_account_add_money_path( @member ) do |f| %>
+      <%= form_for :add_money,
+        url: member_account_add_money_path( @member ),
+        remote: true do |f| %>
 
         <div class="form-group form-group-narrow">
         </div>
 
         <div class="form-group form-group-narrow clearfix">
         </div>
-
 
         <div class="row">
           <div class="col-md-6 offset-md-3">

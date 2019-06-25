@@ -53,7 +53,7 @@
               You played <%= play.quiz %>. The results are now available!
             </p>
             <p>
-              <%= link_to "Review Quiz", member_play_path( @member, play ), class: "" %>
+              <%= link_to "Review Quiz Results", member_play_path( @member, play ), class: "" %>
             </p>
           </div>
         </div>
@@ -61,13 +61,11 @@
 
     <% end %>
 
+    <% grouped_live_quizzes = @member.grouped_live_quizzes %>
 
+    <% if grouped_live_quizzes[:current] && grouped_live_quizzes[:current].any? %>
 
-    <% live_quizzes_groups = @member.live_quizzes_groups %>
-
-    <% if live_quizzes_groups[:current] && live_quizzes_groups[:current].any? %>
-
-      <% quiz = live_quizzes_groups[:current].first %>
+      <% quiz = grouped_live_quizzes[:current].first %>
 
       <div class="col-md-6 mb-4">
         <div class="card">
@@ -84,10 +82,9 @@
         </div>
       </div>
 
-    <% elsif live_quizzes_groups[:waiting] && live_quizzes_groups[:waiting].any? %>
+    <% elsif grouped_live_quizzes[:waiting] && grouped_live_quizzes[:waiting].any? %>
 
-
-      <% quiz = live_quizzes_groups[:waiting].first %>
+      <% quiz = grouped_live_quizzes[:waiting].first %>
 
       <div class="col-md-6 mb-4">
         <div class="card">
@@ -95,7 +92,7 @@
             <h5>Latest Quiz</h5>
             <hr>
             <p>
-              <%= quiz %> will start in <%= time_ago_in_words quiz.start_local, vague: true %> at:
+              <%= quiz %> will start in <%= time_ago_in_words quiz.start_local, vague: true %>:
             </p>
             <p>
               <%= quiz.start_local.strftime("%v at %r") %> <%= quiz.league.timezone %> time.
@@ -106,21 +103,21 @@
 
     <% else %>
 
-    <div class="col-md-6 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h5>Latest Quiz</h5>
-          <hr>
-          <p>There are no queued quizzes.</p>
-          <p>A new quiz will be published soon.</p>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5>Latest Quiz</h5>
+            <hr>
+            <p>There are no queued quizzes.</p>
+            <p>A new quiz will be published soon.</p>
+          </div>
         </div>
       </div>
-    </div>
 
     <% end %>
 
 
-    <% finished_playing = @member.finished_playing %>
+    <% finished_playing = @member.finished_plays %>
 
     <div class="col-md-6 mb-4">
       <div class="card">
