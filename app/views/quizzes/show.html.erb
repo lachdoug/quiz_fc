@@ -25,25 +25,44 @@
 
 <div class="row">
   <div class="col-sm-6">
+
+    <% time_now = Time.current %>
+
     <p>
       <strong>Start</strong><br>
       UTC: <%= @quiz.start.strftime("%v at %r") %><br>
-      <%= @quiz.league.timezone %>: <%= @quiz.start_local.strftime("%v at %r") %>
+      <%= @quiz.league.timezone %>: <%= @quiz.start_local.strftime("%v at %r") %><br>
+      <small>
+        <%= distance_of_time_in_words time_now, @quiz.start_local %>
+        <%= time_now > @quiz.start_local ? 'ago' : 'away' %>
+      </small>
     </p>
     <p>
       <strong>Stop</strong><br>
       UTC: <%= @quiz.stop.strftime("%v at %r") %><br>
-      <%= @quiz.league.timezone %>: <%= @quiz.stop_local.strftime("%v at %r") %>
+      <%= @quiz.league.timezone %>: <%= @quiz.stop_local.strftime("%v at %r") %><br>
+      <small>
+        <%= distance_of_time_in_words time_now, @quiz.stop_local %>
+        <%= time_now > @quiz.stop_local ? 'ago' : 'away' %>
+      </small>
     </p>
     <p>
       <strong>Results</strong><br>
       UTC: <%= @quiz.results.strftime("%v at %r") %><br>
-      <%= @quiz.league.timezone %>: <%= @quiz.results_local.strftime("%v at %r") %>
+      <%= @quiz.league.timezone %>: <%= @quiz.results_local.strftime("%v at %r") %><br>
+      <small>
+        <%= distance_of_time_in_words time_now, @quiz.results_local %>
+        <%= time_now > @quiz.results_local ? 'ago' : 'away' %>
+      </small>
     </p>
     <p>
       <strong>Close</strong><br>
       UTC: <%= @quiz.close.strftime("%v at %r") %><br>
-      <%= @quiz.league.timezone %>: <%= @quiz.close_local.strftime("%v at %r") %>
+      <%= @quiz.league.timezone %>: <%= @quiz.close_local.strftime("%v at %r") %><br>
+      <small>
+        <%= distance_of_time_in_words time_now, @quiz.close_local %>
+        <%= time_now > @quiz.close_local ? 'ago' : 'away' %>
+      </small>
     </p>
   </div>
   <div class="col-sm-6">
