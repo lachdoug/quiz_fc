@@ -1,18 +1,17 @@
 .flash-messages {
   text-align: center;
   padding: 10px;
+  color: white;
   font-size: 1.5rem;
   font-weight: bolder;
 }
 
 .flash-alert {
-  color: red;
-  border: 2px solid red;
+  background-color: red;
   border-radius: 100px;
 }
 
 .flash-notice {
-  color: green;
-  border: 2px solid green;
+  background-color: green;
   border-radius: 100px;
 }
