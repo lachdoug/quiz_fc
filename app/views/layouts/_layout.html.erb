@@ -21,7 +21,6 @@
     <%= render '/layouts/navbar' %>
     <%= render '/layouts/flash_messages' %>
     <main>
-      <%= Rails.env.production? %>
     <% if layout === "application" %>
     <%= yield %>
     <% else %>
