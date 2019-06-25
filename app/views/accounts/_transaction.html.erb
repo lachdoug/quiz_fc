@@ -1,5 +1,12 @@
 <tr>
   <td><%= transaction.created_at %></td>
   <td><%= number_with_precision( transaction.amount, precision: 2 ) %></td>
-  <td><%= markdown transaction.detail %></td>
+  <td>
+    <%= markdown transaction.detail %>
+  </td>
+  <td>
+    <% if transaction.params[:stripe] %>
+      <%= link_to 'Receipt', transaction.params[:stripe][:receipt_url] %>
+    <% end %>
+  </td>
 <tr>

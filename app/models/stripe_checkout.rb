@@ -29,9 +29,10 @@ class StripeCheckout
             charge: charge.id,
             customer: stripe_customer_id,
             checkout: stripe_checkout_id,
+            receipt_url: receipt_url
           }
         },
-        comment: "Payment for #{ bucks } Quizbucks. [Receipt](#{ receipt_url })",
+        comment: "Payment received for #{ bucks } Quizbucks.",
         ).process
 
       end
