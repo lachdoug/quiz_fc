@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_23_222813) do
+ActiveRecord::Schema.define(version: 2019_06_25_194525) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer "accountable_id"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2019_06_23_222813) do
     t.integer "account_id"
     t.decimal "amount", precision: 8, scale: 2
     t.integer "code", default: 0
-    t.string "params"
+    t.text "params"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
