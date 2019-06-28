@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_one :profile
 
   validates :email, confirmation: true
-  validates :email_confirmation, presence: true
 
   def remember_me
     true

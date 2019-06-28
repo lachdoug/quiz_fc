@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@quizfc.com'
+  default from: 'QuizFC Support Team <support@quizfc.com>'
   layout 'mailer'
 end

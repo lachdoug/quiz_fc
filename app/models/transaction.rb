@@ -4,12 +4,12 @@ class Transaction < ApplicationRecord
 
   serialize :params, Hash
 
-  def detail
-    comment.to_s
-  end
+  # def detail
+  #   comment.to_s
+  # end
 
-  def params_as_s
-    params.map { |k,v| " #{ k.to_s.humanize }: #{ v }" }.join
-  end
+  # def params_as_s
+  #   params.map { |k,v| " #{ k.to_s.humanize }: #{ v }" }.join
+  # end
 
 end

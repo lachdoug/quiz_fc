@@ -2,16 +2,18 @@
   text-align: center;
   padding: 10px;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bolder;
 }
 
 .flash-alert {
-  background-color: red;
-  border-radius: 100px;
+  padding: 0px 20px;
+  background-color: #A00;
+  border-radius: 5px;
 }
 
 .flash-notice {
-  background-color: green;
-  border-radius: 100px;
+  padding: 0px 20px;
+  background-color: #0A0;
+  border-radius: 5px;
 }

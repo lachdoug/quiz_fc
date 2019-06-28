@@ -1,0 +1,12 @@
+<tr>
+  <td><%= transaction.created_at %></td>
+  <td><%= number_with_precision( transaction.amount, precision: 2 ) %></td>
+  <td>
+    <%= markdown transaction.comment %>
+  </td>
+  <td>
+    <% if transaction.params[:stripe] && transaction.params[:stripe][:receipt_url] %>
+      <%= link_to 'Receipt', transaction.params[:stripe][:receipt_url], target: "quizfc_stripe_receipt" %>
+    <% end %>
+  </td>
+<tr>

@@ -2,11 +2,25 @@
   <td><%= transaction.created_at %></td>
   <td><%= number_with_precision( transaction.amount, precision: 2 ) %></td>
   <td>
-    <%= markdown transaction.detail %>
+    <%= markdown transaction.comment %>
   </td>
   <td>
-    <% if transaction.params[:stripe] %>
-      <%= link_to 'Receipt', transaction.params[:stripe][:receipt_url] %>
+    <% if transaction.params[:stripe] && transaction.params[:stripe][:receipt_url] %>
+      <%= link_to 'Receipt', transaction.params[:stripe][:receipt_url], target: "quizfc_stripe_receipt" %><br>
     <% end %>
+    <a
+      data-toggle="collapse"
+      href="#transaction_collapse_detail_<%= transaction.id %>"
+    >
+      Detail
+    </a>
   </td>
 <tr>
+<tr
+class="collapse"
+id="transaction_collapse_detail_<%= transaction.id %>"
+>
+  <td colspan='4' style="border: none;">
+    <pre><%= transaction.params.to_yaml.sub( "---\n", '' ) %></pre>
+  </td>
+</tr>
